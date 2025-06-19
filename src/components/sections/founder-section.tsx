@@ -49,7 +49,7 @@ export default function FounderSection() {
           <div className="lg:col-span-2 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-accent">
               <Image
-                src="https://placehold.co/400x400.png"
+                src="https://storage.googleapis.com/techfusion-alchemy-bucket/Generated%20Image%20June%2002%2C%202025%20-%2010_35AM.jpeg"
                 alt="Muzi Khuzwayo, Founder & CEO"
                 layout="fill"
                 objectFit="cover"
@@ -62,7 +62,15 @@ export default function FounderSection() {
               Muzi Khuzwayo is a visionary entrepreneur and technologist, leading the charge in AI development and automation solutions. He embodies a forward-thinking approach, merging deep technical expertise with strategic business acumen. His ability to identify emerging AI trends and transform them into impactful ventures sets him apart.
             </p>
             <p className="text-muted-foreground">
-              Through <strong>TechFusion Ventures</strong>, Muzi has created a dynamic holding company that incubates multiple AI-driven projects. <strong>TechFusion Alchemy</strong>, his specialized AI automation agency, is an extension of his passion for optimizing business operations through intelligent systems. His work empowers companies to streamline processes, enhance decision-making, and scale efficiently in a rapidly evolving digital landscape.
+              Through <strong>TechFusion Ventures</strong>, Muzi has created a dynamic holding company that incubates multiple AI-driven projects. 
+              <strong>TechFusion Alchemy</strong>, his specialised AI automation agency, is an extension of his passion for optimizing business operations through intelligent systems. 
+            </p>
+            <p className="text-muted-foreground">
+            <strong>TechFusion Media</strong>, his specialised Media Agency, is an extension of his burning passion for all things social. In a world driven by AI, heunderstands that humans will forever buy from humans, and leveraging the human connection is everything.
+            <strong>TechFusion Capital</strong>, his specialised Capital Investment firm, is an extension of his will to use every sigle resource to the best of his ability, something he learned very well growing up in the streets of Soweto.
+            </p>
+            <p className="text-muted-foreground">
+              His work empowers companies to streamline processes, enhance decision-making, and scale efficiently in a rapidly evolving digital landscape.
             </p>
             <h3 className="text-2xl font-semibold text-primary pt-4">Business Philosophy</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

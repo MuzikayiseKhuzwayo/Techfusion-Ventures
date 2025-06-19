@@ -25,7 +25,7 @@ export default function HeroSection() {
           </div>
           <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] animate-fadeInRight delay-200">
             <Image
-              src="https://placehold.co/1200x800.png"
+              src="https://storage.googleapis.com/techfusion-alchemy-bucket/image%20(3).png"
               alt="AI and Technology"
               layout="fill"
               objectFit="cover"
