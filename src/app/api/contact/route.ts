@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     // Assuming the sheet has columns: Date | Name | Email | Subject | Message
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
-      range: "Sheet1!A1:E1", // Adjust "Sheet1" if your sheet name is different
+      range: "Techfusion-Ventures-Leads!A1:E1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
