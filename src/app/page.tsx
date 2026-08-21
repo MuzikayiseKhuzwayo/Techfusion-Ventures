@@ -53,8 +53,8 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
-          {/* Block 1: TechFusion Alchemy (Large) */}
-          <BentoCard className="md:col-span-2 md:row-span-2 flex flex-col" delay={0.1}>
+          {/* Block 1: TechFusion Alchemy (col-span-1, row-span-2) */}
+          <BentoCard className="md:col-span-1 md:row-span-2 flex flex-col" delay={0.1}>
             <div className="flex justify-between items-start mb-6">
               <div className="p-3 bg-surface-200 rounded-lg inline-block">
                 <Cpu className="w-8 h-8 text-accent-light" />
@@ -63,54 +63,73 @@ export default function Home() {
                 <ArrowUpRight className="w-5 h-5 text-foreground/70" />
               </a>
             </div>
-            <h3 className="text-2xl font-bold mb-2">TechFusion Alchemy</h3>
-            <p className="text-foreground/70 mb-8 max-w-md">
-              Our premier division focused on Automation & AI Product Development, building tools that redefine operational efficiency.
+            <h3 className="text-2xl font-bold mb-4">TechFusion Alchemy</h3>
+            <p className="text-foreground/70 text-sm leading-relaxed mb-6">
+              Our premier division focused on Automation & AI Product Development, building proprietary tools and systems that redefine operational efficiency and digital capabilities.
             </p>
+            <div className="mt-auto pt-6 border-t border-surface-200/50">
+              <span className="text-xs font-mono text-accent-dark uppercase tracking-wider">Live Division</span>
+            </div>
+          </BentoCard>
 
-            <div className="mt-auto">
-              <div className="p-6 border border-surface-200 rounded-xl bg-background/50">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-semibold text-lg flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    dubstrata
-                  </h4>
-                  <a href="https://dubstrata.com" target="_blank" rel="noopener noreferrer" className="text-accent-dark hover:text-accent-light text-sm flex items-center gap-1 transition-colors">
-                    Visit <ArrowUpRight className="w-3 h-3" />
-                  </a>
+          {/* Block 2: Dubstrata (col-span-2, row-span-2) */}
+          <BentoCard className="md:col-span-2 md:row-span-2 flex flex-col justify-between" delay={0.2}>
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-surface-200 rounded-lg inline-block">
+                  <Zap className="w-8 h-8 text-accent-light" />
                 </div>
-                <p className="text-sm text-foreground/60">
-                  A key live product under Alchemy's wing, streamlining data infrastructure for the modern web.
-                </p>
+                <a href="https://dubstrata.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-surface-200 transition-colors">
+                  <ArrowUpRight className="w-5 h-5 text-foreground/70" />
+                </a>
+              </div>
+              <h3 className="text-2xl font-bold mb-2">dubstrata</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed max-w-xl mb-6">
+                A premier Causal Financial &amp; Narrative Intelligence CDN designed for quant trading desks, risk officers, and autonomous agent swarms. Dubstrata deconstructs noisy, unstructured web data into dense, time-stamped causal substrates.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-auto">
+              <div className="p-4 border border-surface-200 rounded-xl bg-background/30">
+                <h4 className="font-semibold text-sm mb-1 text-white lowercase">causal knowledge graph</h4>
+                <p className="text-xs text-foreground/50">Real-time structured facts combined with crowdsourced conviction metrics.</p>
+              </div>
+              <div className="p-4 border border-surface-200 rounded-xl bg-background/30">
+                <h4 className="font-semibold text-sm mb-1 text-white lowercase">low-latency CDN</h4>
+                <p className="text-xs text-foreground/50">Delivering machine-readable time-series telemetry at sub-150ms latencies.</p>
               </div>
             </div>
           </BentoCard>
 
-          {/* Block 2: Future Divisions (Medium) */}
-          <BentoCard delay={0.2} className="bg-surface-100/30">
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-surface-200/50 rounded-lg inline-block">
-                <Globe className="w-6 h-6 text-foreground/40" />
+          {/* Block 3: Future Divisions (Medium) */}
+          <BentoCard delay={0.3} className="bg-surface-100/30 flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-surface-200/50 rounded-lg inline-block">
+                  <Globe className="w-6 h-6 text-foreground/40" />
+                </div>
               </div>
+              <h3 className="text-xl font-bold mb-2 text-foreground/80">Future Divisions</h3>
+              <p className="text-foreground/50 text-sm leading-relaxed">
+                Innovations in infrastructure, supply chain automation, and digital education. Coming soon as we scale.
+              </p>
             </div>
-            <h3 className="text-xl font-bold mb-2 text-foreground/80">Future Divisions</h3>
-            <p className="text-foreground/50 text-sm mt-auto pb-4">
-              Innovations in infrastructure, supply chain automation, and digital education. Coming soon as we scale.
-            </p>
-            <div className="w-full h-1 bg-surface-200 rounded-full overflow-hidden mt-4">
+            <div className="w-full h-1 bg-surface-200 rounded-full overflow-hidden mt-6">
               <div className="w-1/3 h-full bg-accent-dark/30 rounded-full" />
             </div>
           </BentoCard>
 
-          {/* Block 3: Our Perspective (Medium) */}
-          <BentoCard delay={0.3} className="bg-gradient-to-br from-surface-200/20 to-transparent">
-            <div className="p-3 bg-accent-light/10 text-accent-light rounded-lg inline-block mb-6">
-              <Zap className="w-6 h-6" />
+          {/* Block 4: Our Perspective (Medium) */}
+          <BentoCard delay={0.4} className="md:col-span-2 bg-gradient-to-br from-surface-200/20 to-transparent flex flex-col justify-between">
+            <div>
+              <div className="p-3 bg-accent-light/10 text-accent-light rounded-lg inline-block mb-6">
+                <Zap className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">The Challenge</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed">
+                Achieving digital transformation in all sectors of the African economy is incredibly difficult. We do not underestimate the challenge—but with grounded, deliberate technology, we believe it is fully possible.
+              </p>
             </div>
-            <h3 className="text-xl font-bold mb-4">The Challenge</h3>
-            <p className="text-foreground/70 text-sm leading-relaxed">
-              Achieving digital transformation in all sectors of the African economy is incredibly difficult. We do not underestimate the challenge—but with grounded, deliberate technology, we believe it is fully possible.
-            </p>
           </BentoCard>
         </div>
       </section>
