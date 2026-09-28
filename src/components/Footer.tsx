@@ -25,7 +25,9 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <span className="text-foreground/40">Future Divisions</span>
+              <Link href="/projects" className="hover:text-accent-light transition-colors">
+                Projects &amp; Future Divisions
+              </Link>
             </li>
           </ul>
         </div>

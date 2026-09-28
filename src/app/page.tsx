@@ -102,20 +102,40 @@ export default function Home() {
           </BentoCard>
 
           {/* Block 3: Future Divisions (Medium) */}
-          <BentoCard delay={0.3} className="bg-surface-100/30 flex flex-col justify-between">
+          <BentoCard delay={0.3} className="bg-surface-100/30 flex flex-col justify-between group/card hover:border-accent-light/40 transition-colors">
             <div>
               <div className="flex justify-between items-start mb-6">
                 <div className="p-3 bg-surface-200/50 rounded-lg inline-block">
-                  <Globe className="w-6 h-6 text-foreground/40" />
+                  <Globe className="w-6 h-6 text-foreground/40 group-hover/card:text-accent-light transition-colors" />
                 </div>
+                <Link
+                  href="/projects"
+                  className="p-2 rounded-full hover:bg-surface-200 transition-colors group/link"
+                  aria-label="View Projects and Future Divisions"
+                >
+                  <ArrowUpRight className="w-5 h-5 text-foreground/70 group-hover/link:text-accent-light group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                </Link>
               </div>
-              <h3 className="text-xl font-bold mb-2 text-foreground/80">Future Divisions</h3>
-              <p className="text-foreground/50 text-sm leading-relaxed">
-                Innovations in infrastructure, supply chain automation, and digital education. Coming soon as we scale.
+              <h3 className="text-xl font-bold mb-2 text-foreground/90 group-hover/card:text-white transition-colors">
+                <Link href="/projects" className="hover:underline">
+                  Future Divisions &amp; Projects
+                </Link>
+              </h3>
+              <p className="text-foreground/60 text-sm leading-relaxed mb-4">
+                Innovations in autonomous agent swarms, prediction market harnesses, and semantic compute kernels. Explore our open-source portfolio and upcoming divisions.
               </p>
             </div>
-            <div className="w-full h-1 bg-surface-200 rounded-full overflow-hidden mt-6">
-              <div className="w-1/3 h-full bg-accent-dark/30 rounded-full" />
+            <div className="pt-4 border-t border-surface-200/50 mt-4 flex items-center justify-between">
+              <Link
+                href="/projects"
+                className="text-xs font-mono text-accent-light hover:text-white inline-flex items-center gap-1 group/btn"
+              >
+                <span>Explore 8 Public Projects</span>
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </Link>
+              <div className="w-16 h-1 bg-surface-200 rounded-full overflow-hidden">
+                <div className="w-2/3 h-full bg-accent-light/40 rounded-full" />
+              </div>
             </div>
           </BentoCard>
 
