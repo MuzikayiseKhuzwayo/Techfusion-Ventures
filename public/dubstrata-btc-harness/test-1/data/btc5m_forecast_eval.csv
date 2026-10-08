@@ -1,0 +1,6 @@
+Metric,Observed,Target
+Directional Hit Rate (DHR),30.00%,>= 54.0%
+80% Band Coverage,71.90%,75% - 85%
+Downside Tail Breach Rate,0.95%,< 12.0%
+Mean Absolute Error (MAE),"$1,798.58",N/A
+Trade Win Rate (Forecast-Augmented),23.9%,>= 55.0%

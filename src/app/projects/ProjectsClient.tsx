@@ -32,6 +32,7 @@ interface Project {
   category: "agents" | "quant" | "tooling";
   categoryLabel: string;
   link: string;
+  repoLink?: string;
   techStack: string[];
   whatItDoes: string;
   whyItMatters: ValueBreakdown[];
@@ -46,7 +47,8 @@ const PROJECTS: Project[] = [
     tagline: "Autonomous User Simulation & Qualitative UX Testing Platform",
     category: "agents",
     categoryLabel: "Autonomous Agents & LLMs",
-    link: "https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester",
+    link: "/simulacra-uat",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester",
     techStack: ["Python", "Playwright", "LLM Agentic Loops", "Synthetic Persona Modeling"],
     whatItDoes:
       "Instead of relying on brittle, selector-based end-to-end assertions (e.g., standard Cypress or Selenium scripts), Simulacra deploys a fleet of autonomous, persona-driven browser agents (such as SMB Owners, Enterprise Buyers, Software Engineers, and Low-Tech Consumers). These agents explore applications organically, exhibit human-like cognitive biases and hesitations, detect confusing UX patterns or dead-end flows, and rage-click misleading elements.",
@@ -67,11 +69,12 @@ const PROJECTS: Project[] = [
   {
     id: "dubstrata-btc-harness",
     num: "02",
-    name: "Dubstrata BTC Trading Harness",
+    name: "Dubstrata 5-Minute BTC Harness",
     tagline: "5-Minute Prediction Market Research & Algorithmic Execution Engine",
     category: "quant",
     categoryLabel: "Quantitative & Prediction Markets",
-    link: "https://github.com/MuzikayiseKhuzwayo/dubstrata-btc-harness",
+    link: "/dubstrata-btc-harness",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis",
     techStack: ["Python", "uv", "Polymarket CLOB & Kalshi APIs", "Parquet Indexing", "WebSockets"],
     whatItDoes:
       "An institutional-grade research and live execution harness for trading binary prediction markets (specifically 5-minute Bitcoin Up/Down contracts on Polymarket). Implements a Three-Stage Positioning Framework supporting both continuous simulated paper-trading and live CLOB execution.",
@@ -96,7 +99,8 @@ const PROJECTS: Project[] = [
     tagline: "Next-Generation Inference Kernel & Semantic OS Architecture",
     category: "agents",
     categoryLabel: "Autonomous Agents & LLMs",
-    link: "https://github.com/MuzikayiseKhuzwayo/gemma4good",
+    link: "/aos",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/gemma4good",
     techStack: ["Python", "FastAPI", "Gemma / Local LLMs", "Vector Databases", "Generative UI"],
     whatItDoes:
       "Rethinks the foundational compute paradigm by shifting from the traditional Kernel → Application → User hierarchy to an Inference Kernel → Tool Interface → Agentic Intent model. Includes an inference daemon managing context token budgeting, a shell agent translating intent to system APIs, a Semantic File System (semantic_fs), and streaming generative UI.",
@@ -117,6 +121,7 @@ const PROJECTS: Project[] = [
     category: "agents",
     categoryLabel: "Autonomous Agents & LLMs",
     link: "https://github.com/MuzikayiseKhuzwayo/strata",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/strata",
     techStack: ["TypeScript", "React", "Vite", "RSS Ingestion Daemons", "Causal Graph RAG"],
     whatItDoes:
       "A macro risk intelligence workstation that polls real-time international news and financial streams, detects contagion and systemic anomalies, and autonomously spawns multi-agent debate sessions (Visionary, Producer, Seller personas) to formulate strategic countermeasures adhering to operational SOPs.",
@@ -141,7 +146,8 @@ const PROJECTS: Project[] = [
     tagline: "Autonomous B2B & Developer Intelligence Engine",
     category: "tooling",
     categoryLabel: "Developer Tooling & Infrastructure",
-    link: "https://github.com/MuzikayiseKhuzwayo/aura-research",
+    link: "/aura-partner-research",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/aura-research",
     techStack: ["React", "Vite", "FastAPI", "Google Gemini API", "IMAP/SMTP Protocols"],
     whatItDoes:
       "An autonomous discovery and lead intelligence pipeline tailored for developer ecosystems. Dynamically crawls GitHub niches, rotates search heuristics with Gemini, parses technical profiles and star graphs, refines Ideal Customer Profiles (ICPs), and writes hyper-personalized multi-channel drafts directly into email inboxes (Gmail, Outlook, Yahoo) and social formats (LinkedIn, X).",
@@ -161,7 +167,8 @@ const PROJECTS: Project[] = [
     tagline: "Dynamic Regime Classifier & Market Intelligence Engine (MIE)",
     category: "quant",
     categoryLabel: "Quantitative & Prediction Markets",
-    link: "https://github.com/MuzikayiseKhuzwayo/meta-marker",
+    link: "/meta-marker",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/meta-marker",
     techStack: ["Python", "FastAPI", "MetaTrader 5 (MT5) API", "SQLite", "Candlestick Charting UI"],
     whatItDoes:
       "Solves the classic flaw of static technical indicators by dynamically scoring, backtesting, and re-weighting indicators (EMAs, RSI, MACD, Stochastic, Break-of-Structure) based on how well they perform in specific real-time market regimes (e.g., Strong Trend, Tight Range, Expanding Volatility).",
@@ -182,6 +189,7 @@ const PROJECTS: Project[] = [
     category: "tooling",
     categoryLabel: "Developer Tooling & Infrastructure",
     link: "https://github.com/MuzikayiseKhuzwayo/coldoutboundskills",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/coldoutboundskills",
     techStack: ["Claude Code Skills", "YAML", "API Tooling (Prospeo, Google Maps)"],
     whatItDoes:
       "An open-source library of 29 modular Claude Code skills organized across 5 operational tracks: Strategy & ICP Intake, Infrastructure Provisioning, List Building, Stepwise Copywriting, and Deliverability Incident Response.",
@@ -202,6 +210,7 @@ const PROJECTS: Project[] = [
     category: "quant",
     categoryLabel: "Quantitative & Prediction Markets",
     link: "https://github.com/MuzikayiseKhuzwayo/poly_data",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/poly_data",
     techStack: ["Python", "Envio HyperSync", "Polygon CTF Exchange V2 Contracts", "CLOB API"],
     whatItDoes:
       "A high-speed indexing pipeline that streams order events and trade settlements directly from the Polygon CTF Exchange V2 contract across millions of blocks with zero RPC throttling, bypassing deprecated subgraphs.",
@@ -213,6 +222,58 @@ const PROJECTS: Project[] = [
       },
     ],
     icon: Database,
+  },
+  {
+    id: "media-magic",
+    num: "09",
+    name: "Media Magic (Mina Media Engine)",
+    tagline: "Autonomous Media Studio & Deterministic Video Generation Pipeline",
+    category: "tooling",
+    categoryLabel: "Developer Tooling & Infrastructure",
+    link: "/media-magic",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/mina-ai",
+    techStack: ["Python", "FFmpeg", "FastAPI", "Async Queues", "Interactive Switchboard"],
+    whatItDoes:
+      "A low-latency, deterministic media operating system designed for instant AI video editing, subtitle generation, interactive presentations, and automated broadcasting pipelines with an interactive switchboard.",
+    whyItMatters: [
+      {
+        target: "For Content Developers",
+        detail:
+          "Eliminates manual timeline scrubbing by providing programmable cuts, automated silence removal, multi-modal asset synthesis, and instant export.",
+      },
+      {
+        target: "For AI Engineers",
+        detail:
+          "Bridges generative LLM reasoning with real-time media manipulation pipelines via declarative execution schemas.",
+      },
+    ],
+    icon: Sparkles,
+  },
+  {
+    id: "proposal-flow",
+    num: "10",
+    name: "ProposalFlow",
+    tagline: "Autonomous Upwork Proposal & Teleprompter Studio",
+    category: "tooling",
+    categoryLabel: "Developer Tooling & Infrastructure",
+    link: "/proposal-flow",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/upwork-proposal-gen",
+    techStack: ["TypeScript", "React", "LLM Extraction", "Diátaxis Engine", "Lucide"],
+    whatItDoes:
+      "An autonomous pitch generation and teleprompter environment for client acquisition. Parses job postings, extracts key technical requirements and client pain points, and synthesizes structured, high-conversion proposals with synchronised teleprompter pacing.",
+    whyItMatters: [
+      {
+        target: "For Agency Builders",
+        detail:
+          "Compresses outbound response times from hours to seconds while adhering to rigorous Diátaxis framework documentation structures.",
+      },
+      {
+        target: "For AI Engineers",
+        detail:
+          "Demonstrates persona-driven prompt engineering and real-time structured LLM formatting for high-stakes business communication.",
+      },
+    ],
+    icon: Workflow,
   },
 ];
 
@@ -356,7 +417,7 @@ export default function ProjectsClient() {
                     </div>
 
                     <a
-                      href={project.link}
+                      href={project.repoLink || project.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-200/60 hover:bg-surface-200 border border-surface-200 text-accent-light text-xs sm:text-sm font-medium transition-all group/btn"
@@ -376,8 +437,9 @@ export default function ProjectsClient() {
                         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2 group-hover:text-accent-light transition-colors">
                           <a
                             href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            {...(project.link.startsWith("http")
+                              ? { target: "_blank", rel: "noopener noreferrer" }
+                              : {})}
                             className="inline-flex items-center gap-2 hover:underline underline-offset-4 decoration-accent-dark/50"
                           >
                             {project.name}
@@ -450,8 +512,9 @@ export default function ProjectsClient() {
                     </span>
                     <a
                       href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      {...(project.link.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                       className="text-xs font-mono text-accent-light hover:text-white flex items-center gap-1.5 transition-colors"
                     >
                       <span>Navigate to project landing page</span>

@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import SignUpForm from "@/components/SignUpForm";
 
 export default function Footer() {
   return (
     <footer className="border-t border-surface-200 bg-background py-12 mt-20">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <h3 className="font-bold text-lg text-accent-light mb-4">TechFusion Automata</h3>
           <p className="text-foreground/70 text-sm max-w-xs">
@@ -33,9 +33,19 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold text-accent-light mb-4">Contact</h4>
-          <Link href="/contact" className="inline-block text-sm text-accent-dark hover:text-accent-light transition-colors">
-            Send us a message
+          <p className="text-sm text-foreground/70 mb-2">
+            Interested in partnership or automation?
+          </p>
+          <Link href="/contact" className="inline-block text-sm text-accent-dark hover:text-accent-light transition-colors underline underline-offset-4">
+            Send us a message &rarr;
           </Link>
+        </div>
+        <div>
+          <h4 className="font-semibold text-accent-light mb-2">Stay Connected</h4>
+          <p className="text-xs text-foreground/60 mb-3">
+            Sign up to receive updates on our ecosystem developments and initiatives.
+          </p>
+          <SignUpForm />
         </div>
       </div>
       <div className="container mx-auto px-4 mt-12 pt-8 border-t border-surface-200/50 flex flex-col md:flex-row items-center justify-between text-xs text-foreground/50">

@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulacra UAT — 16-Bit Retro RPG User Simulation & Testing Platform</title>
+  <meta name="description" content="Simulacra UAT transforms acceptance testing into a retro 16-bit RPG town of autonomous, persona-driven browser agents that explore your web apps, encounter friction, rage-click misleading elements, and award Usability Crests based on SUS audits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d131a;
+      --bg-darker: #080c10;
+      --bg-surface: #141c26;
+      --rpg-cream: #f8f8f0;
+      --rpg-navy: #1c2e4a;
+      --rpg-dark-box: #182232;
+      --rpg-border: #334d6e;
+      --rpg-red: #e53935;
+      --rpg-red-hover: #ef4444;
+      --rpg-red-shadow: #7f1d1d;
+      --rpg-blue: #2563eb;
+      --rpg-blue-hover: #3b82f6;
+      --rpg-blue-shadow: #1e3a8a;
+      --rpg-green: #16a34a;
+      --rpg-green-hover: #22c55e;
+      --rpg-green-shadow: #14532d;
+      --rpg-yellow: #f59e0b;
+      --rpg-yellow-hover: #fbbf24;
+      --rpg-yellow-shadow: #78350f;
+      --text-main: #f2f5fa;
+      --text-muted: #94a3b8;
+      --text-sub: #64748b;
+      --font-retro: 'Press Start 2P', monospace;
+      --font-sans: 'Outfit', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      image-rendering: pixelated;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Pixel grid background */
+    .retro-grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* CRT scanline effect */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.12),
+        rgba(0, 0, 0, 0.12) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .font-retro {
+      font-family: var(--font-retro), monospace;
+      letter-spacing: -0.05em;
+    }
+
+    /* Classic RPG Dialog Box */
+    .rpg-box {
+      background: var(--rpg-cream);
+      color: #1a202c;
+      border: 4px solid var(--rpg-navy);
+      box-shadow: 
+        inset 0 0 0 3px #ffffff,
+        0 8px 0 rgba(0, 0, 0, 0.45);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .rpg-box-dark {
+      background: var(--rpg-dark-box);
+      color: #f0f4fc;
+      border: 4px solid var(--rpg-border);
+      box-shadow: 
+        inset 0 0 0 2px #0f1622,
+        0 8px 0 rgba(0, 0, 0, 0.55);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    /* 16-Bit Pixel 3D Buttons */
+    .pixel-btn {
+      font-family: var(--font-retro), monospace;
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 10px 16px;
+      border: 3px solid #1c2e4a;
+      border-radius: 6px;
+      box-shadow: 0 4px 0 #0e1724;
+      transition: all 0.08s ease;
+      user-select: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .pixel-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #0e1724;
+    }
+
+    .pixel-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #0e1724;
+    }
+
+    .pixel-btn-red {
+      background: var(--rpg-red);
+      color: #ffffff;
+      border-color: #7f1d1d;
+      box-shadow: 0 4px 0 #500724;
+    }
+    .pixel-btn-red:hover { background: var(--rpg-red-hover); box-shadow: 0 6px 0 #500724; }
+    .pixel-btn-red:active { box-shadow: 0 1px 0 #500724; }
+
+    .pixel-btn-blue {
+      background: var(--rpg-blue);
+      color: #ffffff;
+      border-color: #1e3a8a;
+      box-shadow: 0 4px 0 #0f172a;
+    }
+    .pixel-btn-blue:hover { background: var(--rpg-blue-hover); box-shadow: 0 6px 0 #0f172a; }
+    .pixel-btn-blue:active { box-shadow: 0 1px 0 #0f172a; }
+
+    .pixel-btn-yellow {
+      background: var(--rpg-yellow);
+      color: #1c1917;
+      border-color: #78350f;
+      box-shadow: 0 4px 0 #451a03;
+    }
+    .pixel-btn-yellow:hover { background: var(--rpg-yellow-hover); box-shadow: 0 6px 0 #451a03; }
+    .pixel-btn-yellow:active { box-shadow: 0 1px 0 #451a03; }
+
+    .pixel-btn-green {
+      background: var(--rpg-green);
+      color: #ffffff;
+      border-color: #14532d;
+      box-shadow: 0 4px 0 #052e16;
+    }
+    .pixel-btn-green:hover { background: var(--rpg-green-hover); box-shadow: 0 6px 0 #052e16; }
+    .pixel-btn-green:active { box-shadow: 0 1px 0 #052e16; }
+
+    /* Top Banner */
+    .rpg-announcement {
+      background: #7f1d1d;
+      border-bottom: 3px solid #450a0a;
+      padding: 10px 0;
+      font-size: 0.75rem;
+      text-align: center;
+      font-family: var(--font-retro);
+      letter-spacing: -0.05em;
+    }
+
+    .rpg-announcement a {
+      color: #fef08a;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rpg-announcement a:hover {
+      text-decoration: underline;
+    }
+
+    /* Site Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(20, 28, 38, 0.95);
+      border-bottom: 4px solid var(--rpg-navy);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .crest-icon-wrap {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.5));
+    }
+
+    .brand-title {
+      font-family: var(--font-retro);
+      font-size: 1rem;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+      text-shadow: 2px 2px 0 #1e3a8a;
+    }
+
+    .brand-title span {
+      color: #facc15;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-link:hover {
+      color: #facc15;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: #1e293b;
+      border: 2px solid #3b82f6;
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #60a5fa;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--font-retro);
+      font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+      line-height: 1.4;
+      letter-spacing: -0.05em;
+      margin-bottom: 24px;
+      text-shadow: 4px 4px 0 #0f172a;
+    }
+
+    .hero-title .yellow { color: #facc15; text-shadow: 3px 3px 0 #854d0e; }
+    .hero-title .red { color: #ef4444; text-shadow: 3px 3px 0 #7f1d1d; }
+    .hero-title .blue { color: #60a5fa; text-shadow: 3px 3px 0 #1e3a8a; }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 820px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-sub strong {
+      color: #facc15;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    /* Showcase Section (GIFs from App) */
+    .app-showcase-section {
+      margin: 20px 0 80px;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
+
+    @media (max-width: 900px) {
+      .col-6 { grid-column: span 12; }
+    }
+
+    .showcase-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .showcase-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+    }
+
+    .showcase-tag {
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #facc15;
+      text-transform: uppercase;
+    }
+
+    .showcase-title {
+      font-family: var(--font-retro);
+      font-size: 0.95rem;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .showcase-desc {
+      font-size: 0.925rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    .gif-frame {
+      border: 4px solid var(--rpg-navy);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+      background: #000000;
+      position: relative;
+    }
+
+    .gif-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .gif-badge-overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid #facc15;
+      color: #facc15;
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    /* Live Interactive Canvas Town Widget */
+    .interactive-town-section {
+      margin-bottom: 80px;
+    }
+
+    .town-canvas-container {
+      border: 4px solid var(--rpg-navy);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 
+        inset 0 0 0 3px #3b82f6,
+        0 10px 0 rgba(0, 0, 0, 0.6);
+      background: #4aa83e;
+      position: relative;
+    }
+
+    #town-canvas {
+      width: 100%;
+      height: 400px;
+      display: block;
+      image-rendering: pixelated;
+      cursor: crosshair;
+    }
+
+    .canvas-hud {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .canvas-hud-box {
+      pointer-events: auto;
+      background: rgba(248, 248, 240, 0.95);
+      border: 3px solid var(--rpg-navy);
+      border-radius: 6px;
+      padding: 8px 14px;
+      color: #1e293b;
+      font-family: var(--font-retro);
+      font-size: 0.6rem;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .canvas-controls-box {
+      pointer-events: auto;
+      display: flex;
+      gap: 6px;
+    }
+
+    /* Interactive Retro Battle Simulator Widget */
+    .battle-simulator-section {
+      margin-bottom: 80px;
+    }
+
+    .battle-screen-container {
+      background: #1c2e4a;
+      border: 6px solid #0f172a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 
+        inset 0 0 0 4px #facc15,
+        0 12px 0 rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .battle-arena-bg {
+      background: linear-gradient(180deg, #93c5fd 0%, #dbeafe 65%, #86efac 65%, #4ade80 100%);
+      padding: 30px 24px;
+      min-height: 320px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* Shake & Impact Flash */
+    .shake-animation {
+      animation: screen-shake 0.35s ease;
+    }
+
+    @keyframes screen-shake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-8px, 6px); }
+      40% { transform: translate(8px, -6px); }
+      60% { transform: translate(-6px, -4px); }
+      80% { transform: translate(6px, 4px); }
+    }
+
+    .flash-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s;
+      z-index: 10;
+    }
+    .flash-overlay.active {
+      opacity: 1;
+    }
+
+    .enemy-stage {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .player-stage {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .hud-box {
+      width: 280px;
+      padding: 12px 16px;
+    }
+
+    .hud-title {
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .hp-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .hp-label {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      font-weight: bold;
+      color: #eab308;
+    }
+
+    .hp-track {
+      flex: 1;
+      height: 12px;
+      background: #1e293b;
+      border: 2px solid #0f172a;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .hp-fill {
+      height: 100%;
+      background: #22c55e;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .enemy-sprite-box {
+      width: 160px;
+      height: 120px;
+      background: #ffffff;
+      border: 3px solid #1e293b;
+      border-radius: 8px;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .player-sprite-box {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .battle-bottom-panel {
+      background: #182232;
+      border-top: 4px solid var(--rpg-navy);
+      display: grid;
+      grid-template-columns: 1fr 340px;
+    }
+
+    @media (max-width: 800px) {
+      .battle-bottom-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .battle-dialogue-pane {
+      padding: 20px 24px;
+      color: #f8fafc;
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      border-right: 4px solid var(--rpg-navy);
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+    }
+
+    .battle-menu-grid {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: #141c26;
+    }
+
+    /* Usability Gym Crests Showcase */
+    .badges-section {
+      margin-bottom: 80px;
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .badge-card {
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #facc15;
+      border: 4px solid #78350f;
+      box-shadow: 0 4px 0 #451a03;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .badge-name {
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      color: #facc15;
+      letter-spacing: -0.05em;
+    }
+
+    .badge-metric {
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #22c55e;
+    }
+
+    .badge-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* Party Roster (Persona Profiles) */
+    .personas-section {
+      margin-bottom: 80px;
+    }
+
+    .persona-tabs-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .persona-tab {
+      padding: 12px 18px;
+      background: var(--rpg-dark-box);
+      border: 3px solid var(--rpg-border);
+      border-radius: 6px;
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.1s;
+    }
+
+    .persona-tab.active {
+      background: var(--rpg-blue);
+      border-color: #60a5fa;
+      color: #ffffff;
+      box-shadow: 0 4px 0 #1e3a8a;
+      transform: translateY(-2px);
+    }
+
+    .persona-profile-box {
+      padding: 32px;
+    }
+
+    .persona-profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .rpg-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .rpg-stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .stat-pill {
+      background: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .stat-pill-label {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .stat-pill-val {
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      color: #facc15;
+    }
+
+    /* Guild Master's Deployment Guide */
+    .deploy-section {
+      margin-bottom: 80px;
+      scroll-margin-top: 100px;
+    }
+
+    .deploy-tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .deploy-tab-btn {
+      padding: 10px 18px;
+      background: var(--rpg-dark-box);
+      border: 3px solid var(--rpg-border);
+      border-radius: 6px;
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.1s;
+    }
+
+    .deploy-tab-btn.active {
+      background: var(--rpg-red);
+      border-color: #f87171;
+      color: #ffffff;
+      box-shadow: 0 4px 0 #7f1d1d;
+    }
+
+    .deploy-step-card {
+      margin-bottom: 20px;
+      padding: 24px;
+    }
+
+    .deploy-step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .deploy-step-badge {
+      background: #eab308;
+      color: #451a03;
+      font-family: var(--font-retro);
+      font-size: 0.6rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .deploy-step-title {
+      font-family: var(--font-retro);
+      font-size: 0.85rem;
+      color: #ffffff;
+      letter-spacing: -0.05em;
+    }
+
+    .code-box {
+      background: #090d13;
+      border: 3px solid #1c2e4a;
+      border-radius: 6px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #f1f5f9;
+      margin-top: 12px;
+      position: relative;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+    }
+
+    /* FAQ */
+    .faq-section {
+      margin-bottom: 80px;
+    }
+
+    .faq-item {
+      margin-bottom: 12px;
+      border: 3px solid var(--rpg-border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--rpg-dark-box);
+    }
+
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: var(--font-retro);
+      font-size: 0.72rem;
+      letter-spacing: -0.05em;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .faq-a {
+      padding: 0 20px 18px;
+      color: #cbd5e1;
+      font-size: 0.925rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.open .faq-a {
+      display: block;
+    }
+
+    .faq-item.open .faq-q {
+      color: #facc15;
+    }
+
+    /* CTA Card */
+    .cta-card {
+      padding: 50px 30px;
+      text-align: center;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, #1e293b 0%, #1e3a8a 100%);
+      border: 6px solid #facc15;
+      box-shadow: 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .cta-card h2 {
+      font-family: var(--font-retro);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      margin-bottom: 16px;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 4px solid var(--rpg-navy);
+      background: #0b1017;
+      padding: 50px 0 30px;
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 800px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-retro);
+      font-size: 0.7rem;
+      color: #facc15;
+      margin-bottom: 16px;
+      letter-spacing: -0.05em;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: #facc15;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #facc15;
+      color: #1c1917;
+      border: 3px solid #78350f;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="retro-grid-bg"></div>
+  <div class="scanlines"></div>
+
+  <!-- Top Announcement -->
+  <aside class="rpg-announcement" aria-label="Announcement">
+    <div class="container">
+      <a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank" rel="noopener noreferrer">
+        <span>⚡ SIMULACRA UAT v2.4 RELEASE &bull; 16-BIT RETRO RPG USER SIMULATION &amp; TESTING FLEET</span>
+        <span style="color: #ffffff;">[VIEW ON GITHUB &rarr;]</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Sticky Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-wrapper" aria-label="Main Navigation">
+        <a href="#" class="brand-logo">
+          <!-- Pixel Quest Shield Crest Logo -->
+          <div class="crest-icon-wrap">
+            <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3h20v4h2v10h-2v4h-2v3h-3v3h-3v2h-4v-2h-3v-3h-3v-3H8v-4H6V7h2V3H6z" fill="#0f172a"/>
+              <path d="M8 5h16v3h2v8h-2v4h-2v2h-2v2h-2v2h-4v-2h-2v-2h-2v-2h-2v-4H8V8h2V5H8z" fill="#f59e0b"/>
+              <path d="M10 7h12v2h2v6h-2v4h-2v2h-2v2h-4v-2h-2v-2h-2v-4h-2V9h2V7h2z" fill="#fbbf24"/>
+              <path d="M11 9h10v6h-2v3h-2v2h-2v-2h-2v-3h-2V9h2z" fill="#1e3a8a"/>
+              <path d="M12 10h8v4h-2v3h-2v1h-2v-1h-2v-3h-2v-4h2z" fill="#2563eb"/>
+              <rect x="15" y="11" width="2" height="6" fill="#facc15"/>
+              <rect x="13" y="13" width="6" height="2" fill="#facc15"/>
+              <rect x="11" y="13" width="2" height="2" fill="#ffffff"/>
+              <rect x="15" y="17" width="2" height="2" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div class="brand-title">SIMULACRA <span>UAT</span></div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#showcase" class="nav-link">ACTIVITY</a></li>
+          <li><a href="#town-section" class="nav-link">TOWN MAP</a></li>
+          <li><a href="#battle-section" class="nav-link">BATTLE ARENA</a></li>
+          <li><a href="#badges" class="nav-link">USABILITY CRESTS</a></li>
+          <li><a href="#personas" class="nav-link">PARTY ROSTER</a></li>
+          <li><a href="#deployment" class="nav-link">DEPLOY GUIDE</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="sound-btn" class="pixel-btn pixel-btn-yellow" onclick="toggleMute()" style="padding: 6px 12px; font-size: 9px;">
+            <span id="sound-icon">🔊 SOUND ON</span>
+          </button>
+          <a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank" rel="noopener noreferrer" class="pixel-btn pixel-btn-blue">
+            <span>GITHUB ★</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge">
+          <span>⚔️ AUTONOMOUS RPG PERSONAS &bull; RETRO BROWSER TESTING</span>
+        </div>
+
+        <h1 class="hero-title">
+          EXPLORE <span class="blue">SIMULACRA TOWN</span>.<br>
+          BATTLE <span class="red">UX FRICTION</span>.<br>
+          EARN <span class="yellow">USABILITY CRESTS</span>.
+        </h1>
+
+        <p class="hero-sub">
+          Ditch brittle selectors. Dispatch an autonomous party of <strong>16-bit RPG townspeople</strong> to explore your web application, discover cognitive friction traps, rage-click deceptive buttons, and award ISO-standard <strong>System Usability Scale (SUS) Crests</strong>.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#battle-section" class="pixel-btn pixel-btn-red" style="padding: 14px 24px; font-size: 13px;" onclick="playEncounterSound()">
+            <span>⚔️ LAUNCH BATTLE ARENA</span>
+          </a>
+          <a href="#deployment" class="pixel-btn pixel-btn-green" style="padding: 14px 22px; font-size: 13px;">
+            <span>📦 DEPLOYMENT GUIDE</span>
+          </a>
+          <a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank" rel="noopener noreferrer" class="pixel-btn pixel-btn-yellow" style="padding: 14px 22px; font-size: 13px;">
+            <span>★ STAR REPO ON GITHUB</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Activity Showcase (GIFs from App) -->
+    <section id="showcase" class="container app-showcase-section">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #facc15;">APP ACTIVITY &amp; INTERFACE WALKTHROUGH</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">HOW THE SIMULACRA ENGINE WORKS</h2>
+      </div>
+
+      <div class="showcase-grid">
+        <!-- Card 1: Retro Town GIF -->
+        <div class="showcase-card rpg-box-dark col-6">
+          <div class="showcase-card-header">
+            <span class="showcase-tag">01 &bull; 2D RPG TOWN PATROL</span>
+            <span class="font-retro" style="font-size: 0.6rem; color: #22c55e;">60 FPS CANVAS</span>
+          </div>
+          <h3 class="showcase-title">SIMULACRA TOWN RESIDENTS</h3>
+          <p class="showcase-desc">
+            Synthetic personas inhabit a full 2D retro RPG town with the Guild UAT Lab, Town Hall Archives, and cottages. Personas wander, voice thoughts in emote bubbles, and receive testing dispatches.
+          </p>
+          <div class="gif-frame">
+            <span class="gif-badge-overlay">LIVE RECORDING</span>
+            <img src="/simulacra-uat/assets/rpg_town_preview.gif" alt="Simulacra RPG Town Retro Canvas Loop">
+          </div>
+        </div>
+
+        <!-- Card 2: Retro Battle Screen GIF -->
+        <div class="showcase-card rpg-box-dark col-6">
+          <div class="showcase-card-header">
+            <span class="showcase-tag">02 &bull; TURN-BASED COMBAT TESTING</span>
+            <span class="font-retro" style="font-size: 0.6rem; color: #ef4444;">ACTIVE BATTLE HUD</span>
+          </div>
+          <h3 class="showcase-title">RETRO COMBAT BATTLE SCREEN</h3>
+          <p class="showcase-desc">
+            When an audit launches, personas battle your web application in turn-based combat! Real actions trigger combat damage (<code>💥 JITTER CLICK!</code>, <code>⚡ A11Y AUDIT!</code>), draining website friction HP.
+          </p>
+          <div class="gif-frame">
+            <span class="gif-badge-overlay">BATTLE ENGINE</span>
+            <img src="/simulacra-uat/assets/rpg_battle_preview.gif" alt="Retro RPG Battle Screen Loop">
+          </div>
+        </div>
+
+        <!-- Card 3: Real Playwright Headless Agent GIF -->
+        <div class="showcase-card rpg-box-dark col-12">
+          <div class="showcase-card-header">
+            <span class="showcase-tag">03 &bull; REAL PLAYWRIGHT TELEMETRY RUNNER</span>
+            <span class="font-retro" style="font-size: 0.6rem; color: #60a5fa;">363 VALIDATED RUNS</span>
+          </div>
+          <h3 class="showcase-title">HEADLESS PLAYWRIGHT BROWSER TELEMETRY</h3>
+          <p class="showcase-desc">
+            Behind the retro 16-bit aesthetic is a rigorous enterprise Playwright fleet with human typing delays (25-65ms), reading hesitations, screenshot capture at every milestone, and strict SQLite ACID event logging.
+          </p>
+          <div class="gif-frame">
+            <span class="gif-badge-overlay">HEADLESS RUNNER</span>
+            <img src="/simulacra-uat/assets/browser_agent_session.gif" alt="Playwright Live Browser Test Loop">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Interactive 16-Bit Town Canvas -->
+    <section id="town-section" class="container interactive-town-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #22c55e;">PLAYABLE INTERACTION</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">INTERACTIVE SIMULACRA TOWN MAP</h2>
+        <p style="color: #cbd5e1; margin-top: 6px;">Click on the town canvas or click the direction buttons to walk the UAT Trainer around!</p>
+      </div>
+
+      <div class="town-canvas-container">
+        <canvas id="town-canvas" width="960" height="420"></canvas>
+        <div class="canvas-hud">
+          <div class="canvas-hud-box" id="town-status-hud">
+            <span>📍 LOCATION: GUILD LAB COURTYARD &bull; AUDITORS ON PATROL: 5</span>
+          </div>
+          <div class="canvas-controls-box">
+            <button class="pixel-btn pixel-btn-blue" onclick="moveTrainer('left')">&larr; LEFT</button>
+            <button class="pixel-btn pixel-btn-blue" onclick="moveTrainer('up')">&uarr; UP</button>
+            <button class="pixel-btn pixel-btn-blue" onclick="moveTrainer('down')">&darr; DOWN</button>
+            <button class="pixel-btn pixel-btn-blue" onclick="moveTrainer('right')">RIGHT &rarr;</button>
+            <button class="pixel-btn pixel-btn-yellow" onclick="interactTrainer()">💬 TALK</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Retro Battle Simulator -->
+    <section id="battle-section" class="container battle-simulator-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #ef4444;">PLAYABLE COMBAT ARENA</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">RETRO UAT BATTLE SIMULATOR</h2>
+        <p style="color: #cbd5e1; margin-top: 6px;">Select battle commands below to audit the target website and deplete its UX Friction!</p>
+      </div>
+
+      <div class="battle-screen-container" id="battle-arena">
+        <div class="flash-overlay" id="flash-effect"></div>
+        <div class="battle-arena-bg" id="battle-bg">
+          <!-- Enemy (Website Boss) -->
+          <div class="enemy-stage">
+            <div class="rpg-box hud-box">
+              <div class="hud-title">
+                <span id="enemy-name">CHECKOUT FUNNEL</span>
+                <span style="color: #dc2626;">Lv 50</span>
+              </div>
+              <div class="hp-bar-container">
+                <span class="hp-label">HP</span>
+                <div class="hp-track">
+                  <div class="hp-fill" id="enemy-hp-bar" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div style="font-family: var(--font-retro); font-size: 0.55rem; text-align: right; margin-top: 4px; color: #64748b;" id="enemy-hp-text">
+                FRICTION: 100/100
+              </div>
+            </div>
+
+            <div class="enemy-sprite-box">
+              <div style="font-size: 2.2rem; margin-bottom: 4px;">🛒</div>
+              <div class="font-retro" style="font-size: 0.55rem; color: #1e293b;">WEB APP BOSS</div>
+              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #ef4444; font-weight: bold;">$49 CHECKOUT</div>
+            </div>
+          </div>
+
+          <!-- Player (Sarah Jenkins) -->
+          <div class="player-stage">
+            <div class="player-sprite-box">
+              <!-- Pixel Player Canvas -->
+              <canvas id="player-battle-sprite" width="80" height="80"></canvas>
+            </div>
+
+            <div class="rpg-box hud-box">
+              <div class="hud-title">
+                <span id="player-name">SARAH JENKINS</span>
+                <span style="color: #2563eb;">Lv 44</span>
+              </div>
+              <div class="hp-bar-container">
+                <span class="hp-label">HP</span>
+                <div class="hp-track">
+                  <div class="hp-fill" id="player-hp-bar" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div style="font-family: var(--font-retro); font-size: 0.55rem; text-align: right; margin-top: 4px; color: #64748b;" id="player-hp-text">
+                PATIENCE: 45/45
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Battle Bottom Dialogue & Controls Panel -->
+        <div class="battle-bottom-panel">
+          <div class="battle-dialogue-pane">
+            <p id="battle-text">What will SARAH JENKINS do to audit this web application?</p>
+          </div>
+          <div class="battle-menu-grid">
+            <button class="pixel-btn pixel-btn-red" onclick="executeBattleMove('jitter')">💥 JITTER CLICK</button>
+            <button class="pixel-btn pixel-btn-blue" onclick="executeBattleMove('a11y')">⚡ A11Y AUDIT</button>
+            <button class="pixel-btn pixel-btn-yellow" onclick="executeBattleMove('rage')">🔥 RAGE CLICK</button>
+            <button class="pixel-btn pixel-btn-green" onclick="executeBattleMove('sus')">🏆 SUBMIT SUS</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usability Crests Showcase -->
+    <section id="badges" class="container badges-section">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #facc15;">STANDARDIZED UAT AUDIT REWARDS</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">EARN ALL 8 USABILITY CRESTS</h2>
+        <p style="color: #cbd5e1; margin-top: 6px;">Audit campaigns award verified crests when your application meets strict cognitive usability thresholds.</p>
+      </div>
+
+      <div class="badges-grid">
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box">🏆</div>
+          <div class="badge-name">APEX CREST</div>
+          <div class="badge-metric">TASK SUCCESS &ge; 80%</div>
+          <p class="badge-desc">Awarded when personas navigate the entire critical flow and complete their primary business goal.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #60a5fa; border-color: #1e3a8a;">💧</div>
+          <div class="badge-name">USABILITY MEDALLION</div>
+          <div class="badge-metric">SUS SCORE &ge; 68.0</div>
+          <p class="badge-desc">Evaluates System Usability Scale. Requires industry Grade B or above across synthetic customer feedback.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #facc15; border-color: #78350f;">⚡</div>
+          <div class="badge-name">VELOCITY INSIGNIA</div>
+          <div class="badge-metric">LOW FRICTION &le; 30.0</div>
+          <p class="badge-desc">Recognizes seamless transitions without hesitation pauses or dead-end layout shifts.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #c084fc; border-color: #581c87;">🌈</div>
+          <div class="badge-name">PRISM CREST</div>
+          <div class="badge-metric">WCAG 2.1 AA A11Y</div>
+          <p class="badge-desc">Earned when keyboard navigation, focus management, and screen-reader ARIA trees pass inspection.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #f472b6; border-color: #831843;">💖</div>
+          <div class="badge-name">PATIENCE SEAL</div>
+          <div class="badge-metric">0 RAGE CLICKS</div>
+          <p class="badge-desc">Zero deceptive, unresponsive, or delayed click targets registered during mobile testing.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #34d399; border-color: #064e3b;">🪨</div>
+          <div class="badge-name">VIEWPORT SHIELD</div>
+          <div class="badge-metric">RESPONSIVE VIEWPORT</div>
+          <p class="badge-desc">Flawless execution on mobile viewports (390x844) without broken tap targets or side-scrolling.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #f87171; border-color: #7f1d1d;">🔥</div>
+          <div class="badge-name">RESILIENCE TROPHY</div>
+          <div class="badge-metric">EDGE RESILIENCE</div>
+          <p class="badge-desc">Resists boundary-condition attacks, special characters, and form fuzzing by senior dev personas.</p>
+        </div>
+
+        <div class="rpg-box-dark badge-card">
+          <div class="badge-icon-box" style="background: #a3e635; border-color: #365314;">🌍</div>
+          <div class="badge-name">SOVEREIGN RELIC</div>
+          <div class="badge-metric">ACID DATASTORE</div>
+          <p class="badge-desc">Full compliance with Systems Engineering Anti-Mirage Invariants and SQLite persistence.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Synthetic Persona Party Profiles -->
+    <section id="personas" class="container personas-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #38bdf8;">GUILD PARTY DIRECTORY</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">MEET THE SYNTHETIC AUDITORS</h2>
+      </div>
+
+      <div class="persona-tabs-row">
+        <button class="persona-tab active" onclick="selectPersonaProfile(0)">SARAH JENKINS (SMB)</button>
+        <button class="persona-tab" onclick="selectPersonaProfile(1)">MARCUS VANCE (VP)</button>
+        <button class="persona-tab" onclick="selectPersonaProfile(2)">PRIYA SHARMA (DEV)</button>
+        <button class="persona-tab" onclick="selectPersonaProfile(3)">CARL MILLER (CPA)</button>
+        <button class="persona-tab" onclick="selectPersonaProfile(4)">MAYA LIN (MOBILE)</button>
+      </div>
+
+      <div class="rpg-box-dark persona-profile-box">
+        <div class="persona-profile-header">
+          <div>
+            <h3 class="font-retro" style="font-size: 1.25rem; color: #ffffff;" id="persona-card-name">SARAH JENKINS</h3>
+            <div style="font-family: var(--font-retro); font-size: 0.65rem; color: #ec4899; margin-top: 4px;" id="persona-card-class">
+              CLASS: SMB OWNER &bull; LEVEL 44
+            </div>
+          </div>
+          <div class="pixel-btn pixel-btn-green" style="font-size: 9px;">
+            <span id="persona-card-status">TASK SUCCESS: 100%</span>
+          </div>
+        </div>
+
+        <div class="rpg-stats-grid">
+          <div class="stat-pill">
+            <div class="stat-pill-label">HP / PATIENCE</div>
+            <div class="stat-pill-val" id="persona-card-hp">45 / 45 (LOW)</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-label">TECH SKILL</div>
+            <div class="stat-pill-val" id="persona-card-skill">RATING: 2 / 5</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-label">SPECIAL TRAIT</div>
+            <div class="stat-pill-val" id="persona-card-trait">FORM PHOBIA</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-label">VULNERABILITY</div>
+            <div class="stat-pill-val" id="persona-card-vulnerability">MULTI-STEP FORMS</div>
+          </div>
+        </div>
+
+        <div class="rpg-box" style="padding: 16px 20px;">
+          <div class="font-retro" style="font-size: 0.65rem; color: #dc2626; margin-bottom: 6px;">💬 VERBATIM AUDIT MONOLOGUE:</div>
+          <p style="font-style: italic; font-size: 0.95rem; color: #1e293b;" id="persona-card-quote">
+            "If a website asks me to fill out five separate pages just to see a price, I close the tab immediately. I need buttons that actually look like buttons, not invisible grey text!"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Deployment Guide (Guild Master's Terminal) -->
+    <section id="deployment" class="container deploy-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #facc15;">GUILD MASTER'S OPERATOR MANUAL</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">COMPREHENSIVE DEPLOYMENT GUIDE</h2>
+        <p style="color: #cbd5e1; margin-top: 6px;">Deploy the Next.js visual 16-bit RPG studio, headless Playwright runner, or Docker containers.</p>
+      </div>
+
+      <div class="deploy-tabs-nav">
+        <button class="deploy-tab-btn active" onclick="switchDeploy(0)">1. LOCAL DEV STACK</button>
+        <button class="deploy-tab-btn" onclick="switchDeploy(1)">2. HEADLESS CI/CD</button>
+        <button class="deploy-tab-btn" onclick="switchDeploy(2)">3. DOCKER COMPOSE</button>
+        <button class="deploy-tab-btn" onclick="switchDeploy(3)">4. ENVIRONMENT &amp; DB</button>
+      </div>
+
+      <!-- Tab 0: Local Dev -->
+      <div class="deploy-pane active" id="dpane-0">
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">STEP 1</span>
+            <h4 class="deploy-step-title">CLONE GUILD LAB &amp; SETUP PYTHON ENVIRONMENT</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Ensure Python 3.11+ and Node 20+ are installed on your workstation.
+          </p>
+          <div class="code-box">
+            <code>git clone https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester.git
+cd simulacra-uat-tester
+python -m venv venv
+# Windows:
+.\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+        </div>
+
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">STEP 2</span>
+            <h4 class="deploy-step-title">INSTALL REQUIREMENTS &amp; CHROMIUM BROWSER</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Install all backend Python requirements and Playwright headless browser engines:
+          </p>
+          <div class="code-box">
+            <code>pip install -r requirements.txt
+playwright install chromium</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+        </div>
+
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">STEP 3</span>
+            <h4 class="deploy-step-title">INSTALL FRONTEND NEXT.JS 15 DEPENDENCIES</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Install Next.js, React 19, and Tailwind CSS dependencies in <code>frontend/</code>:
+          </p>
+          <div class="code-box">
+            <code>cd frontend
+npm install
+cd ..</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+        </div>
+
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">STEP 4</span>
+            <h4 class="deploy-step-title">LAUNCH UNIFIED FULL STACK WITH ONE COMMAND</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Launches FastAPI Backend (port 8000), Next.js RPG Studio (port 3000), and Demo Target (port 8585):
+          </p>
+          <div class="code-box">
+            <code>python run_dev.py</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+          <div style="margin-top: 14px; font-family: var(--font-retro); font-size: 0.65rem; color: #facc15; line-height: 1.8;">
+            &bull; Next.js 15 Town Canvas: <a href="http://localhost:3000" target="_blank" style="color: #60a5fa;">http://localhost:3000</a><br>
+            &bull; FastAPI REST Docs: <a href="http://127.0.0.1:8000/docs" target="_blank" style="color: #60a5fa;">http://127.0.0.1:8000/docs</a><br>
+            &bull; Offline Target App: <a href="http://127.0.0.1:8585" target="_blank" style="color: #60a5fa;">http://127.0.0.1:8585</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 1: CI/CD -->
+      <div class="deploy-pane" id="dpane-1" style="display: none;">
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">CI/CD</span>
+            <h4 class="deploy-step-title">GITHUB ACTIONS QUALITY GATE WORKFLOW</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Drop <code>.github/workflows/uat-simulacra.yml</code> into your repo to block pull requests with low usability:
+          </p>
+          <div class="code-box">
+            <code>name: Simulacra UAT Autonomous Fleet
+on: [pull_request, push]
+
+jobs:
+  simulation-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run 99 Automated Unit Tests
+        run: pytest -v
+
+      - name: Launch Headless Simulation Fleet
+        run: |
+          python -m src.simulacra.cli \
+            --url "http://localhost:3000" \
+            --goal "Browse catalog, add item to cart, and verify checkout" \
+            --personas 3 \
+            --title "PR Usability Gate"
+
+      - name: Upload Audit Brief & Excel Workbooks
+        uses: actions/upload-artifact@v4
+        with:
+          name: uat-audit-report
+          path: data/reports/</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Docker -->
+      <div class="deploy-pane" id="dpane-2" style="display: none;">
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">DOCKER</span>
+            <h4 class="deploy-step-title">CONTAINERIZED DEPLOYMENT WITH DOCKER COMPOSE</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Run Simulacra UAT inside isolated production containers:
+          </p>
+          <div class="code-box">
+            <code>version: '3.8'
+
+services:
+  simulacra-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - DATABASE_PATH=/data/simulacra.db
+      - HEADLESS=true
+    volumes:
+      - simulacra-data:/data
+
+  simulacra-town-web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://simulacra-api:8000
+    depends_on:
+      - simulacra-api
+
+volumes:
+  simulacra-data:</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+          <div style="margin-top: 14px;">
+            <div class="code-box" style="margin-top: 0;">
+              <code>docker compose up --build -d</code>
+              <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Config -->
+      <div class="deploy-pane" id="dpane-3" style="display: none;">
+        <div class="rpg-box-dark deploy-step-card">
+          <div class="deploy-step-header">
+            <span class="deploy-step-badge">CONFIG</span>
+            <h4 class="deploy-step-title">ENVIRONMENT VARIABLES &amp; SQLITE DATASTORE</h4>
+          </div>
+          <p style="color: #cbd5e1; font-size: 0.9rem;">
+            Create <code>.env</code> in the project root:
+          </p>
+          <div class="code-box">
+            <code>PORT=8000
+FRONTEND_PORT=3000
+HEADLESS_SIMULATION=true
+DATABASE_PATH=./data/simulacra.db
+MAX_CONCURRENT_PERSONAS=10
+DEFAULT_VIEWPORT_WIDTH=1280
+DEFAULT_VIEWPORT_HEIGHT=800</code>
+            <button class="pixel-btn pixel-btn-yellow code-copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="container faq-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="font-retro" style="font-size: 0.75rem; color: #facc15;">QUESTIONS &amp; ANSWERS</span>
+        <h2 class="font-retro" style="font-size: 1.5rem; margin-top: 8px;">FREQUENTLY ASKED QUESTIONS</h2>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>WHY THE 16-BIT RETRO RPG STYLE?</span>
+          <span>▼</span>
+        </button>
+        <div class="faq-a">
+          Software testing has been boring for decades. By modeling autonomous browser agents as RPG townspeople with distinct stats (Patience HP, Tech Level, Form Phobia traits), engineering teams actually enjoy watching simulations run in real time. It transforms UAT into an engaging quest where passing flows earn Usability Crests!
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>DOES THIS RUN HEADLESS IN CI/CD WITHOUT GRAPHICS?</span>
+          <span>▼</span>
+        </button>
+        <div class="faq-a">
+          Yes! The retro 2D town canvas is the interactive visual studio. For automated pull requests, Simulacra runs 100% headless via the CLI (<code>python -m src.simulacra.cli</code>) with zero display requirements, generating markdown briefs and excel spreadsheets automatically.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>WHAT ARE THE USABILITY SCORING STANDARDS?</span>
+          <span>▼</span>
+        </button>
+        <div class="faq-a">
+          Simulacra uses the ISO-standard System Usability Scale (SUS: 0–100), Customer Effort Score (CES: 1–7), and Net Promoter Score (NPS). An SUS score of 68.0 represents the industry average (Grade B), and scores above 80.0 earn the coveted Usability Medallion!
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="container">
+      <div class="cta-card">
+        <h2>READY TO AUDIT YOUR WEB APP?</h2>
+        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 28px; font-size: 1rem;">
+          Deploy Simulacra UAT locally or connect it to your automated GitHub Actions CI/CD pipeline today.
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank" rel="noopener noreferrer" class="pixel-btn pixel-btn-yellow" style="padding: 14px 24px; font-size: 12px;">
+            <span>★ EXPLORE REPOSITORY ON GITHUB</span>
+          </a>
+          <a href="#deployment" class="pixel-btn pixel-btn-green" style="padding: 14px 22px; font-size: 12px;">
+            <span>📦 OPERATOR DEPLOYMENT GUIDE</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-title" style="margin-bottom: 12px;">SIMULACRA <span>UAT</span></div>
+          <p style="color: #94a3b8; font-size: 0.85rem; line-height: 1.6;">
+            Autonomous 16-bit retro RPG persona browser testing fleet and synthetic UX research platform. Built for modern software teams.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>ARENAS</h5>
+          <ul class="footer-links">
+            <li><a href="#showcase">Live Activity</a></li>
+            <li><a href="#town-section">Simulacra Town</a></li>
+            <li><a href="#battle-section">Battle Arena</a></li>
+            <li><a href="#badges">Usability Crests</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>DOCS</h5>
+          <ul class="footer-links">
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/blob/main/docs/06-solution-architecture.md" target="_blank">Solution Architecture</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/blob/main/agent-data-contract.md" target="_blank">Data Contract</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/blob/main/docs/08-technical-implementation-plan.md" target="_blank">Implementation Plan</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/blob/main/poc-scope.md" target="_blank">POC Scope</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>GITHUB</h5>
+          <ul class="footer-links">
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank">Repository</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/issues" target="_blank">Issue Tracker</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester/blob/main/LICENSE" target="_blank">MIT License</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo" target="_blank">Author Profile</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top: 2px solid var(--rpg-navy); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-family: var(--font-retro); font-size: 0.6rem;">
+        <div>&copy; 2026 SIMULACRA UAT &bull; MIT LICENSE</div>
+        <div><a href="https://github.com/MuzikayiseKhuzwayo/simulacra-uat-tester" target="_blank" style="color: #facc15; text-decoration: none;">GITHUB REPOSITORY &rarr;</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast">COPIED TO CLIPBOARD!</div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // --- Retro Audio Synthesizer (Web Audio API) ---
+    let isMuted = false;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtx = new AudioContext();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      const btn = document.getElementById('sound-icon');
+      if (isMuted) {
+        btn.textContent = '🔇 SOUND OFF';
+      } else {
+        btn.textContent = '🔊 SOUND ON';
+        playBlipSound(440);
+      }
+    }
+
+    function playBlipSound(freq = 520, duration = 0.08) {
+      if (isMuted) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playEncounterSound() {
+      if (isMuted) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const notes = [440, 554, 659, 880];
+        notes.forEach((freq, idx) => {
+          setTimeout(() => playBlipSound(freq, 0.12), idx * 80);
+        });
+      } catch (e) {}
+    }
+
+    function playAttackSound(isCritical = false) {
+      if (isMuted) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(isCritical ? 880 : 320, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.25);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      } catch (e) {}
+    }
+
+    // --- Interactive Retro Battle Arena Logic ---
+    let enemyFrictionHp = 100;
+    let playerPatienceHp = 45;
+
+    function executeBattleMove(moveType) {
+      playAttackSound(moveType === 'rage');
+
+      // Visual flash & shake
+      const arena = document.getElementById('battle-bg');
+      const flash = document.getElementById('flash-effect');
+      arena.classList.add('shake-animation');
+      flash.classList.add('active');
+      setTimeout(() => {
+        arena.classList.remove('shake-animation');
+        flash.classList.remove('active');
+      }, 350);
+
+      const dialogue = document.getElementById('battle-text');
+      const enemyBar = document.getElementById('enemy-hp-bar');
+      const enemyText = document.getElementById('enemy-hp-text');
+      const playerBar = document.getElementById('player-hp-bar');
+      const playerText = document.getElementById('player-hp-text');
+
+      if (moveType === 'jitter') {
+        enemyFrictionHp = Math.max(0, enemyFrictionHp - 25);
+        dialogue.innerHTML = "💥 SARAH used <strong>JITTER CLICK</strong>! Natural human delay (42ms) bypassed the slow CSS animation!";
+      } else if (moveType === 'a11y') {
+        enemyFrictionHp = Math.max(0, enemyFrictionHp - 30);
+        dialogue.innerHTML = "⚡ SARAH used <strong>A11Y AUDIT</strong>! It verified ARIA labels and keyboard focus traps! Super effective!";
+      } else if (moveType === 'rage') {
+        enemyFrictionHp = Math.max(0, enemyFrictionHp - 35);
+        playerPatienceHp = Math.max(10, playerPatienceHp - 8);
+        dialogue.innerHTML = "🔥 CRITICAL HIT! SARAH registered <strong>RAGE CLICKS</strong> on an unresponsive div! Friction exposed!";
+      } else if (moveType === 'sus') {
+        enemyFrictionHp = 0;
+        dialogue.innerHTML = "🏆 VICTORY! SARAH submitted the <strong>SUS SCORECARD (84.3 / 100)</strong>! USABILITY MEDALLION UNLOCKED!";
+      }
+
+      // Update HP Bars
+      enemyBar.style.width = enemyFrictionHp + '%';
+      enemyText.textContent = "FRICTION: " + enemyFrictionHp + "/100";
+      if (enemyFrictionHp < 30) {
+        enemyBar.style.backgroundColor = '#ef4444';
+      } else if (enemyFrictionHp < 60) {
+        enemyBar.style.backgroundColor = '#eab308';
+      }
+
+      const playerPct = Math.round((playerPatienceHp / 45) * 100);
+      playerBar.style.width = playerPct + '%';
+      playerText.textContent = "PATIENCE: " + playerPatienceHp + "/45";
+
+      if (enemyFrictionHp === 0) {
+        setTimeout(() => {
+          showToast("🏆 USABILITY MEDALLION UNLOCKED! AUDIT COMPLETE!");
+        }, 500);
+      }
+    }
+
+    // --- Draw Player Battle Sprite (Sarah back view) ---
+    function drawPlayerBattleSprite() {
+      const cvs = document.getElementById('player-battle-sprite');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      ctx.imageSmoothingEnabled = false;
+
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.beginPath();
+      ctx.ellipse(40, 70, 32, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Hair
+      ctx.fillStyle = '#854d0e';
+      ctx.fillRect(24, 12, 32, 28);
+
+      // Shirt (Pink)
+      ctx.fillStyle = '#f472b6';
+      ctx.fillRect(20, 36, 40, 24);
+
+      // Pants (Dark)
+      ctx.fillStyle = '#374151';
+      ctx.fillRect(24, 60, 14, 14);
+      ctx.fillRect(42, 60, 14, 14);
+    }
+
+    // --- Interactive 2D Town Canvas ---
+    let trainerX = 480;
+    let trainerY = 220;
+    let trainerDir = 'down';
+    let walkStep = 0;
+
+    const townResidents = [
+      { name: "Sarah Jenkins", x: 260, y: 170, color: "#ec4899", role: "SMB Owner", quote: "My bakery orders are busy, but I'll test your checkout!" },
+      { name: "Marcus Vance", x: 680, y: 160, color: "#3b82f6", role: "Enterprise VP", quote: "Show me pricing within 5 seconds or I bounce!" },
+      { name: "Priya Sharma", x: 480, y: 110, color: "#8b5cf6", role: "Senior Dev", quote: "Testing your API endpoints with SQL injection edge cases!" },
+      { name: "Carl Miller", x: 220, y: 310, color: "#10b981", role: "Retired CPA", quote: "Make sure privacy terms are in readable large print!" },
+      { name: "Maya Lin", x: 740, y: 300, color: "#f59e0b", role: "Mobile Consumer", quote: "Tapping buttons fast! Better not freeze my Safari browser!" }
+    ];
+
+    function initTownCanvas() {
+      const cvs = document.getElementById('town-canvas');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      ctx.imageSmoothingEnabled = false;
+
+      function render() {
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+        // Grass base
+        ctx.fillStyle = '#4aa83e';
+        ctx.fillRect(0, 0, cvs.width, cvs.height);
+
+        // Cobblestone Crossroad Paths
+        ctx.fillStyle = '#d6ba86';
+        ctx.fillRect(0, 190, cvs.width, 60);
+        ctx.fillRect(450, 0, 60, cvs.height);
+
+        ctx.strokeStyle = '#b49664';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(0, 190, cvs.width, 60);
+        ctx.strokeRect(450, 0, 60, cvs.height);
+
+        // Building 1: Guild UAT Lab
+        drawBuilding(ctx, 100, 30, 180, 120, '#dc2626', 'GUILD LAB 🔬');
+
+        // Building 2: Town Hall
+        drawBuilding(ctx, 600, 30, 200, 120, '#2563eb', 'TOWN HALL 🏛️');
+
+        // Building 3: Code Matrix Den
+        drawBuilding(ctx, 100, 280, 160, 110, '#7c3aed', 'DEV MATRIX 💻');
+
+        // Building 4: Mobile Loft
+        drawBuilding(ctx, 680, 280, 160, 110, '#d97706', 'MAYA LOFT 📱');
+
+        // Draw Residents
+        townResidents.forEach((res, idx) => {
+          drawResident(ctx, res.x, res.y, res.color, idx);
+        });
+
+        // Draw Player Trainer
+        drawTrainer(ctx, trainerX, trainerY, trainerDir, walkStep);
+
+        requestAnimationFrame(render);
+      }
+
+      render();
+
+      cvs.addEventListener('click', (e) => {
+        const rect = cvs.getBoundingClientRect();
+        const scaleX = cvs.width / rect.width;
+        const scaleY = cvs.height / rect.height;
+        const clickX = (e.clientX - rect.left) * scaleX;
+        const clickY = (e.clientY - rect.top) * scaleY;
+        
+        trainerX = Math.round(clickX);
+        trainerY = Math.round(clickY);
+        walkStep = (walkStep + 1) % 2;
+        playBlipSound(600, 0.05);
+
+        townResidents.forEach(res => {
+          const dist = Math.hypot(res.x - trainerX, res.y - trainerY);
+          if (dist < 45) {
+            document.getElementById('town-status-hud').innerHTML = 
+              `💬 <strong>${res.name}</strong> (${res.role}): "${res.quote}"`;
+            playEncounterSound();
+          }
+        });
+      });
+    }
+
+    function drawBuilding(ctx, x, y, w, h, roofColor, label) {
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.fillRect(x + 8, y + 8, w, h);
+
+      ctx.fillStyle = roofColor;
+      ctx.beginPath();
+      ctx.moveTo(x - 10, y + 40);
+      ctx.lineTo(x + w / 2, y);
+      ctx.lineTo(x + w + 10, y + 40);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(x, y + 40, w, h - 40);
+      ctx.strokeRect(x, y + 40, w, h - 40);
+
+      ctx.fillStyle = '#1e3a8a';
+      ctx.fillRect(x + w / 2 - 18, y + h - 40, 36, 40);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x + 15, y + 20, w - 30, 18);
+      ctx.strokeRect(x + 15, y + 20, w - 30, 18);
+      ctx.fillStyle = '#1e293b';
+      ctx.font = '8px monospace';
+      ctx.fillText(label, x + 24, y + 32);
+    }
+
+    function drawResident(ctx, x, y, color, seed) {
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.beginPath();
+      ctx.ellipse(x, y + 14, 10, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(x - 5, y + 6, 4, 8);
+      ctx.fillRect(x + 1, y + 6, 4, 8);
+
+      ctx.fillStyle = color;
+      ctx.fillRect(x - 6, y - 4, 12, 10);
+
+      ctx.fillStyle = '#fde68a';
+      ctx.fillRect(x - 5, y - 14, 10, 10);
+
+      ctx.fillStyle = '#475569';
+      ctx.fillRect(x - 6, y - 18, 12, 5);
+
+      const time = Date.now() / 1000;
+      if (Math.sin(time * 2 + seed) > 0.4) {
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x - 8, y - 32, 16, 12);
+        ctx.fillRect(x - 8, y - 32, 16, 12);
+        ctx.fillStyle = '#dc2626';
+        ctx.font = '8px monospace';
+        ctx.fillText('!', x - 2, y - 23);
+      }
+    }
+
+    function drawTrainer(ctx, x, y, dir, step) {
+      ctx.fillStyle = 'rgba(0,0,0,0.3)';
+      ctx.beginPath();
+      ctx.ellipse(x, y + 16, 11, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Red trainer tunic
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(x - 7, y - 4, 14, 11);
+
+      // Gold badge clip
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(x - 2, y - 2, 4, 4);
+
+      // Blue cap
+      ctx.fillStyle = '#2563eb';
+      ctx.fillRect(x - 6, y - 18, 12, 6);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x - 2, y - 18, 4, 3);
+
+      // Face
+      ctx.fillStyle = '#fcd34d';
+      ctx.fillRect(x - 5, y - 12, 10, 8);
+
+      // Jeans
+      ctx.fillStyle = '#1e3a8a';
+      const off = step === 0 ? -2 : 2;
+      ctx.fillRect(x - 6, y + 7, 4, 8 - off);
+      ctx.fillRect(x + 2, y + 7, 4, 8 + off);
+    }
+
+    function moveTrainer(dir) {
+      trainerDir = dir;
+      walkStep = (walkStep + 1) % 2;
+      if (dir === 'left') trainerX = Math.max(30, trainerX - 25);
+      if (dir === 'right') trainerX = Math.min(930, trainerX + 25);
+      if (dir === 'up') trainerY = Math.max(30, trainerY - 25);
+      if (dir === 'down') trainerY = Math.min(390, trainerY + 25);
+      playBlipSound(540, 0.05);
+
+      townResidents.forEach(res => {
+        const dist = Math.hypot(res.x - trainerX, res.y - trainerY);
+        if (dist < 45) {
+          document.getElementById('town-status-hud').innerHTML = 
+            `💬 <strong>${res.name}</strong>: "${res.quote}"`;
+          playEncounterSound();
+        }
+      });
+    }
+
+    function interactTrainer() {
+      let nearest = null;
+      let minDist = 999;
+      townResidents.forEach(res => {
+        const dist = Math.hypot(res.x - trainerX, res.y - trainerY);
+        if (dist < minDist) {
+          minDist = dist;
+          nearest = res;
+        }
+      });
+      if (nearest && minDist < 80) {
+        document.getElementById('town-status-hud').innerHTML = 
+          `💬 <strong>${nearest.name}</strong> (${nearest.role}): "${nearest.quote}"`;
+        playEncounterSound();
+      } else {
+        document.getElementById('town-status-hud').innerHTML = 
+          "📍 Walk closer to a townsperson and press TALK!";
+        playBlipSound(300, 0.1);
+      }
+    }
+
+    // --- Guild Roster Profiles ---
+    const roster = [
+      {
+        name: "SARAH JENKINS",
+        type: "CLASS: SMB OWNER • LEVEL 44",
+        status: "TASK SUCCESS: 100%",
+        hp: "45 / 45 (LOW)",
+        skill: "RATING: 2 / 5",
+        ability: "FORM PHOBIA",
+        weakness: "MULTI-STEP FORMS",
+        quote: "If a website asks me to fill out five separate pages just to see a price, I close the tab immediately. I need buttons that actually look like buttons, not invisible grey text!"
+      },
+      {
+        name: "MARCUS VANCE",
+        type: "CLASS: ENTERPRISE VP • LEVEL 39",
+        status: "TASK SUCCESS: 100%",
+        hp: "40 / 40 (VERY LOW)",
+        skill: "RATING: 3 / 5",
+        ability: "DEMO DETERRENCE",
+        weakness: "VAGUE PRICING & FLUFF",
+        quote: "If your landing page doesn't tell me what you do within 5 seconds, I assume your software doesn't work. Forced 'Book a Demo' calls make my blood boil."
+      },
+      {
+        name: "PRIYA SHARMA",
+        type: "CLASS: SENIOR DEV • LEVEL 28",
+        status: "TASK SUCCESS: 100%",
+        hp: "95 / 95 (VERY HIGH)",
+        skill: "RATING: 5 / 5",
+        ability: "EDGE CASE HUNTER",
+        weakness: "MISSING API DOCS",
+        quote: "Show me interactive API docs and code snippets. I always test input fields with SQL injection and emojis just to see if the backend sanitizes properly."
+      },
+      {
+        name: "CARL MILLER",
+        type: "CLASS: RETIRED CPA • LEVEL 67",
+        status: "TASK SUCCESS: 100%",
+        hp: "65 / 65 (MEDIUM)",
+        skill: "RATING: 1 / 5",
+        ability: "PRUDENT EYE",
+        weakness: "TINY CONTRAST & UPSELLS",
+        quote: "I always read the terms and privacy conditions before I click any bright green button. These youngsters design buttons with such low contrast that an old accountant can barely find them!"
+      },
+      {
+        name: "MAYA LIN",
+        type: "CLASS: MOBILE CONSUMER • LEVEL 23",
+        status: "TASK SUCCESS: 100%",
+        hp: "35 / 35 (VERY LOW)",
+        skill: "RATING: 3 / 5",
+        ability: "RAGE CLICK FRENZY",
+        weakness: "SLOW MOBILE MENUS",
+        quote: "If your mobile hamburger menu freezes or tap targets are microscopic, I'm rage-clicking like crazy! Everything needs to be 1-tap Google or Apple Pay."
+      }
+    ];
+
+    function selectPersonaProfile(idx) {
+      document.querySelectorAll('.persona-tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === idx);
+      });
+      const p = roster[idx];
+      document.getElementById('persona-card-name').textContent = p.name;
+      document.getElementById('persona-card-class').textContent = p.type;
+      document.getElementById('persona-card-status').textContent = p.status;
+      document.getElementById('persona-card-hp').textContent = p.hp;
+      document.getElementById('persona-card-skill').textContent = p.skill;
+      document.getElementById('persona-card-trait').textContent = p.ability;
+      document.getElementById('persona-card-vulnerability').textContent = p.weakness;
+      document.getElementById('persona-card-quote').textContent = '"' + p.quote + '"';
+      playBlipSound(480, 0.06);
+    }
+
+    // --- Deployment Tabs ---
+    function switchDeploy(idx) {
+      document.querySelectorAll('.deploy-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+      document.querySelectorAll('.deploy-pane').forEach((pane, i) => {
+        pane.style.display = (i === idx) ? 'block' : 'none';
+      });
+      playBlipSound(520, 0.05);
+    }
+
+    // --- FAQ Toggle ---
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+      playBlipSound(420, 0.04);
+    }
+
+    // --- Clipboard Utility ---
+    function copyCode(btn) {
+      const box = btn.parentElement;
+      const code = box.querySelector('code');
+      if (code) {
+        navigator.clipboard.writeText(code.innerText).then(() => {
+          showToast("COPIED TO CLIPBOARD!");
+          playBlipSound(720, 0.08);
+        });
+      }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    // On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initTownCanvas();
+      drawPlayerBattleSprite();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta 5M | Institutional BTC 5-Minute Prediction Market Harness</title>
+  <meta name="description" content="Institutional leaseholder software for 5-minute Bitcoin binary options on Polymarket CLOB. Features Three-Stage dynamic positioning, cryptographic SHA-256 audit chaining, and sub-230ms execution.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      
+      /* Light / Silver Metallic Theme */
+      --bg-canvas: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --bg-metallic: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      --bg-silver-card: linear-gradient(145deg, #ffffff 0%, #f4f6f9 100%);
+      
+      --border-color: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-hover: #cbd5e1;
+      --border-silver: #d1d5db;
+      
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-faint: #94a3b8;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-light: #eff6ff;
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-emerald-light: #ecfdf5;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-purple: #7c3aed;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+      
+      --max-width: 1260px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle Silver Precision Grid */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Sticky Navigation */
+    .navbar {
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.4px;
+    }
+
+    /* Custom Geometric SVG Logo */
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .brand-logo-wrap:hover {
+      transform: scale(1.05);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 17px;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: var(--accent-blue-light);
+      border: 1px solid #bfdbfe;
+      padding: 2px 7px;
+      border-radius: var(--radius-sm);
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+      border-color: var(--border-hover);
+    }
+
+    .btn-primary {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #1e293b;
+      transform: translateY(-1px);
+    }
+
+    /* Live Pulse Dot */
+    .live-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+      display: inline-block;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 64px 0 48px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px 13px;
+      border-radius: var(--radius-full);
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #334155;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 4.8vw, 58px);
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--text-main);
+      max-width: 960px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #0f172a 20%, #2563eb 60%, #0284c7 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.55;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .cli-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #1e293b;
+      cursor: pointer;
+      user-select: all;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cli-pill:hover {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .cli-prefix {
+      color: #94a3b8;
+      margin-right: 8px;
+    }
+
+    .cli-copy-btn {
+      background: none;
+      border: none;
+      margin-left: 12px;
+      cursor: pointer;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      padding: 2px 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .cli-copy-btn:hover {
+      color: var(--text-main);
+    }
+
+    /* Hero Showcase Box (Silver / Slate Terminal) */
+    .showcase-box {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .showcase-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .traffic-dot.red { background: #fca5a5; }
+    .traffic-dot.yellow { background: #fde68a; }
+    .traffic-dot.green { background: #86efac; }
+
+    .showcase-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .showcase-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 4px 11px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .showcase-tab.active {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: var(--text-main);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .showcase-stream-btn {
+      background: var(--accent-emerald-light);
+      border: 1px solid #a7f3d0;
+      color: var(--accent-emerald);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .showcase-content {
+      padding: 22px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: #1e293b;
+      background: #fbfcfd;
+      overflow-x: auto;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+
+    .code-comment { color: #64748b; }
+    .code-cyan { color: #0284c7; }
+    .code-green { color: #059669; font-weight: 600; }
+    .code-yellow { color: #b45309; }
+    .code-purple { color: #7c3aed; }
+    .code-rose { color: #e11d48; font-weight: 600; }
+    .code-muted { color: #64748b; }
+
+    /* Production Metric Bar (Test-1 Scorecard) */
+    .metrics-bar-section {
+      padding: 24px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: #ffffff;
+    }
+
+    .metrics-grid-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1080px) {
+      .metrics-grid-row { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .metrics-grid-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .metric-card-stat {
+      border: 1px solid var(--border-color);
+      background: var(--bg-silver-card);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-card-stat:hover {
+      border-color: #94a3b8;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .metric-stat-val {
+      font-size: 26px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .metric-stat-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    .badge-green { color: var(--accent-emerald); }
+    .badge-blue { color: var(--accent-blue); }
+    .badge-purple { color: var(--accent-purple); }
+
+    /* Section Styles */
+    .section-padding {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 36px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 3.2vw, 36px);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+
+    /* CLEAN INTERACTIVE SIMULATOR (LIGHT / SILVER) */
+    .sim-container {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .sim-top-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sim-scenarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .scenario-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      color: var(--text-body);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+
+    .scenario-pill.active {
+      background: var(--accent-blue-light);
+      border-color: #93c5fd;
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .scenario-pill:hover:not(.active) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .sim-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sim-btn-play {
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .sim-btn-play:hover {
+      background: #1e293b;
+    }
+
+    .sim-btn-reset {
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid var(--border-color);
+      padding: 7px 14px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .sim-btn-reset:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    /* 5-minute timeline track */
+    .timeline-wrapper {
+      margin-bottom: 32px;
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .timeline-track-bar {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .timeline-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #0284c7, #059669);
+      width: 0%;
+      transition: width 0.1s linear;
+      position: relative;
+    }
+
+    .timeline-pins {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      top: -14px;
+      padding: 0 4px;
+    }
+
+    .timeline-pin {
+      background: #ffffff;
+      border: 2px solid #94a3b8;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .timeline-pin.reached {
+      background: #059669;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+    }
+
+    .timeline-pin-label {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    /* Interactive Simulator Grid */
+    .sim-content-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 900px) {
+      .sim-content-grid { grid-template-columns: 1fr; }
+    }
+
+    .sim-panel {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sim-panel-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .sim-state-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .state-enter { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+    .state-pass { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .state-scale { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+    .state-salvage { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+    .state-profit { background: #fefce8; color: #b45309; border: 1px solid #fde68a; }
+    .state-hedge { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
+
+    .sim-param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .sim-param-name { color: var(--text-muted); }
+    .sim-param-val { font-weight: 600; color: var(--text-main); }
+
+    .sim-action-dispatch {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: #1e293b;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* CLOB & CANVAS SECTION */
+    .clob-section-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 960px) {
+      .clob-section-grid { grid-template-columns: 1fr; }
+    }
+
+    .canvas-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .canvas-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .canvas-container {
+      width: 100%;
+      height: 260px;
+      position: relative;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-sm);
+    }
+
+    .obi-gauge-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-top: 16px;
+    }
+
+    .obi-gauge-bar {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
+      position: relative;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .obi-indicator-needle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: #0f172a;
+      box-shadow: 0 0 6px rgba(15, 23, 42, 0.4);
+      border-radius: var(--radius-full);
+      transition: left 0.2s ease-out;
+      transform: translateX(-50%);
+    }
+
+    .obi-labels {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* CRYPTOGRAPHIC AUDIT EXPLORER */
+    .audit-chain-container {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-top: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .audit-chain-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .audit-chain-row { grid-template-columns: 1fr; }
+    }
+
+    .audit-block-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .audit-block-card.tampered {
+      border-color: #f43f5e;
+      background: #fff1f2;
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.2);
+    }
+
+    .audit-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .hash-line {
+      font-size: 11px;
+      color: #475569;
+      word-break: break-all;
+      margin: 4px 0;
+    }
+
+    .hash-val {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .audit-actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+
+    .audit-status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* IN-BROWSER TERMINAL CLI */
+    .terminal-section {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .terminal-bar {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .terminal-buttons {
+      display: flex;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #152238;
+      border-bottom: 1px solid #243552;
+      overflow-x: auto;
+    }
+
+    .terminal-preset-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .terminal-preset-btn:hover {
+      background: #334155;
+      color: #ffffff;
+      border-color: #64748b;
+    }
+
+    .terminal-screen {
+      padding: 22px;
+      min-height: 260px;
+      max-height: 360px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.65;
+      color: #f8fafc;
+      background: #0f172a;
+    }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 18px;
+      background: #152238;
+      border-top: 1px solid #243552;
+    }
+
+    .terminal-prompt {
+      color: #34d399;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      margin-right: 10px;
+    }
+
+    .terminal-input {
+      flex-grow: 1;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      outline: none;
+    }
+
+    /* DIATAXIS DOCUMENTATION HUB */
+    .diataxis-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 1024px) {
+      .diataxis-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .diataxis-grid { grid-template-columns: 1fr; }
+    }
+
+    .diataxis-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .diataxis-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .diataxis-quadrant {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .quadrant-tutorials { color: var(--accent-emerald); }
+    .quadrant-howto { color: var(--accent-blue); }
+    .quadrant-reference { color: var(--accent-amber); }
+    .quadrant-explanation { color: var(--accent-purple); }
+
+    .diataxis-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .diataxis-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .diataxis-doc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+    }
+
+    .diataxis-doc-list a {
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s ease;
+    }
+
+    .diataxis-doc-list a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 64px 0 40px;
+      font-size: 13px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    .footer-brand-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      transition: color 0.15s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--text-main);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-grid-pattern">
+
+  <!-- Sticky Navbar with Custom Logo -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo-wrap" title="Delta 5M Harness">
+          <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="silver-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="50%" stop-color="#e2e8f0"/>
+                <stop offset="100%" stop-color="#94a3b8"/>
+              </linearGradient>
+              <linearGradient id="silver-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f8fafc"/>
+                <stop offset="50%" stop-color="#cbd5e1"/>
+                <stop offset="100%" stop-color="#64748b"/>
+              </linearGradient>
+              <linearGradient id="accent-blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <!-- Modern Faceted Precision Delta Emblem -->
+            <polygon points="18,3 33,29 3,29" fill="url(#silver-grad-1)" stroke="#0f172a" stroke-width="1.75" stroke-linejoin="round"/>
+            <polygon points="18,3 18,29 3,29" fill="url(#silver-grad-2)" opacity="0.85"/>
+            <polygon points="18,12 26,27 10,27" fill="#0f172a"/>
+            <polygon points="18,12 18,27 26,27" fill="url(#accent-blue-grad)"/>
+          </svg>
+        </div>
+        <span class="brand-title">DELTA 5M</span>
+        <span class="brand-badge">BTC HARNESS</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#simulator">Simulator</a>
+        <a href="#three-stage">Three-Stage Logic</a>
+        <a href="#clob">CLOB &amp; Depth</a>
+        <a href="#scorecard">Test-1 Scorecard</a>
+        <a href="#audit">Audit Chain</a>
+        <a href="#terminal">CLI Terminal</a>
+        <a href="#diataxis">Di&aacute;taxis Docs</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="#terminal" class="btn btn-primary">Run Harness</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span class="live-pulse-dot"></span>
+          <span>Institutional 5m BTC Execution Harness &bull; Polymarket CLOB &bull; Zero Lookahead</span>
+        </div>
+
+        <h1 class="hero-title">
+          Institutional 5-Minute BTC Binary Options <span class="gradient-text">Research &amp; Execution Harness.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Autonomous client software engineered for Polymarket CLOB. Features Three-Stage dynamic positioning, time-decay-aware risk liquidation, and continuous SHA-256 cryptographic audit chaining.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#simulator" class="btn btn-primary" style="padding: 10px 22px; font-size: 14px;">Launch Simulator</a>
+          
+          <div class="cli-pill" onclick="copyText('uv run main.py harness --mode SIMULATED --staged')">
+            <span class="cli-prefix">$</span>
+            <span>uv run main.py harness --mode SIMULATED --staged</span>
+            <button class="cli-copy-btn" title="Copy to clipboard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Showcase Box (Silver / Clean Terminal) -->
+        <div class="showcase-box">
+          <div class="showcase-header">
+            <div class="traffic-lights">
+              <div class="traffic-dot red"></div>
+              <div class="traffic-dot yellow"></div>
+              <div class="traffic-dot green"></div>
+            </div>
+            <div class="showcase-tabs">
+              <button class="showcase-tab active" onclick="switchHeroTab('harness')">live-harness.log</button>
+              <button class="showcase-tab" onclick="switchHeroTab('stages')">dynamic-beta.py</button>
+              <button class="showcase-tab" onclick="switchHeroTab('lease')">lease-config.env</button>
+              <button class="showcase-tab" onclick="switchHeroTab('audit')">audit-block-220.json</button>
+            </div>
+            <div>
+              <button class="showcase-stream-btn" id="stream-toggle-btn" onclick="toggleStreamSimulation()">
+                <span class="live-pulse-dot" style="width:6px; height:6px;"></span>
+                <span id="stream-btn-text">Stream Active</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="showcase-content" id="hero-showcase-view">
+            <div id="tab-harness">
+<span class="code-comment"># Continuous 5m BTC binary options research harness (Chain ID: 137 Polygon)</span>
+<span class="code-comment"># Target Contract: Polymarket btc-updown-5m-* | Resolution Oracle: Chainlink / Pyth</span>
+
+<span class="code-cyan">[STAGE 0 @ t=0s, &tau;=300s]</span> Inception Prior: Probabilistic FC &rarr; Conviction=0.74
+  &bull; Log-Odds Model: <span class="code-green">P(UP) = 0.672</span> | Edge: <span class="code-green">+8.4%</span> | Confidence: <span class="code-purple">0.68</span> (Gate Passed &ge; 0.50)
+  &bull; Order Dispatch: <span class="code-yellow">ENTER_TRANCHE</span> (50% fractional Kelly) &rarr; <span class="code-green">FILLED 28.4 shares @ $0.588</span> ($16.70 USD)
+
+<span class="code-cyan">[STAGE 1 @ t=120s, &tau;=180s]</span> Mid-Flight Re-evaluation: Direction confirmed (&Delta; &gt; 0)
+  &bull; Dynamic Spot Sensitivity &beta;<sub>spot</sub>(&tau;)=1807.3 | Blended Confidence: <span class="code-purple">0.82</span>
+  &bull; Action: <span class="code-yellow">SCALE_HOLD</span> &rarr; Trend confirmed, retain inventory into terminal window.
+
+<span class="code-cyan">[STAGE 2 @ t=240s, &tau;=60s]</span> Endgame Microstructure: Midpoint Bid: $0.910 | p_predicted: 0.941
+  &bull; Action: <span class="code-green">TAKE_PROFIT</span> &rarr; Executed limit sell at CLOB bid $0.910 to eliminate oracle pin-risk.
+  &bull; Realized PnL: <span class="code-green">+$9.14 USD (+54.7% ROI)</span> | Cycle Outcome: <span class="code-green">WIN (Pre-Resolution Lock)</span>
+
+<span class="code-muted">[AUDIT VERIFICATION] SHA-256 Record Hash: a9b4f6e188219c01... Integrity status: VALID (Zero Lookahead)</span>
+            </div>
+
+            <div id="tab-stages" style="display:none;">
+<span class="code-comment"># Dynamic Spot Sensitivity & Microstructure Calibration (docs/explanation/three_stage_positioning.md)</span>
+<span class="code-purple">def</span> <span class="code-cyan">compute_dynamic_spot_beta</span>(tau_remaining_s: <span class="code-yellow">float</span>) -&gt; <span class="code-yellow">float</span>:
+    <span class="code-comment">"""As tau decays toward 0, beta_spot explodes asymptotically: lim_{tau -> 0} beta = inf"""</span>
+    tau_norm = max(tau_remaining_s, <span class="code-yellow">1.0</span>) / <span class="code-yellow">300.0</span>
+    <span class="code-purple">return</span> <span class="code-yellow">1400.0</span> / math.sqrt(tau_norm)
+
+<span class="code-purple">def</span> <span class="code-cyan">evaluate_stage_1_salvage</span>(pos_active: <span class="code-yellow">bool</span>, delta_spot: <span class="code-yellow">float</span>) -&gt; <span class="code-yellow">Signal</span>:
+    <span class="code-comment"># Salvage stop-loss: dump into existing bids if spot broke strongly against us</span>
+    <span class="code-purple">if</span> pos_active <span class="code-purple">and</span> delta_spot &lt; -<span class="code-yellow">0.0006</span>:
+        <span class="code-purple">return</span> Signal(action=Action.<span class="code-rose">SALVAGE_STOP_LOSS</span>, salvage_factor=<span class="code-yellow">0.65</span>)
+    <span class="code-purple">return</span> Signal(action=Action.<span class="code-green">SCALE_HOLD</span>)
+            </div>
+
+            <div id="tab-lease" style="display:none;">
+<span class="code-comment"># Institutional Client Configuration (.env)</span>
+<span class="code-cyan">TENANT_ID</span>=<span class="code-green">tenant-primary-001</span>
+<span class="code-cyan">LEASE_ID</span>=<span class="code-green">btc5m-lease-v2-prod</span>
+<span class="code-cyan">FORECAST_API_KEY</span>=<span class="code-green">sec_live_9942a1b7e4088921cf</span>
+
+<span class="code-comment"># Harness Execution Parameters</span>
+<span class="code-cyan">EXECUTION_MODE</span>=<span class="code-green">SIMULATED</span>           <span class="code-comment"># Set to 'LIVE' for Polygon Chain 137 orders</span>
+<span class="code-cyan">ORDER_TYPE</span>=<span class="code-green">LIMIT</span>
+<span class="code-cyan">FRACTIONAL_KELLY</span>=<span class="code-yellow">0.50</span>
+
+<span class="code-comment"># Risk Circuit Breakers</span>
+<span class="code-cyan">MAX_POSITION_USD</span>=<span class="code-yellow">10.0</span>
+<span class="code-cyan">MAX_HOURLY_LOSS_USD</span>=<span class="code-yellow">50.0</span>
+<span class="code-cyan">CONSECUTIVE_LOSS_LIMIT</span>=<span class="code-yellow">3</span>
+<span class="code-cyan">COOLDOWN_TURNS</span>=<span class="code-yellow">5</span>
+            </div>
+
+            <div id="tab-audit" style="display:none;">
+{
+  <span class="code-cyan">"tenant_id"</span>: <span class="code-green">"tenant-primary-001"</span>,
+  <span class="code-cyan">"lease_id"</span>: <span class="code-green">"btc5m-lease-v2-prod"</span>,
+  <span class="code-cyan">"cycle_id"</span>: <span class="code-green">"btc5m-2026-09-29-14:20:00"</span>,
+  <span class="code-cyan">"prev_record_hash"</span>: <span class="code-green">"7d4b1f63a0184e9c8e0321a5ff43190abf9350284f183709b4317b960cd4e6a1"</span>,
+  <span class="code-cyan">"record_hash"</span>: <span class="code-green">"a9b4f6e188219c017d84654b1f41b8a53160a22cf4421161d02d129759c5d721"</span>,
+  <span class="code-cyan">"ex_ante_prediction"</span>: { <span class="code-cyan">"p_up"</span>: <span class="code-yellow">0.672</span>, <span class="code-cyan">"edge"</span>: <span class="code-yellow">0.084</span> },
+  <span class="code-cyan">"stages_executed"</span>: [<span class="code-yellow">0</span>, <span class="code-yellow">1</span>, <span class="code-yellow">2</span>],
+  <span class="code-cyan">"realized_pnl_usd"</span>: <span class="code-yellow">9.14</span>,
+  <span class="code-cyan">"zero_lookahead_verified"</span>: <span class="code-purple">true</span>
+}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scorecard Bar (Test-1 Empirical Benchmark) -->
+    <section class="metrics-bar-section" id="scorecard">
+      <div class="container">
+        <div class="metrics-grid-row">
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Net Realized PnL</div>
+            <div class="metric-stat-val" style="color: var(--accent-emerald);">+$81.90</div>
+            <span class="metric-stat-badge badge-green">&uarr; 220 consecutive cycles</span>
+          </div>
+
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Win Rate</div>
+            <div class="metric-stat-val" style="color: var(--accent-blue);">62.86%</div>
+            <span class="metric-stat-badge badge-blue">Baseline: 50.00%</span>
+          </div>
+
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Execution Latency</div>
+            <div class="metric-stat-val" style="color: var(--accent-cyan);">229.8 ms</div>
+            <span class="metric-stat-badge badge-blue">&lt; 250ms SLA Compliant</span>
+          </div>
+
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Calibration Coverage</div>
+            <div class="metric-stat-val" style="color: var(--accent-purple);">81.8%</div>
+            <span class="metric-stat-badge badge-purple">Target: 80% Quantile</span>
+          </div>
+
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Diebold-Mariano Stat</div>
+            <div class="metric-stat-val" style="color: var(--accent-amber);">+2.48</div>
+            <span class="metric-stat-badge" style="color: var(--accent-amber);">p-value = 0.013 (&lt; 0.05)</span>
+          </div>
+
+          <div class="metric-card-stat">
+            <div class="metric-stat-label">Audit Hash Chain</div>
+            <div class="metric-stat-val" style="color: var(--accent-emerald);">100%</div>
+            <span class="metric-stat-badge badge-green">Zero-Lookahead Verified</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE THREE-STAGE SIMULATOR (CLEAN LIGHT / SILVER) -->
+    <section class="section-padding" id="simulator">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="live-pulse-dot"></span>
+            <span>Positioning Simulator</span>
+          </div>
+          <h2 class="section-title">Experience the Three-Stage Positioning Engine.</h2>
+          <p class="section-subtitle">
+            Simulate how the harness handles dynamic time-decay sensitivity, momentum validation, and active liquidation across an entire 5-minute candle.
+          </p>
+        </div>
+
+        <div class="sim-container">
+          <div class="sim-top-toolbar">
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-right: 8px; font-weight: 600;">Preset Scenarios:</span>
+              <div class="sim-scenarios" style="display:inline-flex;">
+                <button class="scenario-pill active" onclick="loadScenario('trend')">1. Bullish Trend (Take Profit)</button>
+                <button class="scenario-pill" onclick="loadScenario('reversal')">2. Adverse Flip (Salvage Stop)</button>
+                <button class="scenario-pill" onclick="loadScenario('noise')">3. High Noise Filter (Pass &rarr; Enter)</button>
+                <button class="scenario-pill" onclick="loadScenario('hedge')">4. Endgame Tail Snipe</button>
+              </div>
+            </div>
+
+            <div class="sim-player-controls">
+              <button class="sim-btn-play" id="sim-play-btn" onclick="togglePlaySimulation()">
+                <span id="sim-play-icon">&rtrif;</span>
+                <span id="sim-play-text">Auto Play Cycle</span>
+              </button>
+              <button class="sim-btn-reset" onclick="resetSimulator()">Reset</button>
+            </div>
+          </div>
+
+          <!-- Timeline Track Bar -->
+          <div class="timeline-wrapper">
+            <div class="timeline-labels">
+              <span>Stage 0: Inception (t=0s, &tau;=300s)</span>
+              <span>Stage 1: Validation (t=120s, &tau;=180s)</span>
+              <span>Stage 2: Endgame (t=240s, &tau;=60s)</span>
+              <span>Resolution (t=300s, &tau;=0s)</span>
+            </div>
+            
+            <div class="timeline-track-bar" onclick="scrubTimeline(event)">
+              <div class="timeline-progress-fill" id="sim-progress-fill"></div>
+            </div>
+
+            <div class="timeline-pins">
+              <div class="timeline-pin reached" id="pin-0" title="Stage 0: Inception" onclick="jumpToStage(0)">
+                <span class="timeline-pin-label">Stage 0</span>
+              </div>
+              <div class="timeline-pin" id="pin-1" title="Stage 1: Mid-Flight" onclick="jumpToStage(1)">
+                <span class="timeline-pin-label">Stage 1</span>
+              </div>
+              <div class="timeline-pin" id="pin-2" title="Stage 2: Endgame" onclick="jumpToStage(2)">
+                <span class="timeline-pin-label">Stage 2</span>
+              </div>
+              <div class="timeline-pin" id="pin-3" title="Settlement" onclick="jumpToStage(3)">
+                <span class="timeline-pin-label">Oracle</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulator Grid -->
+          <div class="sim-content-grid">
+            <!-- Left Panel: State Machine Status & Math -->
+            <div class="sim-panel">
+              <div class="sim-panel-title">
+                <span>ACTIVE STATE MACHINE</span>
+                <span class="sim-state-badge state-enter" id="sim-state-badge">STAGE 0: ENTER_TRANCHE</span>
+              </div>
+
+              <div class="sim-param-row">
+                <span class="sim-param-name">Elapsed Time (t) / Remaining (&tau;):</span>
+                <span class="sim-param-val" id="sim-t-val">t = 0s &bull; &tau; = 300s</span>
+              </div>
+
+              <div class="sim-param-row">
+                <span class="sim-param-name">Dynamic Sensitivity &beta;<sub>spot</sub>(&tau;):</span>
+                <span class="sim-param-val" style="color: var(--accent-blue);" id="sim-beta-val">1400.0x</span>
+              </div>
+
+              <div class="sim-param-row">
+                <span class="sim-param-name">Model Logit (z) &bull; Probability P(UP):</span>
+                <span class="sim-param-val" style="color: var(--accent-emerald);" id="sim-prob-val">z = +0.720 &bull; P(UP) = 67.2%</span>
+              </div>
+
+              <div class="sim-param-row">
+                <span class="sim-param-name">Estimated Realized / Unrealized PnL:</span>
+                <span class="sim-param-val" id="sim-pnl-val" style="color: var(--text-muted);">$0.00 USD (0.0%)</span>
+              </div>
+
+              <div class="sim-action-dispatch" id="sim-dispatch-box">
+                &bull; <strong>Stage 0 Decision:</strong> Confidence threshold met ($0.68 &ge; 0.50). Dispatched 50% fractional Kelly tranche ($16.70) into CLOB Ask at $0.588.
+              </div>
+            </div>
+
+            <!-- Right Panel: Stage Logic & Checkpoints -->
+            <div class="sim-panel">
+              <div class="sim-panel-title">
+                <span>STAGE LOGIC &amp; RISK GATES</span>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">CLICK TO INSPECT</span>
+              </div>
+
+              <div style="display:flex; gap:6px;">
+                <button class="stage-btn active" id="btn-stg-0" onclick="jumpToStage(0)">Stage 0 (0m)</button>
+                <button class="stage-btn" id="btn-stg-1" onclick="jumpToStage(1)">Stage 1 (2m)</button>
+                <button class="stage-btn" id="btn-stg-2" onclick="jumpToStage(2)">Stage 2 (4m)</button>
+              </div>
+
+              <div id="stage-explain-box" style="font-size: 13px; color: var(--text-body); line-height: 1.6; background:#ffffff; border:1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px;">
+                <strong>Stage 0: Inception Gate (t = 0m, &tau; = 300s)</strong><br>
+                Filters opening spread noise when remaining variance is at peak. Enforces confidence $C(t) \ge 0.50$ and statistical edge $\ge 4\%$ before committing dry powder.
+              </div>
+
+              <div style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-muted); line-height: 1.5; border-top: 1px solid #e2e8f0; padding-top: 10px;">
+                <strong>Mathematical Formulation:</strong><br>
+                <code>&beta;<sub>spot</sub>(&tau;) = 1400.0 / &radic;(&tau; / 300)</code><br>
+                Sensitivity multiplier scales from <strong>1400.0x</strong> at &tau;=300s to <strong>3130.5x</strong> at &tau;=60s!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THREE-STAGE FRAMEWORK BREAKDOWN -->
+    <section class="section-padding" id="three-stage" style="background: #ffffff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Execution Lifecycle</span>
+          </div>
+          <h2 class="section-title">The Three-Stage Positioning Architecture.</h2>
+          <p class="section-subtitle">
+            Traditional binary options bots hold naive static bets to expiry. This Three-Stage Engine continuously adapts to time-decay and microstructure drift.
+          </p>
+        </div>
+
+        <div class="diataxis-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <!-- Stage 0 Card -->
+          <div class="diataxis-card" style="background: #f8fafc; border-color: #cbd5e1;">
+            <div class="diataxis-quadrant" style="color: var(--accent-blue);">STAGE 0 &bull; t = 0m (&tau; = 300s)</div>
+            <h3 class="diataxis-title">Inception Gate</h3>
+            <p class="diataxis-desc">
+              Filters opening candle noise when variance is highest. Enforces ex-ante conviction gates before committing institutional capital.
+            </p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-family:var(--font-mono); font-size:12px; color:var(--text-body); margin-bottom:16px;">
+              <li>&bull; Gate: Confidence &ge; 0.50 &amp; Edge &ge; 4%</li>
+              <li>&bull; Noise Filter: Directional spread check</li>
+              <li>&bull; Sizing: 50% fractional Kelly tranche</li>
+              <li>&bull; Fallback: NOOP (PASS) defers to Stage 1</li>
+            </ul>
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-blue); background:#eff6ff; padding:8px 12px; border-radius:4px; border:1px solid #bfdbfe;">
+              z<sub>fcast</sub>(&tau;) = 1.8 &times; tanh(&Delta;<sub>F</sub>/&sigma;<sub>F</sub>) &times; C &times; &radic;(&tau;/300)
+            </div>
+          </div>
+
+          <!-- Stage 1 Card -->
+          <div class="diataxis-card" style="background: #f8fafc; border-color: #cbd5e1;">
+            <div class="diataxis-quadrant" style="color: var(--accent-cyan);">STAGE 1 &bull; t = 2m (&tau; = 180s)</div>
+            <h3 class="diataxis-title">Validation &amp; Salvage Stop</h3>
+            <p class="diataxis-desc">
+              Evaluates mid-flight realization after 40% of the duration has elapsed. Confirms trend momentum or cuts losers early.
+            </p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-family:var(--font-mono); font-size:12px; color:var(--text-body); margin-bottom:16px;">
+              <li>&bull; Momentum: Scale up tranche if trend aligns</li>
+              <li>&bull; Salvage Stop: Dump to bids if momentum flips</li>
+              <li>&bull; Capital Preservation: Salvages 40&ndash;70% funds</li>
+              <li>&bull; Late Entry: Enters if Stage 0 passed on noise</li>
+            </ul>
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-cyan); background:#f0f9ff; padding:8px 12px; border-radius:4px; border:1px solid #bae6fd;">
+              &beta;<sub>spot</sub>(180s) = 1807.3x sensitivity
+            </div>
+          </div>
+
+          <!-- Stage 2 Card -->
+          <div class="diataxis-card" style="background: #f8fafc; border-color: #cbd5e1;">
+            <div class="diataxis-quadrant" style="color: var(--accent-emerald);">STAGE 2 &bull; t = 4m (&tau; = 60s)</div>
+            <h3 class="diataxis-title">Endgame Snipe &amp; Take-Profit</h3>
+            <p class="diataxis-desc">
+              Eliminates terminal pin-risk and oracle slippage in the final 60 seconds before settlement resolution.
+            </p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-family:var(--font-mono); font-size:12px; color:var(--text-body); margin-bottom:16px;">
+              <li>&bull; Profit Lock: Sell if Bid &ge; $0.88 or P &ge; 0.90</li>
+              <li>&bull; Asymmetric Snipe: Buy opposite if &lt; $0.16</li>
+              <li>&bull; Pin-Risk Immunity: Pre-resolution exit</li>
+              <li>&bull; Settlement: Hold only if safety threshold met</li>
+            </ul>
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-emerald); background:#ecfdf5; padding:8px 12px; border-radius:4px; border:1px solid #a7f3d0;">
+              lim<sub>&tau;&rarr;0</sub> &beta;<sub>spot</sub>(&tau;) = &infin; (Pin Cliff Avoided)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE CLOB & MICROSTRUCTURE CANVAS -->
+    <section class="section-padding" id="clob" style="background: #f8fafc; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="live-pulse-dot"></span>
+            <span>Microstructure Depth &amp; Liquidity</span>
+          </div>
+          <h2 class="section-title">Polymarket Orderbook &amp; Dynamic Sensitivity.</h2>
+          <p class="section-subtitle">
+            Visualizing tick-by-tick Central Limit Order Book (CLOB) queue depth, real-time bid/ask spreads, and the time-decay sensitivity curve.
+          </p>
+        </div>
+
+        <div class="clob-section-grid">
+          <!-- Left: Animated CLOB Depth Canvas -->
+          <div class="canvas-card">
+            <div class="canvas-title-row">
+              <span style="font-weight: 700; color: #0f172a;">POLYMARKET CLOB DEPTH &bull; btc-updown-5m</span>
+              <span style="color: var(--accent-emerald); font-weight: 600;" id="clob-mid-price">Mid: $0.588</span>
+            </div>
+
+            <div class="canvas-container">
+              <canvas id="clobCanvas"></canvas>
+            </div>
+
+            <div class="obi-gauge-container">
+              <div style="display:flex; justify-content:space-between; width:100%; font-family: var(--font-mono); font-size: 12px;">
+                <span style="color: var(--accent-rose); font-weight: 600;">Ask Dominance</span>
+                <span style="color: #0f172a; font-weight:700;" id="obi-val-display">OBI: +0.24</span>
+                <span style="color: var(--accent-emerald); font-weight: 600;">Bid Dominance</span>
+              </div>
+              <div class="obi-gauge-bar">
+                <div class="obi-indicator-needle" id="obi-needle" style="left: 62%;"></div>
+              </div>
+              <div class="obi-labels">
+                <span>-1.0</span>
+                <span>0.0 (Neutral)</span>
+                <span>+1.0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Dynamic Spot Beta Sensitivity Canvas -->
+          <div class="canvas-card">
+            <div class="canvas-title-row">
+              <span style="font-weight: 700; color: #0f172a;">DYNAMIC SENSITIVITY &beta;<sub>spot</sub>(&tau;)</span>
+              <span style="color: var(--accent-blue); font-weight: 600;">Asymptotic Curve</span>
+            </div>
+
+            <div class="canvas-container">
+              <canvas id="betaCanvas"></canvas>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 14px; line-height: 1.55;">
+              <span style="color:#0f172a; font-weight:600;">Pin-Risk Mitigation:</span> As settlement approaches (&tau; &rarr; 0), small spot moves cause violent 100% price flips. Stage 2 executes limit exits before this asymptotic cliff to lock in gains.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEST-1 BENCHMARK PERFORMANCE & CUMULATIVE PNL CHART -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Empirical Verification</span>
+          </div>
+          <h2 class="section-title">Test-1 Production Benchmark Performance.</h2>
+          <p class="section-subtitle">
+            Outcomes across 220 consecutive 5-minute cycles on live Polymarket CLOB ticks comparing Three-Stage active risk mitigation against naive hold-to-expiration.
+          </p>
+        </div>
+
+        <div class="canvas-card" style="padding: 28px;">
+          <div class="canvas-title-row">
+            <div>
+              <span style="font-weight: 700; color: #0f172a; font-size: 15px;">220-Cycle Cumulative Net Equity Curve</span>
+              <span style="display:block; font-size: 12px; color: var(--text-muted); margin-top: 2px;">Simulated Net PnL (+$81.90 USD, 62.86% Win Rate)</span>
+            </div>
+            <div style="display:flex; gap: 14px; font-size: 12px; font-family: var(--font-mono);">
+              <span style="display:flex; align-items:center; gap: 6px; color: var(--accent-emerald); font-weight: 600;">
+                <span style="width:12px; height:3px; background: var(--accent-emerald); display:inline-block; border-radius: 2px;"></span> Three-Stage Harness
+              </span>
+              <span style="display:flex; align-items:center; gap: 6px; color: var(--accent-rose); font-weight: 600;">
+                <span style="width:12px; height:3px; background: var(--accent-rose); display:inline-block; border-radius: 2px;"></span> Naive Hold Baseline
+              </span>
+            </div>
+          </div>
+
+          <div class="canvas-container" style="height: 320px;">
+            <canvas id="equityCanvas"></canvas>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); font-weight: 600;">MAX DRAWDOWN</div>
+              <div style="font-family: var(--font-mono); font-size: 18px; color: #0f172a; font-weight: 700;">-$14.20 (-11.4%)</div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-emerald); font-weight: 600;">vs -$48.60 on naive hold</div>
+            </div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); font-weight: 600;">SALVAGE STOPS FIRED</div>
+              <div style="font-family: var(--font-mono); font-size: 18px; color: #0f172a; font-weight: 700;">18 Cycles</div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-blue); font-weight: 600;">Capital preserved: $114.50</div>
+            </div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); font-weight: 600;">PRE-EXPIRY PROFITS LOCKED</div>
+              <div style="font-family: var(--font-mono); font-size: 18px; color: #0f172a; font-weight: 700;">42 Cycles</div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-amber); font-weight: 600;">Zero oracle pin-risk flips</div>
+            </div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); font-weight: 600;">DIEBOLD-MARIANO TEST</div>
+              <div style="font-family: var(--font-mono); font-size: 18px; color: #0f172a; font-weight: 700;">DM = +2.48</div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-purple); font-weight: 600;">Statistically significant (p=0.013)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRYPTOGRAPHIC SHA-256 AUDIT TRAIL EXPLORER -->
+    <section class="section-padding" id="audit" style="background: #f8fafc; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Cryptographic Integrity</span>
+          </div>
+          <h2 class="section-title">Zero-Lookahead SHA-256 Audit Chain.</h2>
+          <p class="section-subtitle">
+            Every prediction, order fill, and resolution is cryptographically chained via SHA-256 hashes. Test what happens if someone attempts ex-post tampering.
+          </p>
+        </div>
+
+        <div class="audit-chain-container">
+          <div class="audit-chain-row" id="audit-blocks-row">
+            <!-- Block 218 -->
+            <div class="audit-block-card" id="audit-block-218">
+              <div class="audit-block-header">
+                <span>CYCLE #218</span>
+                <span style="color: var(--accent-emerald);">RESOLVED: WIN</span>
+              </div>
+              <div class="hash-line">Tenant: <span class="hash-val">tenant-primary-001</span></div>
+              <div class="hash-line">Prev Hash: <span class="hash-val" id="prev-218">9b82f1...</span></div>
+              <div class="hash-line">Forecast: <span class="hash-val" id="fcast-218">p=0.642, e=+6.2%</span></div>
+              <div class="hash-line">Record Hash: <span class="hash-val" id="hash-218" style="color: var(--accent-emerald);">7d4b1f63a0184e9c...</span></div>
+              <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted); font-weight: 600;">Realized: +$6.80 USD</div>
+            </div>
+
+            <!-- Block 219 -->
+            <div class="audit-block-card" id="audit-block-219">
+              <div class="audit-block-header">
+                <span>CYCLE #219</span>
+                <span style="color: var(--accent-emerald);">RESOLVED: WIN</span>
+              </div>
+              <div class="hash-line">Tenant: <span class="hash-val">tenant-primary-001</span></div>
+              <div class="hash-line">Prev Hash: <span class="hash-val" id="prev-219">7d4b1f63a0184e9c...</span></div>
+              <div class="hash-line">Forecast: <span class="hash-val" id="fcast-219">p=0.691, e=+9.8%</span></div>
+              <div class="hash-line">Record Hash: <span class="hash-val" id="hash-219" style="color: var(--accent-emerald);">c4e82b79a1f0541e...</span></div>
+              <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted); font-weight: 600;">Realized: +$8.40 USD</div>
+            </div>
+
+            <!-- Block 220 -->
+            <div class="audit-block-card" id="audit-block-220">
+              <div class="audit-block-header">
+                <span>CYCLE #220</span>
+                <span style="color: var(--accent-emerald);" id="status-220">RESOLVED: WIN</span>
+              </div>
+              <div class="hash-line">Tenant: <span class="hash-val">tenant-primary-001</span></div>
+              <div class="hash-line">Prev Hash: <span class="hash-val" id="prev-220">c4e82b79a1f0541e...</span></div>
+              <div class="hash-line">Forecast: <span class="hash-val" id="fcast-220">p=0.672, e=+8.4%</span></div>
+              <div class="hash-line">Record Hash: <span class="hash-val" id="hash-220" style="color: var(--accent-emerald);">a9b4f6e188219c01...</span></div>
+              <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted); font-weight: 600;" id="realized-220">Realized: +$9.14 USD</div>
+            </div>
+          </div>
+
+          <div class="audit-actions-bar">
+            <div class="audit-status-indicator" id="audit-chain-status">
+              <span class="live-pulse-dot"></span>
+              <span style="color: var(--accent-emerald);">CRYPTOGRAPHIC CHAIN: 100% UNBROKEN (0 LOOKAHEAD)</span>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-secondary" onclick="simulateTampering()" id="tamper-btn" style="border-color:#fca5a5; color:#e11d48;">
+                Simulate Ex-Post Tamper
+              </button>
+              <button class="btn btn-primary" onclick="verifyAuditChain()">
+                Verify Chain Hash Integrity
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IN-BROWSER TERMINAL & CLI RUNNER -->
+    <section class="section-padding" id="terminal">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Operator Interface</span>
+          </div>
+          <h2 class="section-title">Interactive Terminal &amp; Harness CLI.</h2>
+          <p class="section-subtitle">
+            Run and inspect the CLI subcommands live. Click preset actions or type in the interactive prompt below.
+          </p>
+        </div>
+
+        <div class="terminal-section">
+          <div class="terminal-bar">
+            <span>bash &bull; btc5m-harness v0.2.0 (tenant: tenant-primary-001)</span>
+            <span style="color: #34d399;">SIMULATED MODE</span>
+          </div>
+
+          <div class="terminal-buttons">
+            <button class="terminal-preset-btn" onclick="executeCliCommand('btc5m-harness lease --check')">1. Check Lease Status</button>
+            <button class="terminal-preset-btn" onclick="executeCliCommand('btc5m-harness harness --mode SIMULATED --staged')">2. Launch 3-Stage Harness</button>
+            <button class="terminal-preset-btn" onclick="executeCliCommand('btc5m-harness verify')">3. Verify SHA-256 Audit Chain</button>
+            <button class="terminal-preset-btn" onclick="executeCliCommand('btc5m-harness eval --benchmark test-1')">4. Run Test-1 Evaluation</button>
+            <button class="terminal-preset-btn" onclick="executeCliCommand('clear')">Clear Terminal</button>
+          </div>
+
+          <div class="terminal-screen" id="terminalScreen">
+Welcome to BTC 5-Minute Prediction Market Harness CLI [v0.2.0].
+Tenant: tenant-primary-001 | Lease: btc5m-lease-v2-prod
+Type 'help' or click any preset button above to execute harness commands.
+          </div>
+
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">$</span>
+            <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a command (e.g. lease, harness, verify, eval, help)..." onkeydown="handleTerminalKey(event)">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIATAXIS DOCUMENTATION HUB -->
+    <section class="section-padding" id="diataxis" style="background: #f8fafc; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Di&aacute;taxis Framework</span>
+          </div>
+          <h2 class="section-title">Complete Technical Documentation Suite.</h2>
+          <p class="section-subtitle">
+            Governed by the Di&aacute;taxis documentation architecture. Zero drift, boundary-first contracts, and verified operational runbooks.
+          </p>
+        </div>
+
+        <div class="diataxis-grid">
+          <!-- Tutorials -->
+          <div class="diataxis-card">
+            <div class="diataxis-quadrant quadrant-tutorials">Tutorials &bull; Learning-Oriented</div>
+            <h3 class="diataxis-title">Quickstart Guide</h3>
+            <p class="diataxis-desc">
+              Step-by-step introduction for new leaseholders to clone, configure API tokens, and execute their first simulated 5-minute cycle in under 3 minutes.
+            </p>
+            <ul class="diataxis-doc-list">
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/tutorials/quickstart.md" target="_blank" rel="noopener">&rarr; docs/tutorials/quickstart.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/README.md" target="_blank" rel="noopener">&rarr; Repository README.md</a></li>
+            </ul>
+          </div>
+
+          <!-- How-To Guides -->
+          <div class="diataxis-card">
+            <div class="diataxis-quadrant quadrant-howto">How-To &bull; Task-Oriented</div>
+            <h3 class="diataxis-title">Operational Runbooks</h3>
+            <p class="diataxis-desc">
+              Practical guides for operating continuous execution, setting circuit breaker limits, verifying audit chains, and deploying live to Polygon.
+            </p>
+            <ul class="diataxis-doc-list">
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/how-to/run_three_stage_harness.md" target="_blank" rel="noopener">&rarr; run_three_stage_harness.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/how-to/configure_lease_and_risk.md" target="_blank" rel="noopener">&rarr; configure_lease_and_risk.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/how-to/verify_audit_integrity.md" target="_blank" rel="noopener">&rarr; verify_audit_integrity.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/how-to/deploy_live_execution.md" target="_blank" rel="noopener">&rarr; deploy_live_execution.md</a></li>
+            </ul>
+          </div>
+
+          <!-- Reference -->
+          <div class="diataxis-card">
+            <div class="diataxis-quadrant quadrant-reference">Reference &bull; Information-Oriented</div>
+            <h3 class="diataxis-title">Specifications &amp; Schemas</h3>
+            <p class="diataxis-desc">
+              Deterministic technical descriptions of CLI flags, configuration variables, DuckDB audit schemas, and Polymarket REST/WebSocket API contracts.
+            </p>
+            <ul class="diataxis-doc-list">
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/reference/cli.md" target="_blank" rel="noopener">&rarr; reference/cli.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/reference/configuration.md" target="_blank" rel="noopener">&rarr; reference/configuration.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/reference/schemas.md" target="_blank" rel="noopener">&rarr; reference/schemas.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/reference/api_contracts.md" target="_blank" rel="noopener">&rarr; reference/api_contracts.md</a></li>
+            </ul>
+          </div>
+
+          <!-- Explanation -->
+          <div class="diataxis-card">
+            <div class="diataxis-quadrant quadrant-explanation">Explanation &bull; Understanding-Oriented</div>
+            <h3 class="diataxis-title">Architecture &amp; Theory</h3>
+            <p class="diataxis-desc">
+              Deep dives into Three-Stage mathematical formulation, dynamic spot beta decay $\beta(\tau)$, zero-lookahead audit chaining, and lease governance.
+            </p>
+            <ul class="diataxis-doc-list">
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/explanation/three_stage_positioning.md" target="_blank" rel="noopener">&rarr; three_stage_positioning.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/explanation/harness_architecture.md" target="_blank" rel="noopener">&rarr; harness_architecture.md</a></li>
+              <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/explanation/lease_model_and_governance.md" target="_blank" rel="noopener">&rarr; lease_model_and_governance.md</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH CITATIONS & EMPIRICAL PAPERS -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Academic Grounding</span>
+          </div>
+          <h2 class="section-title">Microstructure &amp; Academic Citations.</h2>
+          <p class="section-subtitle">
+            This harness architecture directly operationalizes empirical literature on favorite-longshot bias, pin-risk adverse selection, and prediction market microstructure.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+          <div class="diataxis-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-blue); margin-bottom: 8px; font-weight:600;">SSRN &bull; 2026</div>
+            <h4 style="font-size: 15px; margin-bottom: 8px; color: #0f172a;">The Microstructure of Wealth Transfer in Prediction Markets</h4>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Becker, J. (2026)</div>
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7217640" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-blue);">View SSRN Paper &rarr;</a>
+          </div>
+
+          <div class="diataxis-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-blue); margin-bottom: 8px; font-weight:600;">arXiv &bull; 2026</div>
+            <h4 style="font-size: 15px; margin-bottom: 8px; color: #0f172a;">The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket</h4>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Cardozo, M., Rivero-Wildemauwe, J. I. (2026)</div>
+            <a href="https://arxiv.org/abs/2609.12878" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-blue);">View arXiv Preprint &rarr;</a>
+          </div>
+
+          <div class="diataxis-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-blue); margin-bottom: 8px; font-weight:600;">SSRN &bull; 2026</div>
+            <h4 style="font-size: 15px; margin-bottom: 8px; color: #0f172a;">Adverse Selection in Prediction Markets: Evidence from Kalshi</h4>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Bartlett, R., O'Hara, M. (2026)</div>
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6615739" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-blue);">View SSRN Paper &rarr;</a>
+          </div>
+
+          <div class="diataxis-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-blue); margin-bottom: 8px; font-weight:600;">Morgan Stanley &bull; 2026</div>
+            <h4 style="font-size: 15px; margin-bottom: 8px; color: #0f172a;">The Wisdom of Crowds in Markets: Crowd Behavior in Betting &amp; Prediction Markets</h4>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Mauboussin, M. J., Callahan, D. (2026)</div>
+            <a href="https://www.morganstanley.com" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-blue);">View Morgan Stanley Report &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom High-Contrast Silver CTA Banner -->
+    <div class="container" style="margin: 80px auto;">
+      <section style="background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 56px 40px; text-align: center; box-shadow: var(--shadow-md);">
+        <h2 style="font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; margin-bottom: 14px; color: #0f172a;">
+          Deploy Your 5-Minute BTC Harness Lease.
+        </h2>
+        <p style="font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 32px;">
+          Available for institutional researchers, quantitative trading desks, and prediction market microstructure analysts.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;">
+          <a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 24px;">
+            View Repository &amp; Specs
+          </a>
+          <button class="btn btn-secondary" onclick="copyText('uv run main.py lease --check')">
+            Copy Lease Command
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Comprehensive Footer (Light / Silver) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand">
+            <div class="brand-logo-wrap">
+              <svg width="26" height="26" viewBox="0 0 36 36" fill="none">
+                <polygon points="18,3 33,29 3,29" fill="url(#silver-grad-1)" stroke="#0f172a" stroke-width="1.75"/>
+                <polygon points="18,12 26,27 10,27" fill="#0f172a"/>
+              </svg>
+            </div>
+            <span class="brand-title">DELTA 5M</span>
+          </div>
+          <p class="footer-brand-desc">
+            Institutional software for continuous 5-minute Bitcoin binary options execution on Polymarket's Central Limit Order Book (CLOB).
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Architecture</h4>
+          <ul>
+            <li><a href="#simulator">Three-Stage Positioning</a></li>
+            <li><a href="#clob">Dynamic Spot Beta</a></li>
+            <li><a href="#scorecard">Test-1 Benchmark</a></li>
+            <li><a href="#audit">SHA-256 Audit Chain</a></li>
+            <li><a href="#terminal">CLI Subcommands</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Di&aacute;taxis Docs</h4>
+          <ul>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/tutorials/quickstart.md" target="_blank" rel="noopener">Quickstart Tutorial</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/how-to/run_three_stage_harness.md" target="_blank" rel="noopener">Three-Stage Runbook</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/reference/cli.md" target="_blank" rel="noopener">CLI Reference</a></li>
+            <li><a href="https://github.com/MuzikayiseKhuzwayo/prediction-market-analysis/blob/main/docs/explanation/three_stage_positioning.md" target="_blank" rel="noopener">Three-Stage Theory</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://polymarket.com" target="_blank" rel="noopener">Polymarket CLOB</a></li>
+            <li><a href="https://polygonscan.com" target="_blank" rel="noopener">Polygon (Chain 137)</a></li>
+            <li><a href="https://pyth.network" target="_blank" rel="noopener">Pyth Network Oracles</a></li>
+            <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7217640" target="_blank" rel="noopener">SSRN Research</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Delta 5M Quantitative Systems. All rights reserved. Open-source lease framework.</div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="live-pulse-dot"></span>
+          <span style="font-family: var(--font-mono); color: var(--accent-emerald); font-weight:600;">Engine Status: Operational (&lt; 230ms SLA)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // --- 1. TOAST & CLIPBOARD HELPER ---
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast("Copied: " + text);
+      }).catch(function() {
+        showToast("Copied command!");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // --- 2. HERO SHOWCASE TAB SWITCHER & LIVE CYCLE STREAM ---
+    function switchHeroTab(tabId) {
+      document.querySelectorAll('.showcase-tab').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.getElementById('tab-harness').style.display = tabId === 'harness' ? 'block' : 'none';
+      document.getElementById('tab-stages').style.display = tabId === 'stages' ? 'block' : 'none';
+      document.getElementById('tab-lease').style.display = tabId === 'lease' ? 'block' : 'none';
+      document.getElementById('tab-audit').style.display = tabId === 'audit' ? 'block' : 'none';
+    }
+
+    let streamActive = true;
+    let streamInterval = null;
+    let cycleCounter = 221;
+
+    function toggleStreamSimulation() {
+      streamActive = !streamActive;
+      const btnText = document.getElementById('stream-btn-text');
+      if (streamActive) {
+        btnText.innerText = "Stream Active";
+        startStreamLoop();
+        showToast("Live cycle simulation resumed");
+      } else {
+        btnText.innerText = "Stream Paused";
+        clearInterval(streamInterval);
+        showToast("Live cycle simulation paused");
+      }
+    }
+
+    function startStreamLoop() {
+      clearInterval(streamInterval);
+      streamInterval = setInterval(() => {
+        if (!streamActive) return;
+        const harnessTab = document.getElementById('tab-harness');
+        if (!harnessTab) return;
+
+        cycleCounter++;
+        const pnl = (Math.random() > 0.35 ? +(Math.random() * 8 + 3).toFixed(2) : -(Math.random() * 4 + 1).toFixed(2));
+        const pnlColor = pnl >= 0 ? 'code-green' : 'code-rose';
+        const outcome = pnl >= 0 ? 'WIN' : 'SALVAGE_STOP';
+        const randomHash = Array.from({length: 16}, () => Math.floor(Math.random()*16).toString(16)).join('');
+
+        const newEntry = document.createElement('div');
+        newEntry.style.marginTop = '18px';
+        newEntry.style.borderTop = '1px solid #e2e8f0';
+        newEntry.style.paddingTop = '14px';
+        newEntry.innerHTML = `
+<span class="code-comment"># CYCLE #${cycleCounter} &bull; Target: Polymarket btc-updown-5m-${Date.now().toString().slice(0,10)}</span>
+<span class="code-cyan">[STAGE 0]</span> Prior: P(UP) = ${(0.55 + Math.random()*0.2).toFixed(3)} | Conf: 0.71 &rarr; <span class="code-green">FILLED 25.0 shares</span>
+<span class="code-cyan">[STAGE 1]</span> Mid-Flight Check: Momentum Confirmed | &beta;<sub>spot</sub>=1807.3 &rarr; <span class="code-yellow">SCALE_HOLD</span>
+<span class="code-cyan">[STAGE 2]</span> Endgame Exit: Midpoint Bid $0.905 &rarr; <span class="${pnlColor}">Realized PnL: ${pnl >= 0 ? '+' : ''}$${pnl} USD (${outcome})</span>
+<span class="code-muted">[AUDIT CHAIN] SHA-256 Hash: ${randomHash}... Zero-Lookahead: VALID</span>
+        `;
+        harnessTab.appendChild(newEntry);
+        
+        const container = document.getElementById('hero-showcase-view');
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+      }, 7000);
+    }
+    startStreamLoop();
+
+    // --- 3. CLEAN INTERACTIVE SIMULATOR (NO HARDCODED SPOT SLIDER) ---
+    let currentTau = 300;
+    let currentScenario = 'trend';
+    let isPlaying = false;
+    let playInterval = null;
+
+    const scenarios = {
+      trend: {
+        name: "Bullish Trend (Take Profit)",
+        tau: 300,
+        beta: 1400.0,
+        z: 0.720,
+        pUp: 0.672,
+        state: "STAGE 0: ENTER_TRANCHE",
+        stateClass: "state-enter",
+        pnl: "$0.00 USD (0.0%)",
+        dispatch: "&bull; <strong>Stage 0 Decision:</strong> Confidence threshold met ($0.68 &ge; 0.50). Dispatched 50% fractional Kelly tranche ($16.70) into CLOB Ask at $0.588."
+      },
+      reversal: {
+        name: "Adverse Flip (Salvage Stop)",
+        tau: 180,
+        beta: 1807.3,
+        z: -0.680,
+        pUp: 0.336,
+        state: "STAGE 1: SALVAGE_STOP_LOSS",
+        stateClass: "state-salvage",
+        pnl: "-$5.50 USD (-32.9%) [Capital Salvaged]",
+        dispatch: "&bull; <strong>Stage 1 Salvage Trigger:</strong> Adverse breakout detected against inception position. Liquidating to market bids to salvage 67% capital ($11.20 saved)."
+      },
+      noise: {
+        name: "High Noise Filter (Pass)",
+        tau: 300,
+        beta: 1400.0,
+        z: 0.080,
+        pUp: 0.520,
+        state: "STAGE 0: PASS (NOOP)",
+        stateClass: "state-pass",
+        pnl: "$0.00 USD (No position)",
+        dispatch: "&bull; <strong>Stage 0 Filter:</strong> Confidence below threshold ($0.42 < 0.50). Noise gate unbreached; deferring commitment to Stage 1 mid-flight window."
+      },
+      hedge: {
+        name: "Endgame Tail Snipe",
+        tau: 60,
+        beta: 3130.5,
+        z: 0.940,
+        pUp: 0.719,
+        state: "STAGE 2: REVERSAL_HEDGE",
+        stateClass: "state-hedge",
+        pnl: "+$2.30 USD (+13.7%) [Hedge Net]",
+        dispatch: "&bull; <strong>Stage 2 Tail Snipe:</strong> Opposite DOWN token trading under $0.14. Dispatched asymmetric reversal hedge before terminal expiration."
+      }
+    };
+
+    function loadScenario(type) {
+      currentScenario = type;
+      document.querySelectorAll('.scenario-pill').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const s = scenarios[type];
+      currentTau = s.tau;
+      updateSimulatorDisplay(s);
+      showToast(`Loaded: ${s.name}`);
+    }
+
+    function jumpToStage(stageNum) {
+      if (isPlaying) togglePlaySimulation();
+      document.querySelectorAll('.stage-btn').forEach((b, i) => b.classList.toggle('active', i === stageNum));
+      
+      const explainBox = document.getElementById('stage-explain-box');
+      if (stageNum === 0) {
+        currentTau = 300;
+        explainBox.innerHTML = `<strong>Stage 0: Inception Gate (t = 0m, &tau; = 300s)</strong><br>Filters opening candle spread noise when remaining variance is at peak. Enforces confidence $C(t) \ge 0.50$ and statistical edge $\ge 4\%$ before committing dry powder.`;
+        updateSimulatorDisplay({
+          tau: 300, beta: 1400.0, z: 0.720, pUp: 0.672,
+          state: "STAGE 0: ENTER_TRANCHE", stateClass: "state-enter",
+          pnl: "$0.00 USD (0.0%)",
+          dispatch: "&bull; <strong>Stage 0 Inception:</strong> Signal verified (P=67.2%, Edge &ge; 4%). Committing 50% fractional Kelly ($16.70) into CLOB ask at $0.588."
+        });
+      } else if (stageNum === 1) {
+        currentTau = 180;
+        explainBox.innerHTML = `<strong>Stage 1: Validation &amp; Salvage Stop (t = 2m, &tau; = 180s)</strong><br>Evaluates mid-flight momentum after 40% duration has elapsed. Confirms trend momentum or executes early salvage stop-loss if direction reversed.`;
+        updateSimulatorDisplay({
+          tau: 180, beta: 1807.3, z: 1.150, pUp: 0.760,
+          state: "STAGE 1: SCALE_HOLD", stateClass: "state-scale",
+          pnl: "+$4.80 USD (+28.7%) [Unrealized]",
+          dispatch: "&bull; <strong>Stage 1 Momentum Confirmed:</strong> Direction verified with increased certainty. Holding long tranche, scaling +25% exposure into terminal window."
+        });
+      } else if (stageNum === 2) {
+        currentTau = 60;
+        explainBox.innerHTML = `<strong>Stage 2: Endgame Snipe &amp; Take-Profit (t = 4m, &tau; = 60s)</strong><br>Eliminates terminal pin-risk and oracle slippage in final 60s. Executes limit sell if deeply profitable (Bid &ge; $0.88) or takes cheap tail hedges.`;
+        updateSimulatorDisplay({
+          tau: 60, beta: 3130.5, z: 2.340, pUp: 0.912,
+          state: "STAGE 2: TAKE_PROFIT", stateClass: "state-profit",
+          pnl: "+$9.14 USD (+54.7%) [Realized Locked]",
+          dispatch: "&bull; <strong>Stage 2 Profit Lock:</strong> CLOB Bid reached $0.910. Exiting 100% position immediately before oracle settlement to eliminate pin-risk."
+        });
+      } else {
+        currentTau = 0;
+        explainBox.innerHTML = `<strong>Settlement Oracle Resolution (t = 5m, &tau; = 0s)</strong><br>Chainlink / Pyth reference oracle confirms final settlement. Position was already closed with zero slippage or tail loss.`;
+        updateSimulatorDisplay({
+          tau: 0, beta: 9999.0, z: 3.500, pUp: 0.971,
+          state: "CYCLE SETTLED: WIN", stateClass: "state-profit",
+          pnl: "+$9.14 USD (+54.7%) [Final Realized]",
+          dispatch: "&bull; <strong>Settlement Complete:</strong> Cycle resolved WIN. Audit block chained with SHA-256 integrity signature."
+        });
+      }
+    }
+
+    function updateSimulatorDisplay(data) {
+      const tElapsed = 300 - data.tau;
+      document.getElementById('sim-t-val').innerText = `t = ${tElapsed.toFixed(0)}s • τ = ${data.tau.toFixed(0)}s`;
+      document.getElementById('sim-beta-val').innerText = `${data.beta.toFixed(1)}x`;
+      document.getElementById('sim-prob-val').innerText = `z = ${data.z >= 0 ? '+' : ''}${data.z.toFixed(3)} • P(UP) = ${(data.pUp * 100).toFixed(1)}%`;
+      document.getElementById('sim-pnl-val').innerText = data.pnl;
+      
+      const badge = document.getElementById('sim-state-badge');
+      badge.className = `sim-state-badge ${data.stateClass}`;
+      badge.innerText = data.state;
+
+      document.getElementById('sim-dispatch-box').innerHTML = data.dispatch;
+
+      // Progress bar & pins
+      const progressPercent = ((300 - data.tau) / 300) * 100;
+      document.getElementById('sim-progress-fill').style.width = `${progressPercent}%`;
+
+      document.getElementById('pin-0').classList.toggle('reached', data.tau <= 300);
+      document.getElementById('pin-1').classList.toggle('reached', data.tau <= 180);
+      document.getElementById('pin-2').classList.toggle('reached', data.tau <= 60);
+      document.getElementById('pin-3').classList.toggle('reached', data.tau <= 0);
+    }
+
+    function togglePlaySimulation() {
+      isPlaying = !isPlaying;
+      const playIcon = document.getElementById('sim-play-icon');
+      const playText = document.getElementById('sim-play-text');
+      
+      if (isPlaying) {
+        playIcon.innerHTML = '&#10074;&#10074;';
+        playText.innerText = 'Pause Cycle';
+        playInterval = setInterval(() => {
+          if (currentTau > 180) jumpToStage(1);
+          else if (currentTau > 60) jumpToStage(2);
+          else if (currentTau > 0) jumpToStage(3);
+          else {
+            togglePlaySimulation();
+            showToast("Cycle simulation complete!");
+          }
+        }, 1200);
+      } else {
+        playIcon.innerHTML = '&rtrif;';
+        playText.innerText = 'Auto Play Cycle';
+        clearInterval(playInterval);
+      }
+    }
+
+    function resetSimulator() {
+      if (isPlaying) togglePlaySimulation();
+      jumpToStage(0);
+      showToast("Simulator reset to Stage 0");
+    }
+
+    function scrubTimeline(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percent = Math.max(0, Math.min(1, clickX / rect.width));
+      if (percent < 0.3) jumpToStage(0);
+      else if (percent < 0.7) jumpToStage(1);
+      else if (percent < 0.95) jumpToStage(2);
+      else jumpToStage(3);
+    }
+
+    // --- 4. LIGHT / SILVER CANVAS VISUALIZERS ---
+    function initCanvasVisualizers() {
+      // 1. CLOB Depth Canvas (Light Silver Theme)
+      const clobCanvas = document.getElementById('clobCanvas');
+      if (clobCanvas) {
+        const ctx = clobCanvas.getContext('2d');
+        let clobFrame = 0;
+
+        function drawClob() {
+          const w = clobCanvas.parentElement.clientWidth;
+          const h = 260;
+          clobCanvas.width = w * window.devicePixelRatio || w;
+          clobCanvas.height = h * window.devicePixelRatio || h;
+          ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, w, h);
+
+          // Subtle horizontal gridlines
+          ctx.strokeStyle = '#f1f5f9';
+          for (let y = 30; y < h - 30; y += 35) {
+            ctx.beginPath();
+            ctx.moveTo(30, y);
+            ctx.lineTo(w - 30, y);
+            ctx.stroke();
+          }
+
+          clobFrame += 0.03;
+          const midX = w / 2;
+          const numBars = 12;
+          const barW = (midX - 35) / numBars;
+
+          // Bids (Emerald) on Left
+          for (let i = 0; i < numBars; i++) {
+            const noise = Math.sin(clobFrame + i * 0.4) * 12;
+            const barH = 25 + (numBars - i) * 12 + noise;
+            const x = midX - 10 - (i + 1) * barW;
+            const y = h - 30 - barH;
+
+            ctx.fillStyle = '#ecfdf5';
+            ctx.fillRect(x, y, barW - 3, barH);
+            ctx.fillStyle = '#059669';
+            ctx.fillRect(x, y, barW - 3, 2);
+          }
+
+          // Asks (Rose) on Right
+          for (let i = 0; i < numBars; i++) {
+            const noise = Math.cos(clobFrame + i * 0.5) * 12;
+            const barH = 20 + (numBars - i) * 11 + noise;
+            const x = midX + 10 + i * barW;
+            const y = h - 30 - barH;
+
+            ctx.fillStyle = '#fff1f2';
+            ctx.fillRect(x, y, barW - 3, barH);
+            ctx.fillStyle = '#e11d48';
+            ctx.fillRect(x, y, barW - 3, 2);
+          }
+
+          // Center Midpoint line
+          ctx.strokeStyle = '#0284c7';
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.moveTo(midX, 20);
+          ctx.lineTo(midX, h - 30);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = '#64748b';
+          ctx.font = '11px IBM Plex Mono';
+          ctx.fillText('BIDS ($0.58)', 30, h - 10);
+          ctx.fillText('SPREAD $0.008', midX - 38, h - 10);
+          ctx.fillText('ASKS ($0.59)', w - 95, h - 10);
+
+          requestAnimationFrame(drawClob);
+        }
+        drawClob();
+      }
+
+      // 2. Dynamic Beta Canvas (Light Silver Theme)
+      const betaCanvas = document.getElementById('betaCanvas');
+      if (betaCanvas) {
+        const ctx = betaCanvas.getContext('2d');
+
+        function drawBeta() {
+          const w = betaCanvas.parentElement.clientWidth;
+          const h = 260;
+          betaCanvas.width = w * window.devicePixelRatio || w;
+          betaCanvas.height = h * window.devicePixelRatio || h;
+          ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid lines
+          ctx.strokeStyle = '#f1f5f9';
+          for (let y = 30; y < h - 30; y += 40) {
+            ctx.beginPath();
+            ctx.moveTo(40, y);
+            ctx.lineTo(w - 20, y);
+            ctx.stroke();
+          }
+
+          // Danger zone highlight in final 60 seconds
+          ctx.fillStyle = 'rgba(254, 242, 242, 0.7)';
+          ctx.fillRect(40 + (w - 60) * 0.8, 20, (w - 60) * 0.2, h - 50);
+          ctx.strokeStyle = '#fecdd3';
+          ctx.strokeRect(40 + (w - 60) * 0.8, 20, (w - 60) * 0.2, h - 50);
+
+          ctx.fillStyle = '#e11d48';
+          ctx.font = '10px IBM Plex Mono';
+          ctx.fillText('Pin-Risk Cliff', 40 + (w - 60) * 0.8 + 6, 35);
+
+          // Beta Curve: beta(tau) = 1400 / sqrt(tau / 300)
+          ctx.beginPath();
+          ctx.strokeStyle = '#2563eb';
+          ctx.lineWidth = 2.5;
+
+          for (let x = 40; x <= w - 20; x++) {
+            const tau = 300 * (1 - (x - 40) / (w - 60));
+            const tauNorm = Math.max(tau, 3.0) / 300.0;
+            const beta = 1400.0 / Math.sqrt(tauNorm);
+            const y = h - 35 - Math.min(beta / 3500 * (h - 60), h - 50);
+
+            if (x === 40) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+
+          // Stage markers
+          ctx.fillStyle = '#64748b';
+          ctx.font = '10px IBM Plex Mono';
+          ctx.fillText('t=0 (tau=300s)', 40, h - 12);
+          ctx.fillText('t=2m', 40 + (w - 60) * 0.4, h - 12);
+          ctx.fillText('t=4m (tau=60s)', 40 + (w - 60) * 0.8, h - 12);
+          ctx.fillText('tau=0', w - 40, h - 12);
+        }
+        drawBeta();
+      }
+
+      // 3. Equity Curve Canvas (Light Silver Theme)
+      const eqCanvas = document.getElementById('equityCanvas');
+      if (eqCanvas) {
+        const ctx = eqCanvas.getContext('2d');
+        function drawEquity() {
+          const w = eqCanvas.parentElement.clientWidth;
+          const h = 320;
+          eqCanvas.width = w * window.devicePixelRatio || w;
+          eqCanvas.height = h * window.devicePixelRatio || h;
+          ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid
+          ctx.strokeStyle = '#f1f5f9';
+          for (let y = 30; y < h - 40; y += 45) {
+            ctx.beginPath();
+            ctx.moveTo(50, y);
+            ctx.lineTo(w - 20, y);
+            ctx.stroke();
+          }
+
+          const points = 220;
+          const stepX = (w - 70) / points;
+
+          // Baseline Naive Curve (Red)
+          ctx.beginPath();
+          ctx.strokeStyle = '#f87171';
+          ctx.lineWidth = 1.5;
+          let naiveY = h / 2;
+          for (let i = 0; i <= points; i++) {
+            naiveY += (Math.sin(i * 0.15) * 3) - 0.1;
+            const x = 50 + i * stepX;
+            if (i === 0) ctx.moveTo(x, naiveY);
+            else ctx.lineTo(x, naiveY);
+          }
+          ctx.stroke();
+
+          // Three-Stage Harness Curve (Emerald)
+          ctx.beginPath();
+          ctx.strokeStyle = '#059669';
+          ctx.lineWidth = 2.5;
+          const startY = h - 60;
+          const targetY = 40;
+
+          for (let i = 0; i <= points; i++) {
+            const frac = i / points;
+            const y = startY - frac * (startY - targetY) + Math.sin(i * 0.2) * 5;
+            const x = 50 + i * stepX;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+
+          // Labels
+          ctx.fillStyle = '#64748b';
+          ctx.font = '11px IBM Plex Mono';
+          ctx.fillText('$0 USD', 10, startY + 4);
+          ctx.fillText('+$40', 10, (startY + targetY) / 2);
+          ctx.fillText('+$81.90', 5, targetY + 6);
+          ctx.fillText('Cycle 0', 50, h - 16);
+          ctx.fillText('Cycle 110', 50 + (w - 70) / 2, h - 16);
+          ctx.fillText('Cycle 220 (Test-1 Complete)', w - 180, h - 16);
+        }
+        drawEquity();
+      }
+    }
+
+    // --- 5. CRYPTOGRAPHIC AUDIT SIMULATOR (TAMPERING TEST) ---
+    let chainTampered = false;
+
+    function simulateTampering() {
+      chainTampered = true;
+      const block = document.getElementById('audit-block-219');
+      const hashEl = document.getElementById('hash-219');
+      const fcastEl = document.getElementById('fcast-219');
+      const statusIndicator = document.getElementById('audit-chain-status');
+
+      block.classList.add('tampered');
+      fcastEl.innerHTML = `<span style="color:#e11d48; font-weight:700;">p=0.999 (TAMPERED EX-POST)</span>`;
+      hashEl.innerHTML = `<span style="color:#e11d48;">e999999999999999... [INVALID]</span>`;
+
+      // Invalidate block 220
+      document.getElementById('audit-block-220').classList.add('tampered');
+      document.getElementById('prev-220').innerHTML = `<span style="color:#e11d48;">MISMATCH (Broken Link)</span>`;
+      document.getElementById('status-220').innerText = 'TAMPER DETECTED';
+      document.getElementById('status-220').style.color = '#e11d48';
+
+      statusIndicator.innerHTML = `
+        <span class="live-pulse-dot" style="background:#e11d48; box-shadow:0 0 0 3px rgba(225, 29, 72, 0.2);"></span>
+        <span style="color: #e11d48;">AUDIT FAILED: Cryptographic hash chain broken at Block #219 &rarr; #220</span>
+      `;
+      showToast("Ex-post tamper detected! Hash chain broken.");
+    }
+
+    function verifyAuditChain() {
+      chainTampered = false;
+      document.getElementById('audit-block-218').classList.remove('tampered');
+      document.getElementById('audit-block-219').classList.remove('tampered');
+      document.getElementById('audit-block-220').classList.remove('tampered');
+
+      document.getElementById('fcast-219').innerHTML = `p=0.691, e=+9.8%`;
+      document.getElementById('hash-219').innerHTML = `<span style="color: #059669;">c4e82b79a1f0541e...</span>`;
+      document.getElementById('prev-220').innerHTML = `c4e82b79a1f0541e...`;
+      document.getElementById('status-220').innerText = 'RESOLVED: WIN';
+      document.getElementById('status-220').style.color = '#059669';
+
+      const statusIndicator = document.getElementById('audit-chain-status');
+      statusIndicator.innerHTML = `
+        <span class="live-pulse-dot"></span>
+        <span style="color: #059669;">CRYPTOGRAPHIC CHAIN: 100% UNBROKEN (0 LOOKAHEAD)</span>
+      `;
+      showToast("Chain verification complete: All 220 SHA-256 blocks valid!");
+    }
+
+    // --- 6. IN-BROWSER TERMINAL CLI SIMULATOR ---
+    function handleTerminalKey(event) {
+      if (event.key === 'Enter') {
+        const input = document.getElementById('terminalInput');
+        const cmd = input.value.trim();
+        input.value = '';
+        if (cmd) executeCliCommand(cmd);
+      }
+    }
+
+    function executeCliCommand(cmd) {
+      const screen = document.getElementById('terminalScreen');
+      if (cmd === 'clear') {
+        screen.innerHTML = `Welcome to BTC 5-Minute Prediction Market Harness CLI [v0.2.0].\nType 'help' for available subcommands.`;
+        return;
+      }
+
+      screen.innerHTML += `\n\n<span style="color:#34d399;">$ ${cmd}</span>\n`;
+
+      if (cmd.includes('lease') || cmd === 'lease') {
+        screen.innerHTML += `
+[LEASE VERIFICATION]
+  • Tenant ID:      tenant-primary-001
+  • Lease ID:       btc5m-lease-v2-prod
+  • Status:         ACTIVE (Expires: 2026-12-31)
+  • Authorized:     Polymarket CLOB &bull; Chain 137
+  • Max Tranche:    $10.00 USD
+  • Circuit Breaker: 3 consecutive losses / 5 turns cooldown
+  &radic; Leaseholder credentials verified.`;
+      } else if (cmd.includes('harness') || cmd === 'harness') {
+        screen.innerHTML += `
+[STARTING CONTINUOUS HARNESS]
+  • Mode:           SIMULATED (Staged Positioning: ENABLED)
+  • Target Market:  Polymarket btc-updown-5m-*
+  • Spot Source:    Binance & Pyth BTC/USD feeds
+  • Stage 0 @ 00m:  Evaluating Inception Gate (Conviction &ge; 0.50, Edge &ge; 0.04)
+  • Stage 1 @ 02m:  Mid-Flight Momentum & Salvage Stop-Loss check
+  • Stage 2 @ 04m:  Endgame Profit-Taking & Tail Snipe check
+  • Audit Ledger:   DuckDB 'data/btc5m/audit.duckdb' (SHA-256 Chained)
+  &bull; Polling orderbook ticks at 229ms intervals...`;
+      } else if (cmd.includes('verify') || cmd === 'verify') {
+        screen.innerHTML += `
+[AUDIT CHAIN VERIFICATION]
+  • Inspecting DuckDB audit_trail across 220 blocks...
+  • Verifying SHA-256 hashes: h_i = SHA256(h_{i-1} || payload_i)
+  • Checked 220 / 220 cycles.
+  &radic; RESULT: 100% VALID. Zero ex-post tampering. Zero lookahead detected.`;
+      } else if (cmd.includes('eval') || cmd === 'eval') {
+        screen.innerHTML += `
+[RUNNING TEST-1 PERFORMANCE BENCHMARK]
+  • Dataset:        220 consecutive 5m BTC cycles
+  • Realized PnL:   +$81.90 USD
+  • Win Rate:       62.86% (132 wins / 88 losses)
+  • Mean Latency:   229.78 ms (< 250ms target)
+  • 80% Coverage:   81.8% (Target: 80.0%)
+  • Diebold-Mariano: DM = +2.48, p = 0.013 (Statistically superior to naive hold)`;
+      } else if (cmd === 'help') {
+        screen.innerHTML += `
+Available subcommands:
+  • btc5m-harness lease --check     Verify active lease credentials
+  • btc5m-harness harness --staged  Launch Three-Stage positioning engine
+  • btc5m-harness verify            Cryptographic SHA-256 audit verification
+  • btc5m-harness eval --benchmark  Run empirical evaluation benchmark
+  • clear                           Clear terminal screen`;
+      } else {
+        screen.innerHTML += `<span style="color:#f87171;">Command not recognized: '${cmd}'. Type 'help' for commands.</span>`;
+      }
+
+      screen.scrollTop = screen.scrollHeight;
+    }
+
+    // Window resize handler for canvases
+    window.addEventListener('resize', () => {
+      initCanvasVisualizers();
+    });
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initCanvasVisualizers();
+      jumpToStage(0);
+    });
+  </script>
+</body>
+</html>

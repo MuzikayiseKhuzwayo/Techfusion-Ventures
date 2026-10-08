@@ -7,22 +7,22 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, subject, message } = body;
 
-    if (!name || !email || !message) {
+    if (!email) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "Email address is required" },
         { status: 400 }
       );
     }
 
-    // Google Sheets integration requires these environment variables:
-    // GOOGLE_CLIENT_EMAIL
-    // GOOGLE_PRIVATE_KEY
-    // GOOGLE_SHEET_ID
-    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-    const sheetId = process.env.GOOGLE_SHEET_ID;
+    const leadName = name?.trim() || email.split("@")[0];
+    const leadSubject = subject?.trim() || "New Website Sign-up";
+    const leadMessage = message?.trim() || "Signed up to receive updates and collaborate.";
 
     // 1. Record to Google Sheets (if configured)
+    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+    const sheetId = process.env.GOOGLE_SHEET_ID;
+
     let sheetAppended = false;
     if (clientEmail && privateKey && sheetId) {
       try {
@@ -46,26 +46,24 @@ export async function POST(req: Request) {
           valueInputOption: "USER_ENTERED",
           requestBody: {
             values: [
-              [new Date().toISOString(), name, email, subject || "", message],
+              [new Date().toISOString(), leadName, email, leadSubject, leadMessage],
             ],
           },
         });
         sheetAppended = true;
       } catch (sheetError) {
-        console.error("Failed to append to Google Sheets:", sheetError);
+        console.error("Failed to append sign-up to Google Sheets:", sheetError);
       }
-    } else {
-      console.warn("Google Sheets credentials are not fully configured. Skipping sheet append.");
     }
 
     // 2. Dispatch Email Notifications
     // - User notification: We will be in contact soon
     // - Admin notification to muzikhuzwayo@techfusion-ventures.xyz: Someone signed up and deserves a reply
     const emailResult = await sendLeadNotificationEmails({
-      name,
+      name: leadName,
       email,
-      subject: subject || "Website Inquiry",
-      message,
+      subject: leadSubject,
+      message: leadMessage,
       submittedAt: new Date().toUTCString(),
     });
 
@@ -75,9 +73,9 @@ export async function POST(req: Request) {
       emailNotification: emailResult,
     });
   } catch (error) {
-    console.error("Error submitting contact form:", error);
+    console.error("Error submitting sign-up:", error);
     return NextResponse.json(
-      { error: "Failed to submit form" },
+      { error: "Failed to process sign-up" },
       { status: 500 }
     );
   }
