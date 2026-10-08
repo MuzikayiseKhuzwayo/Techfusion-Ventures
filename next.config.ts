@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    unoptimized: true,
+  },
   // @ts-ignore
   turbopack: {
     root: __dirname,

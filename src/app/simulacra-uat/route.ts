@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), "public", "simulacra-uat", "index.html");
+  const filePath = path.join(process.cwd(), "showcases", "simulacra-uat.html");
   const html = fs.readFileSync(filePath, "utf-8");
 
   return new Response(html, {
