@@ -117,24 +117,24 @@ const PROJECTS: Project[] = [
     id: "strata",
     num: "04",
     name: "Strata",
-    tagline: "Geopolitical Situation Monitor & Autonomous Multi-Agent Debate Hub",
+    tagline: "Geopolitical Situation Monitor & Autonomous Multi-Agent Investigation Hub",
     category: "agents",
     categoryLabel: "Autonomous Agents & LLMs",
-    link: "https://github.com/MuzikayiseKhuzwayo/strata",
-    repoLink: "https://github.com/MuzikayiseKhuzwayo/strata",
-    techStack: ["TypeScript", "React", "Vite", "RSS Ingestion Daemons", "Causal Graph RAG"],
+    link: "/strata",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/dubstrata-investigation",
+    techStack: ["Python", "FastAPI", "Dubstrata MCP 1.3.0", "Causal Knowledge Graphs", "Multi-Agent SOPs", "Live Telemetry"],
     whatItDoes:
-      "A macro risk intelligence workstation that polls real-time international news and financial streams, detects contagion and systemic anomalies, and autonomously spawns multi-agent debate sessions (Visionary, Producer, Seller personas) to formulate strategic countermeasures adhering to operational SOPs.",
+      "A macro risk intelligence workstation and multi-agent cockpit compliant with the Dubstrata MCP Standard 1.3.0. Screens international geopolitical cascades and financial contagion streams, detects systemic anomalies, traverses causal knowledge graphs, and autonomously orchestrates 5 specialized subagents bounded by strict Standard Operating Procedures (SOPs) with cryptographic audit logging.",
     whyItMatters: [
       {
-        target: "For AI Engineers",
+        target: "For AI Engineers & Quants",
         detail:
-          "Provides a production-grade pattern for multi-agent consensus and debate orchestration. Rather than unconstrained chat loops, agents are bounded by strict Standard Operating Procedures (SOPs) and deterministic compliance checks.",
+          "Provides a reference implementation for deterministic multi-agent orchestration via MCP 1.3.0. Rather than unconstrained LLM loops, agents query causal graphs, debate across structured operational roles, and enforce verifiable compliance gates.",
       },
       {
-        target: "For Developers",
+        target: "For Systems Developers",
         detail:
-          "Features a dense, cyber-glassmorphic dashboard with real-time streaming telemetry and causal graph visualizations.",
+          "Features an interactive glassmorphic cockpit with Server-Sent Events (SSE) telemetry, real-time graph visualization, and Diátaxis-compliant technical documentation.",
       },
     ],
     icon: Layers,
@@ -271,6 +271,32 @@ const PROJECTS: Project[] = [
         target: "For AI Engineers",
         detail:
           "Demonstrates persona-driven prompt engineering and real-time structured LLM formatting for high-stakes business communication.",
+      },
+    ],
+    icon: Workflow,
+  },
+  {
+    id: "alchemy-crm",
+    num: "11",
+    name: "Alchemy CRM (Laravel CRM)",
+    tagline: "Reactive Sales Pipelines, Omni-Channel Visitor Chat & Automated Motions for Laravel",
+    category: "tooling",
+    categoryLabel: "Developer Tooling & Infrastructure",
+    link: "/alchemy-crm",
+    repoLink: "https://github.com/MuzikayiseKhuzwayo/crm",
+    techStack: ["PHP 8.2+", "Laravel 11-13", "Livewire", "Tailwind CSS", "REST API v2", "SQLite/MySQL"],
+    whatItDoes:
+      "An enterprise-grade, open-source CRM package engineered natively for the Laravel ecosystem (venturedrake/laravel-crm v2.4.0). Eliminates SaaS seat costs by turning any Laravel application into a complete revenue operating system with multi-stage visual sales kanbans, deal velocity tracking, omni-channel live visitor chat, automated sales playbooks (lead routing, dynamic follow-ups), and machine-accurate REST APIs.",
+    whyItMatters: [
+      {
+        target: "For Laravel Developers & Founders",
+        detail:
+          "Runs natively within existing Eloquent models, migrations, and tenancy architectures. Eliminates recurring third-party SaaS fees (Salesforce, HubSpot) and removes brittle webhook synchronization lag.",
+      },
+      {
+        target: "For Systems Architects",
+        detail:
+          "Exposes a comprehensive REST API v2 with machine-accurate contract schemas, reactive Livewire components, and event-driven automation hooks for outbound and inbound marketing workflows.",
       },
     ],
     icon: Workflow,

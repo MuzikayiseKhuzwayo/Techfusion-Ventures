@@ -130,7 +130,7 @@ export default function Home() {
                 href="/projects"
                 className="text-xs font-mono text-accent-light hover:text-white inline-flex items-center gap-1 group/btn"
               >
-                <span>Explore 10 Public Projects</span>
+                <span>Explore 11 Public Projects</span>
                 <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
               <div className="w-16 h-1 bg-surface-200 rounded-full overflow-hidden">
