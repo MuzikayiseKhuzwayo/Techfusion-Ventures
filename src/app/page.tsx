@@ -35,12 +35,6 @@ export default function Home() {
             >
               Explore the Ecosystem
             </Link>
-            <Link
-              href="/founder"
-              className="px-8 py-4 rounded-full glass-panel text-accent-light hover:text-white transition-colors duration-300 w-full sm:w-auto text-center"
-            >
-              Meet the Founder
-            </Link>
           </div>
         </div>
       </section>

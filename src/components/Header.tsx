@@ -30,9 +30,6 @@ export default function Header() {
           <Link href="/#philosophy" className="text-foreground/80 hover:text-accent-light transition-colors">
             Our Philosophy
           </Link>
-          <Link href="/founder" className="text-foreground/80 hover:text-accent-light transition-colors">
-            Founder
-          </Link>
           <Link href="/contact" className="px-4 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors">
             Contact
           </Link>
