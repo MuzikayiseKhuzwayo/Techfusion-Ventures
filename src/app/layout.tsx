@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TechFusion Automata | Accelerating Africa's Future",
-  description: "TechFusion Automata is an ecosystem hub accelerating digital transformation and automation in Africa.",
+  title: "Techfusion Automata (Pty) Ltd | Sovereign AI, Data & Digital Transformation",
+  description:
+    "Techfusion Automata (Pty) Ltd is a digital transformation, artificial intelligence, data engineering, and bespoke software consultancy. B-BBEE Level 1 (135% Recognition).",
   icons: {
     icon: "/techfusion_automata_ico.ico",
   },
@@ -26,14 +27,12 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "TechFusion Automata",
-  "url": "https://techfusionautomata.com",
-  "logo": "https://techfusionautomata.com/logo.png",
-  "founder": {
-    "@type": "Person",
-    "name": "Muzikayise Khuzwayo"
-  },
-  "description": "Accelerating towards the future in Africa by driving digital transformation across all economic sectors."
+  "name": "Techfusion Automata (Pty) Ltd",
+  "legalName": "Techfusion Automata (Pty) Ltd",
+  "url": "https://techfusion-ventures.xyz",
+  "logo": "https://techfusion-ventures.xyz/techfusion_automata_ico.ico",
+  "description":
+    "Digital transformation, artificial intelligence, data engineering, and bespoke software consultancy serving public-sector departments, international development agencies, and private enterprises.",
 };
 
 export default function RootLayout({
@@ -44,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <FirebaseAnalytics />
