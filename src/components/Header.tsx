@@ -27,9 +27,6 @@ export default function Header() {
           <Link href="/#ecosystem" className="text-foreground/80 hover:text-accent-light transition-colors">
             Ecosystem
           </Link>
-          <Link href="/projects" className="text-foreground/80 hover:text-accent-light transition-colors">
-            Projects
-          </Link>
           <Link href="/#philosophy" className="text-foreground/80 hover:text-accent-light transition-colors">
             Our Philosophy
           </Link>
