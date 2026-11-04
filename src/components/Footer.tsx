@@ -66,6 +66,23 @@ export default function Footer() {
                 Procurement Readiness
               </Link>
             </li>
+            <li>
+              <Link
+                href="/#faq"
+                className="hover:text-accent-light transition-colors"
+              >
+                Procurement &amp; Governance FAQ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/forecast"
+                className="hover:text-accent-light transition-colors inline-flex items-center gap-1"
+              >
+                Analytical Growth Forecast
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,9 @@ export default function SignUpForm() {
 
       setStatus("success");
       setEmail("");
+      trackEvent("sign_up", {
+        method: "footer_newsletter",
+      });
     } catch (err: unknown) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong.");

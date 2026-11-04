@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | TechFusion Automata",
-  description: "Read the Terms of Service for using TechFusion Automata's website and services.",
+  title: "Terms of Service",
+  description:
+    "Read the Terms of Service governing the use of Techfusion Automata (Pty) Ltd's website, procurement desk, and digital services.",
+  alternates: {
+    canonical: "https://techfusion-ventures.xyz/terms",
+  },
 };
 
 export default function TermsPage() {

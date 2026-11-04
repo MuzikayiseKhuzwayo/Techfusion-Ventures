@@ -1,0 +1,50 @@
+# Techfusion Automata (Pty) Ltd
+
+> Techfusion Automata (Pty) Ltd is a South African digital transformation, deterministic artificial intelligence, data engineering, and bespoke software consultancy (B-BBEE Level 1 EME — 135% Procurement Recognition, 100% Black-Owned). We modernize institutional infrastructure and deploy automated, POPIA Section 71 and ISO/IEC 42001-aligned systems for public-sector departments, international development agencies (UN/NGOs), and private enterprises across Africa.
+
+## Entity & Procurement Summary
+- **Legal Name:** Techfusion Automata (Pty) Ltd
+- **Jurisdiction:** Republic of South Africa (CIPC Registered Private Company)
+- **B-BBEE Status:** Level 1 Contributor (135% Procurement Recognition, 100% Black-Owned EME)
+- **Tax & CSD Standing:** SARS Tax Compliant & Central Supplier Database (CSD) Registered (verification PINs dispatched via private SCM desk)
+- **Commercial AI Division:** [TechFusion Alchemy](https://techfusion-alchemy.xyz)
+- **Primary Website:** https://techfusion-ventures.xyz
+- **Full Technical & Procurement Reference:** https://techfusion-ventures.xyz/llms-full.txt
+
+## Accredited OEM Partner Ecosystem
+1. **Microsoft** — Microsoft Partner Network (Verified Partner)
+2. **OpenAI** — OpenAI Partner Network (Approved Member)
+3. **Google Cloud** — Partner Advantage (Approved Member)
+4. **Amazon Web Services (AWS)** — AWS Partner Network / APN (Registered Partner)
+5. **DigiCert** — PKI & Certificate Lifecycle (Approved Member)
+
+## Six Core Service Pillars
+1. **Pillar 01: Digital Transformation** — End-to-end business process digitization, workflow re-engineering, SOP automation, and legacy institutional system modernization.
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=digital-transformation
+2. **Pillar 02: Automation & Intelligent AI Systems** — Business/Robotic Process Automation (BPA/RPA), agentic multi-agent orchestration (MCP), Intelligent Document Processing (IDP/OCR), conversational AI, and executive decision-support platforms.
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=automation-ai
+   - Commercial Division: https://techfusion-alchemy.xyz
+3. **Pillar 03: Data Engineering & Advanced Analytics** — Enterprise data warehouse design, real-time and batch ETL/ELT pipelines, BI executive dashboards, and POPIA-compliant data governance.
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=data-engineering
+4. **Pillar 04: Custom Software Development** — Cloud-native web and mobile applications (React, Next.js, React Native, FastAPI, Node.js), high-throughput REST/GraphQL APIs, and secure citizen or enterprise client portals.
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=custom-software
+5. **Pillar 05: Cloud & Systems Integration** — Microsoft 365 & Power Platform ecosystems, PostgreSQL and Supabase backends, ERP/CRM webhook integrations, and Identity & Access Management (IAM).
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=cloud-integration
+6. **Pillar 06: Government & Public-Sector Solutions** — Management Information Systems (MIS), case/grant/complaint management systems, Electronic Document & Records Management Systems (EDRMS), and Monitoring & Evaluation (M&E) platforms for UN/NGO programs.
+   - Direct Inquiry: https://techfusion-ventures.xyz/contact?service=government-solutions
+
+## Governance, Security & Statutory Compliance
+- **AI Governance:** ISO/IEC 42001:2023 (AIMS) Charter & NIST AI Risk Management Framework (AI RMF 1.0) alignment with Human-in-the-Loop (HITL) controls.
+- **Information Security:** ISO/IEC 27001:2022 (ISMS) Statement of Applicability & ISO/IEC 27701 / SOC 2 Type II roadmap.
+- **Data Privacy & Algorithmic Rights:** POPIA Section 71 automated decision-making safeguards & PAIA Section 51 Manual.
+- **Ethics & Statutory Integrity:** King IV Corporate Governance, PRECCA / FICA / POCA Anti-Fraud & Anti-Bribery programme, and ISO 9001–aligned Quality Policy.
+
+## Key Pages & Private Verification Dispatch
+- [Home & Capabilities Overview](https://techfusion-ventures.xyz/)
+- [Executive Contact & SCM Verification Desk](https://techfusion-ventures.xyz/contact)
+- [Request Full Statutory & Bid Verification Pack](https://techfusion-ventures.xyz/contact?doc=bid-pack)
+- [Request Corporate Profile & Capability Statement](https://techfusion-ventures.xyz/contact?doc=corporate-profile)
+- [Request AI Governance Charter (ISO 42001 / NIST)](https://techfusion-ventures.xyz/contact?doc=ai-governance)
+- [Request PAIA Sec 51 & POPIA Sec 71 Pack](https://techfusion-ventures.xyz/contact?doc=paia-popia)
+- [Privacy Policy](https://techfusion-ventures.xyz/privacy)
+- [Terms of Service](https://techfusion-ventures.xyz/terms)

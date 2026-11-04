@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | TechFusion Automata",
-  description: "Learn how TechFusion Automata collects, uses, and protects your information.",
+  title: "Privacy Policy",
+  description:
+    "Learn how Techfusion Automata (Pty) Ltd collects, uses, and protects personal information in compliance with POPIA and PAIA.",
+  alternates: {
+    canonical: "https://techfusion-ventures.xyz/privacy",
+  },
 };
 
 export default function PrivacyPage() {

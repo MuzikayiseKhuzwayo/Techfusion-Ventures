@@ -55,6 +55,12 @@ export default function Header() {
             Procurement
           </Link>
           <Link
+            href="/#faq"
+            className="text-foreground/80 hover:text-accent-light transition-colors"
+          >
+            FAQ
+          </Link>
+          <Link
             href="/contact"
             className="px-4 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors"
           >
@@ -101,6 +107,13 @@ export default function Header() {
               className="text-foreground/80 hover:text-accent-light py-1"
             >
               Procurement
+            </Link>
+            <Link
+              href="/#faq"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-foreground/80 hover:text-accent-light py-1"
+            >
+              FAQ
             </Link>
             <Link
               href="/contact"

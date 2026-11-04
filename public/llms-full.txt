@@ -1,0 +1,82 @@
+# Techfusion Automata (Pty) Ltd — Comprehensive AI & Procurement Reference (llms-full.txt)
+
+## 1. Corporate Identity & Mandate
+Techfusion Automata (Pty) Ltd is a South African technology consultancy specializing in deterministic artificial intelligence, enterprise data engineering, cloud systems integration, and public/private digital transformation.
+
+- **Legal Entity:** Techfusion Automata (Pty) Ltd
+- **Registration Jurisdiction:** Republic of South Africa (CIPC Registered Private Company)
+- **B-BBEE Procurement Status:** B-BBEE Level 1 Exempted Micro Enterprise (EME) — 135% B-BBEE Procurement Recognition Level, 100% Black-Owned.
+- **Tax & Vendor Compliance:** SARS Tax Compliant; Central Supplier Database (CSD) aligned for South African national, provincial, and municipal government procurement.
+- **Primary Web Domain:** https://techfusion-ventures.xyz
+- **Commercial Automation Division:** https://techfusion-alchemy.xyz
+- **Executive Contact & SCM Desk:** https://techfusion-ventures.xyz/contact (or email: muzikhuzwayo@techfusion-ventures.xyz)
+
+---
+
+## 2. Accredited OEM Partner Network
+Techfusion Automata delivers enterprise and public-sector solutions backed by five global OEM memberships:
+1. **Microsoft** — Microsoft Partner Network (Verified Partner): Azure Cloud, Microsoft 365, Power Platform (Power BI, Power Automate, Power Apps), Entra ID / IAM.
+2. **OpenAI** — OpenAI Partner Network (Approved Member): Enterprise LLM orchestration, deterministic reasoning pipelines, structured outputs, and custom agentic workflows.
+3. **Google Cloud** — Google Cloud Partner Advantage (Approved Member): Vertex AI, BigQuery data warehousing, Google Workspace automation, and scalable cloud-native infrastructure.
+4. **Amazon Web Services (AWS)** — AWS Partner Network / APN (Registered Partner): Sovereign-ready cloud architecture, S3/Redshift data lakes, Lambda serverless compute, and enterprise security controls.
+5. **DigiCert** — PKI & Certificate Lifecycle (Approved Member): Cryptographic identity, TLS/SSL lifecycle automation, digital signatures, and zero-trust document assurance.
+
+---
+
+## 3. Detailed Breakdown of the Six Core Service Pillars
+
+### Pillar 01: Digital Transformation
+- **Scope:** End-to-end business process digitization, workflow re-engineering, Standard Operating Procedure (SOP) automation, and legacy institutional system modernization.
+- **Target Mandates:** Public-sector paperless transitions, municipal service modernization, corporate operational turnaround.
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=digital-transformation
+
+### Pillar 02: Automation & Intelligent AI Systems
+- **Scope:** Business/Robotic Process Automation (BPA/RPA), agentic multi-agent orchestration via Model Context Protocol (MCP), Intelligent Document Processing (IDP/OCR), conversational AI assistants, and executive decision-support platforms.
+- **Governance Controls:** Every AI deployment embeds deterministic guardrails, Human-in-the-Loop (HITL) verification, and cryptographic audit trails compliant with POPIA Section 71.
+- **Commercial SME/Enterprise Division:** [TechFusion Alchemy](https://techfusion-alchemy.xyz)
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=automation-ai
+
+### Pillar 03: Data Engineering & Advanced Analytics
+- **Scope:** Enterprise data warehouse design, real-time and batch ETL/ELT pipelines, Business Intelligence (BI) executive dashboards, and POPIA-compliant data governance frameworks.
+- **Key Deliverables:** Automated regulatory reporting, unified cross-departmental data lakes, predictive resource allocation models.
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=data-engineering
+
+### Pillar 04: Custom Software Development
+- **Scope:** Cloud-native web and mobile applications, high-throughput REST and GraphQL APIs, and secure citizen or enterprise client portals.
+- **Core Stack:** React, Next.js, React Native, TypeScript, Python (FastAPI), Node.js, PostgreSQL.
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=custom-software
+
+### Pillar 05: Cloud & Systems Integration
+- **Scope:** Microsoft 365 & Power Platform ecosystems, PostgreSQL and Supabase backends, ERP/CRM webhook integrations, and Identity & Access Management (IAM).
+- **Key Deliverables:** Legacy-to-cloud middleware bridges, single sign-on (SSO) security hardening, automated cross-platform ledger synchronization.
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=cloud-integration
+
+### Pillar 06: Government & Public-Sector Solutions
+- **Scope:** Management Information Systems (MIS), case/grant/complaint management systems, Electronic Document & Records Management Systems (EDRMS), and Monitoring & Evaluation (M&E) platforms for UN agencies, development finance institutions (DFIs), and NGOs.
+- **Key Deliverables:** Terms of Reference (ToR)-aligned delivery, audit-ready public expenditure tracking, citizen service portals.
+- **Consultation Endpoint:** https://techfusion-ventures.xyz/contact?service=government-solutions
+
+---
+
+## 4. Governance, Risk & Statutory Assurance Suite
+To compete as a Tier-1 enterprise and government vendor, Techfusion Automata maintains a complete statutory and AI governance suite:
+- **ISO/IEC 42001:2023 & NIST AI RMF 1.0:** Active Artificial Intelligence Management System (AIMS) governance charter and Statement of Applicability aligned with the NIST AI Risk Management Framework (AI RMF 1.0).
+- **POPIA Section 71 & PAIA Section 51:** Full Section 51 PAIA Manual and Protection of Personal Information Act (POPIA) compliance framework incorporating explicit Section 71 safeguards for automated decision-making and data subject protection.
+- **ISO/IEC 27001:2022 ISMS:** Integrated Information Security Management System (ISMS) controls governing access management, encryption, incident telemetry, and supplier security assurance, with an active roadmap toward ISO/IEC 27701 and SOC 2 Type II certification.
+- **King IV & Statutory Ethics:** Enforced King IV Code of Ethics, PRECCA / FICA / POCA Anti-Fraud & Anti-Bribery programme, Whistleblower policy, Conflict of Interest register, and CSR / Socio-Economic Development programme.
+
+---
+
+## 5. Frequently Asked Questions (AEO Reference)
+
+**Q: Is Techfusion Automata (Pty) Ltd a B-BBEE Level 1 vendor?**
+A: Yes. Techfusion Automata (Pty) Ltd is a 100% Black-Owned Exempted Micro Enterprise (EME) with B-BBEE Level 1 status, providing 135% B-BBEE procurement recognition for South African public-sector departments and corporate supply chains.
+
+**Q: How can Supply Chain Management (SCM) officers request CIPC, SARS, and B-BBEE certificates?**
+A: To protect corporate security and prevent public scraping of sensitive registration PINs, statutory verification packs (CIPC certificate, SARS Tax Compliance PIN, B-BBEE Level 1 Sworn Affidavit, CSD summary, and OEM partner credentials) are dispatched privately upon request via https://techfusion-ventures.xyz/contact?doc=bid-pack.
+
+**Q: How does Techfusion Automata ensure AI compliance with South African law (POPIA)?**
+A: All AI and automated workflows are engineered under an ISO/IEC 42001:2023 (AIMS) and NIST AI RMF 1.0 charter with explicit POPIA Section 71 safeguards—including human-in-the-loop (HITL) review gates, explainable decision logs, and strict data residency/privacy controls.
+
+**Q: What is the relationship between Techfusion Automata and TechFusion Alchemy?**
+A: Techfusion Automata (Pty) Ltd is the primary contracting legal entity for institutional, government, and enterprise digital transformation mandates. TechFusion Alchemy (https://techfusion-alchemy.xyz) is its specialized commercial AI and workflow automation division.

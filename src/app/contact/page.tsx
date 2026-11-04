@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Send, CheckCircle, AlertCircle, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 const PREFILL_PRESETS: Record<
   string,
@@ -117,6 +118,15 @@ function ContactFormContent() {
       if (!response.ok) throw new Error("Failed to submit");
 
       setStatus("success");
+      trackEvent("generate_lead", {
+        inquiry_category: searchParams.get("service")
+          ? "service_pillar"
+          : searchParams.get("doc")
+          ? "statutory_dossier"
+          : "general_executive_inquiry",
+        preset_key: serviceKey || "direct",
+        subject: String(data.subject || "Website Inquiry"),
+      });
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       console.error(err);

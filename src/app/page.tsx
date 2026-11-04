@@ -47,9 +47,64 @@ const OEM_PARTNERS = [
   },
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: "Is Techfusion Automata (Pty) Ltd a B-BBEE Level 1 vendor?",
+    answer:
+      "Yes. Techfusion Automata (Pty) Ltd is a 100% Black-Owned Exempted Micro Enterprise (EME) with B-BBEE Level 1 Contributor status, providing 135% B-BBEE procurement recognition for South African public-sector departments, state-owned entities, and corporate supply chains.",
+  },
+  {
+    question:
+      "How do Supply Chain Management (SCM) officers request CIPC, SARS, and B-BBEE verification packs?",
+    answer:
+      "To safeguard statutory credentials against public scraping, CIPC registration certificates, SARS Tax Compliance PINs, B-BBEE Level 1 sworn affidavits, CSD vendor summaries, and OEM partner letters are dispatched privately upon request via our controlled SCM Verification Desk at /contact?doc=bid-pack.",
+  },
+  {
+    question:
+      "How does Techfusion Automata ensure AI compliance with POPIA Section 71 and ISO/IEC 42001?",
+    answer:
+      "Every AI and automated workflow is engineered under our ISO/IEC 42001:2023 (AIMS) and NIST AI Risk Management Framework (AI RMF 1.0) charter. We embed Human-in-the-Loop (HITL) approval gates, deterministic execution guardrails, cryptographic audit logs, and full POPIA Section 71 protections against solely automated adverse decisions.",
+  },
+  {
+    question:
+      "What are Techfusion Automata's Six Core Service Pillars for tenders and enterprise mandates?",
+    answer:
+      "Our delivery is structured across six core service pillars: (1) Digital Transformation & SOP Automation, (2) Automation & Intelligent AI Systems (Multi-Agent MCP, BPA/RPA, IDP/OCR), (3) Data Engineering & Advanced Analytics (ETL/ELT, BI, POPIA Data Governance), (4) Custom Software Development, (5) Cloud & Systems Integration (Microsoft 365, Power Platform, AWS, Google Cloud), and (6) Government & Public-Sector Solutions (MIS, EDRMS, UN/NGO M&E platforms).",
+  },
+  {
+    question:
+      "Which global OEM technology partners is Techfusion Automata accredited with?",
+    answer:
+      "Techfusion Automata is an accredited member across five global OEM ecosystems: Microsoft Partner Network (Verified Partner), OpenAI Partner Network (Approved Member), Google Cloud Partner Advantage (Approved Member), Amazon Web Services APN (Registered Partner), and DigiCert PKI & Certificate Lifecycle (Approved Member).",
+  },
+  {
+    question:
+      "What is the relationship between Techfusion Automata (Pty) Ltd and TechFusion Alchemy?",
+    answer:
+      "Techfusion Automata (Pty) Ltd is the CIPC-registered contracting entity for institutional, government, development agency, and enterprise mandates. TechFusion Alchemy (techfusion-alchemy.xyz) operates as our specialized commercial AI and workflow automation division.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* HERO SECTION (Preserves glass_hand.mp4 background video & centered layout) */}
       <section className="relative min-h-[82vh] flex items-center justify-center overflow-hidden py-20 md:py-28">
         {/* Background Video */}
@@ -58,6 +113,8 @@ export default function Home() {
           loop
           muted
           playsInline
+          preload="metadata"
+          poster="/techfusion_automata_jpg.jpeg"
           className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
         >
           <source src="/glass_hand.mp4" type="video/mp4" />
@@ -768,6 +825,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* EXECUTIVE & PROCUREMENT FAQ (AEO / GEO Structured Knowledge Block) */}
+      <section
+        id="faq"
+        className="py-24 bg-surface-100/15 border-t border-surface-200/70"
+      >
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="max-w-3xl mb-14">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent-dark">
+              Executive &amp; Procurement Briefing
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-foreground/65 text-sm sm:text-base leading-relaxed">
+              Direct answers for Supply Chain Management (SCM) adjudicators,
+              enterprise architecture boards, and technical due-diligence teams.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {FAQ_ITEMS.map((faq, index) => (
+              <BentoCard
+                key={faq.question}
+                delay={0.05 * (index + 1)}
+                className="flex flex-col justify-between"
+              >
+                <div>
+                  <span className="font-mono text-[11px] text-accent-dark">
+                    FAQ // 0{index + 1}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground mt-1.5 mb-3 leading-snug">
+                    {faq.question}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              </BentoCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA SECTION (Preserves carbon_circuitry.mp4 background video) */}
       <section className="relative py-28 overflow-hidden border-t border-surface-200/50">
         {/* Background Video */}
@@ -776,6 +876,8 @@ export default function Home() {
           loop
           muted
           playsInline
+          preload="metadata"
+          poster="/techfusion_automata_jpg.jpeg"
           className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
         >
           <source src="/carbon_circuitry.mp4" type="video/mp4" />
