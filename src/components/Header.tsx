@@ -55,6 +55,18 @@ export default function Header() {
             Procurement
           </Link>
           <Link
+            href="/research"
+            className="text-foreground/80 hover:text-accent-light transition-colors"
+          >
+            Research
+          </Link>
+          <Link
+            href="/calculator"
+            className="text-foreground/80 hover:text-accent-light transition-colors"
+          >
+            ROI Calculator
+          </Link>
+          <Link
             href="/#faq"
             className="text-foreground/80 hover:text-accent-light transition-colors"
           >
@@ -107,6 +119,20 @@ export default function Header() {
               className="text-foreground/80 hover:text-accent-light py-1"
             >
               Procurement
+            </Link>
+            <Link
+              href="/research"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-foreground/80 hover:text-accent-light py-1"
+            >
+              Research
+            </Link>
+            <Link
+              href="/calculator"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-foreground/80 hover:text-accent-light py-1"
+            >
+              ROI Calculator
             </Link>
             <Link
               href="/#faq"

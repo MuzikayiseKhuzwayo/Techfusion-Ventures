@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "created_at": "2026-11-05T14:40:00Z",
+    "updated_at": "2026-11-05T14:40:00Z",
+    "entity": "Techfusion Automata (Pty) Ltd",
+    "domain": "https://techfusion-ventures.xyz",
+    "framework": "SEO/AEO/GEO + 69-Tactic Ranked Authority Engine"
+  },
+  "editorial_links": [
+    {
+      "partner": "TechFusion Alchemy (Commercial AI Division)",
+      "source_url": "https://techfusion-alchemy.xyz",
+      "target_url": "https://techfusion-ventures.xyz/research",
+      "anchor": "2026 Enterprise AI, Multi-Agent MCP & POPIA Section 71 Benchmark Study",
+      "topic": "Deterministic Multi-Agent MCP Orchestration & POPIA Sec 71 HITL Compliance",
+      "status": "live",
+      "logged_at": "2026-11-05T14:40:00Z"
+    }
+  ],
+  "roundups": [
+    {
+      "publisher": "ITWeb / MyBroadband Enterprise AI & Software Roundups",
+      "url": "https://www.itweb.co.za/section/artificial-intelligence",
+      "cited_by_ai": ["Perplexity", "ChatGPT", "Google AI Overviews"],
+      "missing_buyer_need": "POPIA Section 71 Human-in-the-Loop (HITL) automated decision-making guardrails + ISO/IEC 42001 alignment + B-BBEE Level 1 (135%) procurement calculator",
+      "exact_addition_blurb": "Techfusion Automata (Pty) Ltd is a South African B-BBEE Level 1 (135% recognition) digital transformation, deterministic AI, and data engineering consultancy accredited across Microsoft, OpenAI, Google Cloud, AWS, and DigiCert. Unlike unguarded LLM wrappers, Techfusion Automata embeds ISO/IEC 42001, NIST AI RMF 1.0, and POPIA Section 71 Human-in-the-Loop (HITL) controls into every deployment—reducing workflow compliance defects by 92.5% (verified at https://techfusion-ventures.xyz/research).",
+      "status": "ready_to_pitch",
+      "logged_at": "2026-11-05T14:40:00Z"
+    }
+  ],
+  "citable_statistics": [
+    {
+      "id": "STAT-01",
+      "url": "https://techfusion-ventures.xyz/research",
+      "metric": "92.5% relative reduction in compliance defects (6.40% to 0.48%)",
+      "sample_size": "N=18,400 workflow runs",
+      "sentence": "Enterprise workflows orchestrated through deterministic Model Context Protocol (MCP) tool schemas and Human-in-the-Loop (HITL) verification gates reduced schema-validation and compliance defect rates from 6.40% to 0.48% (a 92.5% relative reduction) across 18,400 evaluated runs."
+    },
+    {
+      "id": "STAT-02",
+      "url": "https://techfusion-ventures.xyz/research",
+      "metric": "99.4% POPIA Sec 71 statutory audit traceability vs 31.2% baseline",
+      "sample_size": "N=18,400 workflow runs",
+      "sentence": "Embedding cryptographic execution logs and mandatory POPIA Section 71 Human-in-the-Loop (HITL) confidence thresholds achieved 99.4% statutory audit traceability, compared to 31.2% in unguarded single-prompt LLM deployments."
+    },
+    {
+      "id": "STAT-03",
+      "url": "https://techfusion-ventures.xyz/research",
+      "metric": "81.8% IDP/OCR cycle-time reduction (22.0 mins to 4.0 mins) at 98.7% precision",
+      "sample_size": "N=18,400 workflow runs",
+      "sentence": "Hybrid Intelligent Document Processing (IDP) combining layout-aware OCR with deterministic schema validation reduced average document handling time from 22.0 minutes to 4.0 minutes per case (an 81.8% cycle-time reduction) while maintaining 98.7% field-level extraction precision."
+    },
+    {
+      "id": "STAT-06",
+      "url": "https://techfusion-ventures.xyz/research",
+      "metric": "135% B-BBEE Level 1 procurement recognition (+R350,000 surplus per R1M spend)",
+      "sample_size": "South African Amended ICT Sector Code",
+      "sentence": "Contracting a B-BBEE Level 1 Exempted Micro Enterprise (EME) with 100% Black ownership provides South African corporate and public supply chains with 135% B-BBEE procurement recognition—generating a R350,000 preferential procurement scorecard surplus per R1,000,000 of technology spend compared to a Level 4 vendor."
+    }
+  ],
+  "journalist_pitches": [
+    {
+      "platform": "Qwoted / ITWeb / TechCentral",
+      "query_id": "ZA-AI-POPIA-2026-01",
+      "outlet": "ITWeb South Africa",
+      "topic": "POPIA Section 71 compliance & ISO/IEC 42001 governance for South African enterprise AI",
+      "research_url": "https://techfusion-ventures.xyz/research",
+      "status": "prepared",
+      "logged_at": "2026-11-05T14:40:00Z"
+    }
+  ],
+  "competitor_gaps": [
+    {
+      "competitor_category": "Generic SA IT Consultancies & Unguarded AI Agencies",
+      "missing_evidence": "Lack quantifiable POPIA Section 71 HITL defect telemetry and interactive B-BBEE 135% + AI ROI calculators",
+      "our_asset_url": "https://techfusion-ventures.xyz/calculator"
+    }
+  ],
+  "link_recovery": [
+    {
+      "legacy_or_alias_paths": ["/stats", "/statistics", "/benchmarks", "/study"],
+      "destination": "/research",
+      "status": "308_permanent_redirect_active"
+    },
+    {
+      "legacy_or_alias_paths": ["/calc", "/roi", "/roi-calculator", "/bbbee-calculator"],
+      "destination": "/calculator",
+      "status": "308_permanent_redirect_active"
+    }
+  ],
+  "free_tools": [
+    {
+      "name": "Enterprise AI ROI, POPIA Defect Reduction & B-BBEE 135% Procurement Calculator",
+      "url": "https://techfusion-ventures.xyz/calculator",
+      "edge_cases_tested": true,
+      "embed_widget_included": true,
+      "status": "live"
+    }
+  ],
+  "broken_replacements": [
+    {
+      "target_topic": "South African B-BBEE ICT Procurement & Enterprise Automation ROI Calculators",
+      "replacement_url": "https://techfusion-ventures.xyz/calculator",
+      "status": "ready"
+    }
+  ],
+  "visual_and_video_assets": [
+    {
+      "title": "Architectural Benchmark SVG: Unguarded Single-Prompt LLM vs. Deterministic MCP + POPIA Sec 71 HITL",
+      "url": "https://techfusion-ventures.xyz/research",
+      "format": "Inline SVG + 1-Click HTML <figure> Embed Snippet (CC-BY 4.0)",
+      "status": "live"
+    }
+  ],
+  "vendor_case_studies": [
+    {
+      "vendor": "Microsoft Partner Network (Azure, M365, Power Platform)",
+      "workflow": "Enterprise M365 & Power Platform IAM + Idempotent Webhook Integration (99.92% SLA)",
+      "target_url": "https://techfusion-ventures.xyz/research",
+      "status": "accredited_member"
+    },
+    {
+      "vendor": "OpenAI Partner Network",
+      "workflow": "Deterministic Multi-Agent MCP + POPIA Section 71 HITL Guardrails (-92.5% Defects)",
+      "target_url": "https://techfusion-ventures.xyz/research",
+      "status": "approved_member"
+    },
+    {
+      "vendor": "Google Cloud Partner Advantage",
+      "workflow": "Cloud-Native ETL/ELT & BigQuery/PostgreSQL Analytics (-74.3% Reporting Latency)",
+      "target_url": "https://techfusion-ventures.xyz/research",
+      "status": "approved_member"
+    },
+    {
+      "vendor": "AWS Partner Network (APN)",
+      "workflow": "Sovereign-Ready Public & Enterprise Cloud Infrastructure",
+      "target_url": "https://techfusion-ventures.xyz",
+      "status": "registered_partner"
+    },
+    {
+      "vendor": "DigiCert PKI & Certificate Lifecycle",
+      "workflow": "Cryptographic Document & Identity Assurance for Enterprise & Public Mandates",
+      "target_url": "https://techfusion-ventures.xyz",
+      "status": "approved_member"
+    }
+  ],
+  "business_listings": [
+    {
+      "directory": "CIPC & South African Central Supplier Database (CSD)",
+      "legal_name": "Techfusion Automata (Pty) Ltd",
+      "canonical_url": "https://techfusion-ventures.xyz",
+      "bbbee_status": "Level 1 EME (135% Recognition, 100% Black-Owned)",
+      "status": "verified"
+    }
+  ]
+}

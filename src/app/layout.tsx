@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     "Public Sector MIS EDRMS South Africa",
     "Multi-Agent MCP Orchestration",
     "Custom Software Development Africa",
+    "AI ROI Calculator South Africa",
+    "B-BBEE 135% Procurement Calculator",
   ],
   authors: [{ name: "Techfusion Automata (Pty) Ltd", url: SITE_URL }],
   creator: "Techfusion Automata (Pty) Ltd",
@@ -46,6 +48,12 @@ export const metadata: Metadata = {
   category: "technology",
   alternates: {
     canonical: SITE_URL,
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "LLM Summary" },
+        { url: "/llms-full.txt", title: "LLM Full Documentation" },
+      ],
+    },
   },
   icons: {
     icon: "/techfusion_automata_ico.ico",
@@ -219,6 +227,32 @@ const jsonLdGraph = {
       },
       inLanguage: "en-ZA",
     },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${SITE_URL}/#software`,
+      name: "Techfusion Automata Sovereign AI & Enterprise ROI Calculator",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web, Cloud, Hybrid On-Premise",
+      url: `${SITE_URL}/calculator`,
+      provider: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+      featureList: [
+        "Deterministic Multi-Agent MCP Orchestration",
+        "POPIA Section 71 Human-in-the-Loop (HITL) Compliance Guardrails",
+        "ISO/IEC 42001 & NIST AI RMF 1.0 Audit Telemetry",
+        "Intelligent Document Processing (IDP/OCR) & ETL/ELT Pipelines",
+        "Enterprise AI ROI & B-BBEE Level 1 (135% Recognition) Procurement Calculator",
+      ],
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "ZAR",
+        description:
+          "Free interactive Enterprise AI ROI, SLA & B-BBEE 135% Procurement Recognition Calculator at /calculator.",
+        url: `${SITE_URL}/calculator`,
+      },
+    },
   ],
 };
 
@@ -232,6 +266,20 @@ export default function RootLayout({
       lang="en-ZA"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
+      <head>
+        <link
+          rel="alternate"
+          type="text/plain"
+          title="LLM Summary"
+          href="/llms.txt"
+        />
+        <link
+          rel="alternate"
+          type="text/plain"
+          title="LLM Full Documentation"
+          href="/llms-full.txt"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <FirebaseAnalytics />
         <script

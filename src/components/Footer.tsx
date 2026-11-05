@@ -68,6 +68,22 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href="/research"
+                className="hover:text-accent-light transition-colors"
+              >
+                2026 AI &amp; POPIA Benchmark Study
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/calculator"
+                className="hover:text-accent-light transition-colors"
+              >
+                Enterprise ROI &amp; B-BBEE Calculator
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/#faq"
                 className="hover:text-accent-light transition-colors"
               >
