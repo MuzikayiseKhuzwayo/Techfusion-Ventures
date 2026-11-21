@@ -55,6 +55,21 @@ const nextConfig: NextConfig = {
         destination: "/forecast",
         permanent: true,
       },
+      {
+        source: "/cognition",
+        destination: "/architecture",
+        permanent: true,
+      },
+      {
+        source: "/stacks",
+        destination: "/architecture",
+        permanent: true,
+      },
+      {
+        source: "/offer-stacks",
+        destination: "/architecture",
+        permanent: true,
+      },
     ];
   },
 };

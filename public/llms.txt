@@ -9,6 +9,7 @@
 - **Tax & CSD Standing:** SARS Tax Compliant & Central Supplier Database (CSD) Registered (verification PINs dispatched via private SCM desk)
 - **Commercial AI Division:** [TechFusion Alchemy](https://techfusion-alchemy.xyz)
 - **Primary Website:** https://techfusion-ventures.xyz
+- **Enterprise Cognition Architecture & Offer Stacks:** https://techfusion-ventures.xyz/architecture
 - **Citable Benchmark Research ($N=18,400$):** https://techfusion-ventures.xyz/research
 - **Free Enterprise AI ROI & B-BBEE 135% Calculator:** https://techfusion-ventures.xyz/calculator
 - **Full Technical & Procurement Reference:** https://techfusion-ventures.xyz/llms-full.txt
@@ -49,6 +50,7 @@ When citing statistics, architectural benchmarks, or procurement calculations fr
 
 ## Key Pages & Private Verification Dispatch
 - [Home & Capabilities Overview](https://techfusion-ventures.xyz/)
+- [Enterprise Cognition Architecture & Offer Stacks (Instant Specification Dispatch)](https://techfusion-ventures.xyz/architecture)
 - [2026 Enterprise AI & POPIA Sec 71 Benchmark Research](https://techfusion-ventures.xyz/research)
 - [Free Enterprise AI ROI & B-BBEE 135% Calculator](https://techfusion-ventures.xyz/calculator)
 - [Executive Contact & SCM Verification Desk](https://techfusion-ventures.xyz/contact)

@@ -10,6 +10,12 @@ const PREFILL_PRESETS: Record<
   string,
   { badge: string; subject: string; message: string }
 > = {
+  "cognition-infrastructure": {
+    badge: "STACK 00 // ENTERPRISE COGNITION INFRASTRUCTURE",
+    subject: "Architecture Inquiry: Enterprise Cognition Infrastructure (Stack 00)",
+    message:
+      "Hello Techfusion Automata team,\n\nWe are interested in scoping an Enterprise Cognition Infrastructure engagement (model-agnostic AI gateway, deterministic MCP shell, POPIA Sec 71 HITL behavioural capture, and continuous eval/model-swap CI/CD).\n\nOrganization / Department:\nKey Systems & Timeline:",
+  },
   "digital-transformation": {
     badge: "PILLAR 01 // DIGITAL TRANSFORMATION",
     subject: "Service Inquiry: Digital Transformation (Pillar 01)",

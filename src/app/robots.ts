@@ -32,6 +32,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
         allow: [
           "/",
+          "/architecture",
           "/research",
           "/calculator",
           "/contact",

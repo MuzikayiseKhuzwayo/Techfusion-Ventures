@@ -52,6 +52,14 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href="/architecture"
+                className="hover:text-accent-light transition-colors"
+              >
+                Cognition Architecture &amp; Offer Stacks
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/#governance"
                 className="hover:text-accent-light transition-colors"
               >

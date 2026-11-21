@@ -8,6 +8,7 @@ Techfusion Automata (Pty) Ltd is a South African technology consultancy speciali
 - **B-BBEE Procurement Status:** B-BBEE Level 1 Exempted Micro Enterprise (EME) — 135% B-BBEE Procurement Recognition Level, 100% Black-Owned.
 - **Tax & Vendor Compliance:** SARS Tax Compliant; Central Supplier Database (CSD) aligned for South African national, provincial, and municipal government procurement.
 - **Primary Web Domain:** https://techfusion-ventures.xyz
+- **Enterprise Cognition Architecture & Offer Stacks:** https://techfusion-ventures.xyz/architecture
 - **Original Benchmark Study ($N=18,400$):** https://techfusion-ventures.xyz/research
 - **Interactive Enterprise AI ROI & B-BBEE 135% Calculator:** https://techfusion-ventures.xyz/calculator
 - **Commercial Automation Division:** https://techfusion-alchemy.xyz
@@ -64,8 +65,11 @@ Given monthly workflow volume $V_{\text{monthly}}$, manual minutes per run $T_{\
 
 ---
 
-## 5. Six Core Service Pillars
-1. **Pillar 01: Digital Transformation** (`/contact?service=digital-transformation`) — Business process digitization, workflow re-engineering, SOP automation, legacy system modernization.
+## 5. Enterprise Cognition Infrastructure & Six Core Service Pillars
+Canonical Architecture & Offer Stack Dossier Desk: https://techfusion-ventures.xyz/architecture (Instant email dispatch of complete three-layer technical specifications, deliverables, engagement cadence, and governance baselines).
+
+0. **Stack 00: Enterprise Cognition Infrastructure (Flagship Cross-Pillar Spine)** — Model-agnostic AI gateway (`/chat`, `/embed`, `/rerank`, `/agent`) behind a deterministic MCP verification shell, POPIA Section 71 HITL behavioural knowledge capture (`Data + Context + Feedback + Outcomes`), and continuous eval/model-swap CI/CD across 5 OEM clouds and open weights.
+1. **Pillar 01: Digital Transformation & SOP Modernisation** (`/contact?service=digital-transformation`) — Business process digitisation, workflow re-engineering, SOP automation, legacy system modernisation.
 2. **Pillar 02: Automation & Intelligent AI Systems** (`/contact?service=automation-ai` | Commercial Division: `https://techfusion-alchemy.xyz`) — BPA/RPA, multi-agent MCP orchestration, IDP/OCR, conversational AI, executive decision-support.
 3. **Pillar 03: Data Engineering & Advanced Analytics** (`/contact?service=data-engineering`) — Enterprise data warehouses, real-time/batch ETL/ELT, BI executive dashboards, POPIA data governance.
 4. **Pillar 04: Custom Software Development** (`/contact?service=custom-software`) — Cloud-native web/mobile apps (React, Next.js, React Native, FastAPI, Node.js), REST/GraphQL APIs, citizen/enterprise portals.
