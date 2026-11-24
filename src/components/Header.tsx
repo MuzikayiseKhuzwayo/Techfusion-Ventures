@@ -20,40 +20,16 @@ export default function Header() {
             className="group-hover:rotate-12 transition-transform duration-300"
           />
           <div className="flex items-center gap-1 whitespace-nowrap">
-            <span className="font-bold text-lg xl:text-xl tracking-tight text-accent-light">
+            <span className="font-bold text-xl tracking-tight text-accent-light">
               TECHFUSION
             </span>
-            <span className="font-light text-lg xl:text-xl tracking-wide text-accent-dark hidden sm:inline-block">
+            <span className="font-light text-xl tracking-wide text-accent-dark hidden sm:inline-block">
               AUTOMATA
             </span>
           </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-[13px] xl:text-sm font-medium">
-          <Link
-            href="/#capabilities"
-            className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
-          >
-            Service Pillars
-          </Link>
-          <Link
-            href="/#partners"
-            className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
-          >
-            OEM Partners
-          </Link>
-          <Link
-            href="/#governance"
-            className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
-          >
-            AI Governance
-          </Link>
-          <Link
-            href="/#procurement"
-            className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
-          >
-            Procurement
-          </Link>
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
           <Link
             href="/case-studies"
             className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
@@ -80,7 +56,7 @@ export default function Header() {
           </Link>
           <Link
             href="/contact"
-            className="whitespace-nowrap px-3.5 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors"
+            className="whitespace-nowrap px-4 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors"
           >
             Contact
           </Link>
@@ -89,43 +65,15 @@ export default function Header() {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle navigation menu"
-          className="lg:hidden p-2 text-foreground/80 hover:text-accent-light"
+          className="md:hidden p-2 text-foreground/80 hover:text-accent-light"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-surface-200 bg-background/95 backdrop-blur-xl px-4 py-6 space-y-4">
+        <div className="md:hidden border-t border-surface-200 bg-background/95 backdrop-blur-xl px-4 py-6 space-y-4">
           <div className="flex flex-col space-y-3 text-sm font-medium">
-            <Link
-              href="/#capabilities"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground/80 hover:text-accent-light py-1"
-            >
-              Service Pillars
-            </Link>
-            <Link
-              href="/#partners"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground/80 hover:text-accent-light py-1"
-            >
-              OEM Partners
-            </Link>
-            <Link
-              href="/#governance"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground/80 hover:text-accent-light py-1"
-            >
-              AI Governance
-            </Link>
-            <Link
-              href="/#procurement"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground/80 hover:text-accent-light py-1"
-            >
-              Procurement
-            </Link>
             <Link
               href="/case-studies"
               onClick={() => setMobileMenuOpen(false)}

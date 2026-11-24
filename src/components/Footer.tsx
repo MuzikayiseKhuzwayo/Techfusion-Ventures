@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="border-t border-surface-200 bg-background py-12 mt-20">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
             <Image
@@ -28,7 +28,7 @@ export default function Footer() {
 
         <div>
           <h4 className="font-semibold text-accent-light mb-4">
-            Divisions &amp; Delivery
+            Divisions &amp; Capabilities
           </h4>
           <ul className="space-y-2.5 text-sm text-foreground/70">
             <li>
@@ -74,6 +74,14 @@ export default function Footer() {
                 Procurement Readiness
               </Link>
             </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-accent-light mb-4">
+            Proof &amp; Resources
+          </h4>
+          <ul className="space-y-2.5 text-sm text-foreground/70">
             <li>
               <Link
                 href="/case-studies"
@@ -100,14 +108,6 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/#faq"
-                className="hover:text-accent-light transition-colors"
-              >
-                Procurement &amp; Governance FAQ
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/forecast"
                 className="hover:text-accent-light transition-colors inline-flex items-center gap-1"
               >
@@ -115,14 +115,22 @@ export default function Footer() {
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </li>
+            <li>
+              <Link
+                href="/#faq"
+                className="hover:text-accent-light transition-colors"
+              >
+                Procurement &amp; Governance FAQ
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-semibold text-accent-light mb-4">
-            Private Executive Desk
+          <h4 className="font-semibold text-accent-light mb-3">
+            Executive Desk &amp; Updates
           </h4>
-          <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
+          <p className="text-sm text-foreground/70 mb-2.5 leading-relaxed">
             For service inquiries, RFPs, or statutory verification packs:
           </p>
           <Link
@@ -131,17 +139,14 @@ export default function Footer() {
           >
             Send a private inquiry &rarr;
           </Link>
-        </div>
 
-        <div>
-          <h4 className="font-semibold text-accent-light mb-2">
-            Stay Connected
-          </h4>
-          <p className="text-xs text-foreground/60 mb-3 leading-relaxed">
-            Sign up to receive updates on our engineering developments and
-            initiatives.
-          </p>
-          <SignUpForm />
+          <div className="mt-5 pt-5 border-t border-surface-200/70">
+            <p className="text-xs text-foreground/60 mb-2.5 leading-relaxed">
+              Sign up for updates on our engineering developments and
+              initiatives.
+            </p>
+            <SignUpForm />
+          </div>
         </div>
       </div>
 
@@ -152,7 +157,9 @@ export default function Footer() {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <span className="font-mono text-[11px]">B-BBEE Level 1 (135%)</span>
-          <span className="font-mono text-[11px]">ISO/IEC 42001 &amp; 27001 Aligned</span>
+          <span className="font-mono text-[11px]">
+            ISO/IEC 42001 &amp; 27001 Aligned
+          </span>
           <Link
             href="/privacy"
             className="hover:text-foreground transition-colors"
