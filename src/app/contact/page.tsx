@@ -10,6 +10,18 @@ const PREFILL_PRESETS: Record<
   string,
   { badge: string; subject: string; message: string }
 > = {
+  "managed-applications": {
+    badge: "MANAGED APPLICATIONS // SCOPING REVIEW",
+    subject: "Managed Application Scoping & Architecture Review",
+    message:
+      "Hello Techfusion Automata team,\n\nWe are interested in scoping a sovereign Managed Application (custom CRM/revenue engine, client portal, OMS/ERP, or institutional MIS) built and maintained by your engineering team with zero per-seat licence tax.\n\nOrganization / Team Size:\nCurrent SaaS Tools / Bottlenecks:",
+  },
+  "crm-walkthrough": {
+    badge: "LIVE PRODUCTION WALKTHROUGH // MANAGED CRM",
+    subject: "Request: 30-Minute Live Production CRM Walkthrough",
+    message:
+      "Hello Techfusion Automata team,\n\nWe would like to book a 30-minute live technical walkthrough of your production Laravel CRM implementation (Gemini + Telegram AI Chief of Staff, Account Relay Waterfall, Stage-Gates, and Quote-to-Cash suite).\n\nOrganization / Role:\nPreferred Time Window (SAST):",
+  },
   "cognition-infrastructure": {
     badge: "STACK 00 // ENTERPRISE COGNITION INFRASTRUCTURE",
     subject: "Architecture Inquiry: Enterprise Cognition Infrastructure (Stack 00)",
