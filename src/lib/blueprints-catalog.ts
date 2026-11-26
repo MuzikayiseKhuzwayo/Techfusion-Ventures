@@ -1895,21 +1895,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -1923,7 +1923,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -1937,14 +1937,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -1966,21 +1966,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -1994,7 +1994,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2008,14 +2008,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2037,21 +2037,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2065,7 +2065,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2079,14 +2079,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2108,21 +2108,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2136,7 +2136,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2150,14 +2150,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2179,21 +2179,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2207,7 +2207,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2221,14 +2221,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2250,21 +2250,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2278,7 +2278,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2292,14 +2292,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2321,21 +2321,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2349,7 +2349,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2363,14 +2363,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2392,21 +2392,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2420,7 +2420,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2434,14 +2434,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2463,21 +2463,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2491,7 +2491,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2505,14 +2505,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   },
@@ -2534,21 +2534,21 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 0,
         "subject": "Your {{keyword}} Architecture Blueprint is ready (+ quick walkthrough)",
         "goal": "Instant asset delivery + direct 15-min Architecture Scoping Call booking link",
-        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the copy-paste PostgreSQL guardrail schema.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 15-minute Architecture Scoping Call here: {{booking_url}}\n\nBest,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nHere is the direct link to your **{{blueprint_title}}** PDF blueprint: {{download_url}}\n\nYou noted that {{company_name}} is currently dealing with {{qual_answer}} — Page 2 has the exact plug-in cost calculator, and Page 4 has the stack-aware AI implementation prompt you can plug straight into Claude, Gemini, or ChatGPT.\n\nIf you want to walk through how this plugs into {{current_stack}} without disrupting your team, you can grab a 30-minute Architecture Scoping Call here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       },
       {
         "step": 1,
         "delay_days": 1,
         "subject": "Did you run the Page 2 leakage math for {{company_name}}?",
         "goal": "Anchor the Rand/hour cost of inaction in their specific business",
-        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 15 minutes here: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nQuick check-in — most leaders in {{cluster_name}} who grab the {{keyword}} blueprint are surprised when they plug their own monthly volume into the Page 2 formula.\n\nUsually the real cost isn't the admin hours — it's the silent exceptions that slip through before anyone notices.\n\nReply with your rough monthly volume if you'd like me to sanity-check the ROI math for {{company_name}}, or book 30 minutes here: {{booking_url}}"
       },
       {
         "step": 2,
         "delay_days": 2,
         "subject": "The #1 mistake teams make when building {{keyword}} in-house",
         "goal": "Demonstrate senior engineering depth & why fragile Zaps fail",
-        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 15-min call if helpful: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIf your team decides to build the {{keyword}} pipeline internally, watch out for one trap: skipping the idempotency & validation gate on Page 3.\n\nWithout a deterministic schema check in PostgreSQL, one bad webhook or malformed PDF quietly corrupts downstream records inside {{current_stack}}.\n\nHappy to review your team's draft architecture on a quick 30-min call if helpful: {{booking_url}}"
       },
       {
         "step": 3,
@@ -2562,7 +2562,7 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 6,
         "subject": "Why we never build this on rented per-seat SaaS glue",
         "goal": "Differentiate sovereign managed engineering vs. fragile Zapier/SaaS bloat",
-        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 15-minute scoping chat for {{company_name}}? {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nMost agencies glue 5 rented SaaS tools together with fragile Zaps that break silently on Friday night.\n\nWe deploy sovereign, field-encrypted systems directly into your own infrastructure (PostgreSQL, Laravel/Next.js, direct Xero/ERP APIs) so you own 100% of your data with R0 per-seat licence tax.\n\nWorth a 30-minute scoping chat for {{company_name}}? {{booking_url}}"
       },
       {
         "step": 5,
@@ -2576,14 +2576,14 @@ export const BLUEPRINT_EMAIL_SEQUENCES: Record<string, ClusterSequence> = {
         "delay_days": 12,
         "subject": "14-day deployment roadmap for {{company_name}}",
         "goal": "De-risk the engagement with clear 2-week delivery milestones",
-        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 15-minute scoping call here if you'd like us to map this out: {{booking_url}}"
+        "body": "Hi {{first_name}},\n\nIn case you're wondering what it actually takes to go live with {{keyword}} without derailing your staff:\n\n- Days 1–3: Architecture lock & read-only integration with {{current_stack}}\n- Days 4–10: Deterministic validation gates, audit ledger & exception alerts\n- Days 11–14: Shadow-mode QA against real data → full production cutover\n\nBook a 30-minute scoping call here if you'd like us to map this out: {{booking_url}}"
       },
       {
         "step": 7,
         "delay_days": 16,
         "subject": "Closing the loop on your {{keyword}} blueprint",
         "goal": "Polite breakup email leaving the door open",
-        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 15 minutes here: {{booking_url}}\n\nAll the best,\nMuzi · Techfusion Automata"
+        "body": "Hi {{first_name}},\n\nI'll stop following up after this so I don't clutter your inbox. Your {{keyword}} blueprint link stays active whenever your team is ready: {{download_url}}\n\nWhenever {{company_name}} is ready to turn manual bottlenecks into sovereign, self-healing infrastructure, just reply to this email or grab 30 minutes here: {{booking_url}}\n\nKind regards,\nMuzikayise Wiston Khuzwayo\nFounder & CEO · Techfusion Automata"
       }
     ]
   }
@@ -2598,11 +2598,5 @@ export function interpolateTemplate(
   template: string,
   vars: Record<string, string>
 ): string {
-  return template.replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ")
-    .replace(/\{\{(\w+)\}\} /g, (_, k) => (vars[k] ?? "") + " ");
+  return template.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] ?? "");
 }
