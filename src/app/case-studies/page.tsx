@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
+  Calendar,
   Globe,
   Layers,
   Quote,
@@ -12,6 +14,7 @@ import {
 } from "lucide-react";
 import { CASE_STUDIES, type CaseStudyCategory } from "@/lib/case-studies";
 import { trackEvent } from "@/lib/analytics";
+import { BOOKING_URL } from "@/lib/booking";
 
 type FilterOption = "All" | CaseStudyCategory;
 
@@ -478,9 +481,24 @@ export default function CaseStudiesPage() {
         </div>
 
         <div className="flex flex-wrap gap-3 shrink-0">
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent("book_call_click", {
+                location: "case_studies_cta",
+              })
+            }
+            className="h-10 px-5 rounded-lg bg-accent-light text-background text-sm font-medium inline-flex items-center gap-2 hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Calendar className="w-4 h-4" />
+            Book 30-Min Walkthrough
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
           <Link
             href="/contact?service=managed-applications"
-            className="h-10 px-5 rounded-lg bg-accent-light text-background text-sm font-medium inline-flex items-center gap-2 hover:bg-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="h-10 px-5 rounded-lg bg-surface-200 border border-surface-200 text-foreground text-sm font-medium inline-flex items-center gap-2 hover:border-accent-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Scope Your Application
             <ArrowRight className="w-4 h-4" />

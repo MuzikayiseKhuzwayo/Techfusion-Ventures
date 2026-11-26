@@ -6,10 +6,9 @@ import {
   interpolateTemplate,
 } from "@/lib/blueprints-catalog";
 import { sendBlueprintInstantEmail } from "@/lib/email";
+import { BOOKING_URL } from "@/lib/booking";
 
-const DEFAULT_BOOKING_URL =
-  process.env.BOOKING_URL ||
-  "https://calendly.com/muzikhuzwayo-techfusion-ventures/30min";
+const DEFAULT_BOOKING_URL = process.env.BOOKING_URL || BOOKING_URL;
 
 export async function POST(req: Request) {
   try {

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import SignUpForm from "@/components/SignUpForm";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Calendar } from "lucide-react";
+import { BOOKING_URL } from "@/lib/booking";
 
 export default function Footer() {
   return (
@@ -133,12 +134,24 @@ export default function Footer() {
           <p className="text-sm text-foreground/70 mb-2.5 leading-relaxed">
             For service inquiries, RFPs, or statutory verification packs:
           </p>
-          <Link
-            href="/contact"
-            className="inline-block text-sm text-accent-light hover:text-white transition-colors underline underline-offset-4"
-          >
-            Send a private inquiry &rarr;
-          </Link>
+          <div className="flex flex-col items-start gap-2">
+            <Link
+              href="/contact"
+              className="inline-block text-sm text-accent-light hover:text-white transition-colors underline underline-offset-4"
+            >
+              Send a private inquiry &rarr;
+            </Link>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-foreground/80 hover:text-accent-light transition-colors"
+            >
+              <Calendar className="w-3.5 h-3.5 text-accent-dark" />
+              <span>Book a 30-minute call</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
 
           <div className="mt-5 pt-5 border-t border-surface-200/70">
             <p className="text-xs text-foreground/60 mb-2.5 leading-relaxed">

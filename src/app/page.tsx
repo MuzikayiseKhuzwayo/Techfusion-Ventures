@@ -17,7 +17,9 @@ import {
   BadgeCheck,
   Lock,
   Layers,
+  Calendar,
 } from "lucide-react";
+import { BOOKING_URL } from "@/lib/booking";
 
 const OEM_PARTNERS = [
   {
@@ -896,13 +898,23 @@ export default function Home() {
             enterprise infrastructure, forming a consortium JV, or bringing a
             new digital system to life—let&apos;s build it together.
           </p>
-          <div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-block px-10 py-5 rounded-full bg-accent-light text-background font-semibold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+              className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-accent-light text-background font-semibold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg w-full sm:w-auto"
             >
               Get in Touch
             </Link>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-full glass-panel text-foreground font-medium hover:border-accent-light/50 transition-colors duration-300 w-full sm:w-auto"
+            >
+              <Calendar className="w-4 h-4 text-accent-dark" />
+              <span>Book a 30-Min Call</span>
+              <ArrowUpRight className="w-4 h-4 text-accent-dark" />
+            </a>
           </div>
         </div>
       </section>

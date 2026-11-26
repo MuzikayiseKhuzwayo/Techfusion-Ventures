@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Calendar, Menu, X } from "lucide-react";
+import { BOOKING_URL } from "@/lib/booking";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,10 +57,19 @@ export default function Header() {
           </Link>
           <Link
             href="/contact"
-            className="whitespace-nowrap px-4 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors"
+            className="whitespace-nowrap text-foreground/80 hover:text-accent-light transition-colors"
           >
             Contact
           </Link>
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-surface-100 border border-surface-200 text-accent-light hover:border-accent-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+          >
+            <Calendar className="w-3.5 h-3.5" />
+            Book a Call
+          </a>
         </nav>
 
         <button
@@ -105,10 +115,20 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center px-4 py-2.5 rounded-md bg-surface-100 border border-surface-200 text-accent-light font-medium mt-2"
+              className="text-foreground/80 hover:text-accent-light py-1"
             >
               Contact
             </Link>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-surface-100 border border-surface-200 text-accent-light font-medium mt-2"
+            >
+              <Calendar className="w-4 h-4" />
+              Book a 30-Min Call
+            </a>
           </div>
         </div>
       )}

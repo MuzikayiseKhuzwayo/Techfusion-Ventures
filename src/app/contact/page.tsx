@@ -2,9 +2,17 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Send, CheckCircle, AlertCircle, ShieldCheck } from "lucide-react";
+import {
+  Send,
+  CheckCircle,
+  AlertCircle,
+  ShieldCheck,
+  Calendar,
+  ArrowUpRight,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { trackEvent } from "@/lib/analytics";
+import { BOOKING_URL } from "@/lib/booking";
 
 const PREFILL_PRESETS: Record<
   string,
@@ -160,7 +168,7 @@ function ContactFormContent() {
     >
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-light to-accent-dark" />
 
-      <div className="text-center mb-10">
+      <div className="text-center mb-8">
         {preset ? (
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-200 border border-surface-200 text-accent-light font-mono text-xs mb-4">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -176,6 +184,38 @@ function ContactFormContent() {
         </p>
       </div>
 
+      <div className="mb-8 rounded-xl border border-surface-200 bg-surface-100/50 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="w-9 h-9 rounded-lg bg-surface-200/80 border border-surface-200 flex items-center justify-center shrink-0 mt-0.5">
+            <Calendar className="w-4 h-4 text-accent-light" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Prefer a live 30-minute scoping call?
+            </p>
+            <p className="text-xs text-foreground/65 mt-0.5 leading-relaxed">
+              Book directly on Muzikayise&apos;s calendar for architecture scoping,
+              CRM walkthroughs, or tender briefings.
+            </p>
+          </div>
+        </div>
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() =>
+            trackEvent("book_call_click", {
+              location: "contact_banner",
+              preset_key: serviceKey || "direct",
+            })
+          }
+          className="shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-surface-200 border border-surface-200 hover:border-accent-light text-accent-light text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
+        >
+          <span>Book 30-Min Call</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+
       {status === "success" ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -189,12 +229,30 @@ function ContactFormContent() {
           <p className="text-foreground/70 mb-6">
             Thank you for reaching out. Our executive desk will respond shortly.
           </p>
-          <button
-            onClick={() => setStatus("idle")}
-            className="px-6 py-2 rounded-md bg-surface-200 text-foreground hover:bg-surface-100 transition-colors"
-          >
-            Send another message
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("book_call_click", {
+                  location: "contact_success",
+                  preset_key: serviceKey || "direct",
+                })
+              }
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-accent-light text-background font-semibold hover:bg-white transition-colors"
+            >
+              <Calendar className="w-4 h-4" />
+              Book a 30-Min Call Now
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => setStatus("idle")}
+              className="px-5 py-2.5 rounded-md bg-surface-200 text-foreground hover:bg-surface-100 transition-colors"
+            >
+              Send another message
+            </button>
+          </div>
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
