@@ -654,6 +654,7 @@ export async function sendLeadNotificationEmails(
   };
 }
 
+
 export async function sendOfferStackDossierEmails(
   req: OfferStackDossierRequest
 ): Promise<EmailDispatchResult> {
@@ -766,4 +767,194 @@ export async function sendOfferStackDossierEmails(
     adminEmailSent,
     errors: errors.length > 0 ? errors : undefined,
   };
+}
+
+export interface BlueprintInstantEmailRequest {
+  name: string;
+  email: string;
+  company: string;
+  role?: string;
+  currentStack?: string;
+  qualQuestion: string;
+  qualAnswer?: string;
+  keyword: string;
+  blueprintTitle: string;
+  clusterLabel: string;
+  pdfUrl: string;
+  bookingUrl: string;
+  subject: string;
+  bodyText: string;
+}
+
+function markdownTextToEmailHtml(text: string): string {
+  return text
+    .split("\n\n")
+    .map((para) => {
+      const escaped = escapeHtml(para)
+        .replace(/\*\*([^*]+)\*\*/g, `<strong style="color:${THEME.foreground};">$1</strong>`)
+        .replace(
+          /(https?:\/\/[^\s<]+)/g,
+          `<a href="$1" style="color:${THEME.emerald};text-decoration:underline;">$1</a>`
+        )
+        .replace(/\n/g, "<br/>");
+      return `<p style="margin:0 0 16px 0;font-size:14.5px;line-height:1.65;color:${THEME.body};">${escaped}</p>`;
+    })
+    .join("");
+}
+
+export async function sendBlueprintInstantEmail(
+  req: BlueprintInstantEmailRequest
+): Promise<EmailDispatchResult> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const smtpHost = process.env.SMTP_HOST;
+  const senderEmail = getSenderEmail();
+  const adminEmails = getAdminEmails();
+  const primaryAdmin = adminEmails[0];
+
+  let userEmailSent = false;
+  let adminEmailSent = false;
+  const errors: string[] = [];
+
+  const userHtml = renderEmailShell({
+    title: req.subject,
+    subtitle: `ARCHITECTURE BLUEPRINT // ${req.keyword}`,
+    bodyHtml: `
+      ${markdownTextToEmailHtml(req.bodyText)}
+      <div style="margin:24px 0 8px 0;">
+        <a href="${escapeHtml(req.pdfUrl)}" style="display:inline-block;padding:12px 22px;background:${THEME.emerald};color:#0B0B0C;font-weight:700;font-size:14px;border-radius:8px;text-decoration:none;margin-right:10px;margin-bottom:10px;">
+          Download ${escapeHtml(req.keyword)} PDF Blueprint
+        </a>
+        <a href="${escapeHtml(req.bookingUrl)}" style="display:inline-block;padding:12px 22px;background:${THEME.surface};color:${THEME.foreground};border:1px solid ${THEME.border};font-weight:600;font-size:14px;border-radius:8px;text-decoration:none;margin-bottom:10px;">
+          Book 30-Min Architecture Call
+        </a>
+      </div>
+    `,
+  });
+
+  const adminSubject = `Blueprint Lead [${req.keyword}]: ${req.name} — ${req.company}`;
+  const adminText = [
+    `Blueprint Requested: ${req.keyword} — ${req.blueprintTitle}`,
+    `Cluster: ${req.clusterLabel}`,
+    `Name: ${req.name}`,
+    `Email: ${req.email}`,
+    `Company: ${req.company}`,
+    req.role ? `Role: ${req.role}` : null,
+    req.currentStack ? `Current Stack: ${req.currentStack}` : null,
+    req.qualAnswer ? `${req.qualQuestion}: ${req.qualAnswer}` : null,
+    `PDF Link: ${req.pdfUrl}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const adminHtml = renderEmailShell({
+    title: adminSubject,
+    subtitle: `NEW BLUEPRINT LEAD // ${req.keyword}`,
+    bodyHtml: `<pre style="font-family:${THEME.fontMono};font-size:12.5px;line-height:1.6;color:${THEME.foreground};background:${THEME.surface};padding:16px;border-radius:10px;border:1px solid ${THEME.border};white-space:pre-wrap;margin:0;">${escapeHtml(adminText)}</pre>`,
+  });
+
+  if (!resendApiKey && !smtpHost) {
+    return { userEmailSent: true, adminEmailSent: true, simulated: true };
+  }
+
+  try {
+    if (resendApiKey) {
+      await sendViaResend({
+        apiKey: resendApiKey,
+        from: senderEmail,
+        to: req.email,
+        replyTo: primaryAdmin,
+        subject: req.subject,
+        html: userHtml,
+        text: req.bodyText,
+      });
+    } else {
+      await sendViaSmtp({
+        from: senderEmail,
+        to: req.email,
+        replyTo: primaryAdmin,
+        subject: req.subject,
+        html: userHtml,
+        text: req.bodyText,
+      });
+    }
+    userEmailSent = true;
+  } catch (err: unknown) {
+    errors.push(err instanceof Error ? err.message : String(err));
+  }
+
+  try {
+    if (resendApiKey) {
+      await sendViaResend({
+        apiKey: resendApiKey,
+        from: senderEmail,
+        to: adminEmails,
+        replyTo: req.email,
+        subject: adminSubject,
+        html: adminHtml,
+        text: adminText,
+      });
+    } else {
+      await sendViaSmtp({
+        from: senderEmail,
+        to: adminEmails,
+        replyTo: req.email,
+        subject: adminSubject,
+        html: adminHtml,
+        text: adminText,
+      });
+    }
+    adminEmailSent = true;
+  } catch (err: unknown) {
+    errors.push(err instanceof Error ? err.message : String(err));
+  }
+
+  return { userEmailSent, adminEmailSent, errors: errors.length ? errors : undefined };
+}
+
+export async function sendBlueprintFollowUpEmail(params: {
+  to: string;
+  keyword: string;
+  subject: string;
+  bodyText: string;
+}): Promise<{ sent: boolean; error?: string }> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const smtpHost = process.env.SMTP_HOST;
+  const senderEmail = getSenderEmail();
+  const primaryAdmin = getAdminEmails()[0];
+
+  if (!resendApiKey && !smtpHost) {
+    return { sent: true };
+  }
+
+  const html = renderEmailShell({
+    title: params.subject,
+    subtitle: `ARCHITECTURE FOLLOW-UP // ${params.keyword}`,
+    bodyHtml: markdownTextToEmailHtml(params.bodyText),
+  });
+
+  try {
+    if (resendApiKey) {
+      await sendViaResend({
+        apiKey: resendApiKey,
+        from: senderEmail,
+        to: params.to,
+        replyTo: primaryAdmin,
+        subject: params.subject,
+        html,
+        text: params.bodyText,
+      });
+    } else {
+      await sendViaSmtp({
+        from: senderEmail,
+        to: params.to,
+        replyTo: primaryAdmin,
+        subject: params.subject,
+        html,
+        text: params.bodyText,
+      });
+    }
+    return { sent: true };
+  } catch (err: unknown) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) };
+  }
 }

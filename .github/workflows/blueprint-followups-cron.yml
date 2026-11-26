@@ -1,0 +1,21 @@
+name: Blueprint 7-Email Follow-Up Worker (Hourly Wake-Up)
+
+on:
+  schedule:
+    # Runs every hour on the hour (24/7) so Firebase App Hosting never depends on user traffic
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  dispatch-followups:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Blueprint Follow-Up Cron Endpoint
+        run: |
+          AUTH_HEADER=""
+          if [ -n "${{ secrets.CRON_SECRET }}" ]; then
+            AUTH_HEADER="-H Authorization: Bearer ${{ secrets.CRON_SECRET }}"
+          fi
+          curl -fsS --max-time 60 \
+            ${AUTH_HEADER:+-H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"} \
+            "https://techfusion-ventures.xyz/api/blueprints/cron-followups"
