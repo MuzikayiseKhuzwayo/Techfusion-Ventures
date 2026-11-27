@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "2026 Enterprise AI, Multi-Agent MCP & POPIA Sec 71 Benchmark Study | Techfusion Automata",
+    "Enterprise AI, Multi-Agent MCP & POPIA Sec 71 Research (Methodology Under Revision)",
   description:
-    "Original benchmark statistics and methodology (N=18,400 workflow runs) on deterministic Multi-Agent MCP orchestration, IDP/OCR accuracy, ISO/IEC 42001 governance, and POPIA Section 71 compliance in South Africa.",
+    "Research notes on deterministic Multi-Agent MCP orchestration, IDP/OCR accuracy, ISO/IEC 42001 governance, and POPIA Section 71 compliance in South Africa. Earlier figures are under revision pending a production-only rerun.",
   alternates: {
     canonical: "https://techfusion-ventures.xyz/research",
   },

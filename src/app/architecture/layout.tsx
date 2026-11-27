@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Enterprise Cognition Infrastructure & Offer Stacks | Techfusion Automata",
+    "Enterprise Cognition Infrastructure & Offer Stacks",
   description:
     "Model-agnostic Enterprise Cognition Infrastructure and documented three-layer offer stacks across all six Techfusion Automata service pillars. Instant specification dispatch, B-BBEE Level 1 (135%), ISO/IEC 42001 and POPIA Sec 71 aligned.",
   keywords: [

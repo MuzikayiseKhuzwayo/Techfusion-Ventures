@@ -13,6 +13,10 @@ import {
   Database,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import {
+  RESEARCH_DIAGRAM_EMBED_HTML,
+  RESEARCH_DIAGRAM_SVG,
+} from "@/lib/research-diagram";
 
 interface CitableFinding {
   id: string;
@@ -130,27 +134,8 @@ export default function ResearchPage() {
     setTimeout(() => setCopiedId(null), 2500);
   }
 
-  const svgEmbedCode = `<figure style="margin:1.5rem 0;padding:1.25rem;background:#07090e;border:1px solid #1e293b;border-radius:12px;color:#f1f5f9;font-family:system-ui,sans-serif;">
-  <svg viewBox="0 0 860 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deterministic Multi-Agent MCP + POPIA Sec 71 HITL Architecture vs Unguarded LLM">
-    <rect width="860" height="280" rx="12" fill="#0b101b"/>
-    <text x="30" y="36" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="bold">ARCHITECTURAL BENCHMARK (N = 18,400 WORKFLOW RUNS)</text>
-    <!-- Track A: Unguarded -->
-    <rect x="30" y="58" width="800" height="82" rx="8" fill="#161f30" stroke="#f43f5e" stroke-opacity="0.45"/>
-    <text x="50" y="84" fill="#fda4af" font-family="sans-serif" font-size="13" font-weight="bold">A. Unguarded Single-Prompt LLM Pipeline (Baseline)</text>
-    <text x="50" y="108" fill="#94a3b8" font-family="monospace" font-size="12">Raw Prompt &rarr; Unvalidated LLM Output &rarr; Direct DB Write | Defect Rate: 6.40% | POPIA Sec 71 Audit Pass: 31.2%</text>
-    <!-- Track B: Deterministic MCP + HITL -->
-    <rect x="30" y="158" width="800" height="94" rx="8" fill="#112224" stroke="#10b981" stroke-opacity="0.6"/>
-    <text x="50" y="186" fill="#6ee7b7" font-family="sans-serif" font-size="13" font-weight="bold">B. Techfusion Automata Deterministic MCP + POPIA Sec 71 HITL Architecture</text>
-    <text x="50" y="210" fill="#cbd5e1" font-family="monospace" font-size="12">Input &rarr; Schema-Typed MCP Agent &rarr; Confidence Gate (&lt;0.96 to HITL Review) &rarr; Cryptographic Audit Log</text>
-    <text x="50" y="234" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">Result: 0.48% Defect Rate (-92.5% Errors) | 99.4% ISO 42001 &amp; POPIA Sec 71 Traceability | 81.8% Faster</text>
-  </svg>
-  <figcaption style="margin-top:0.75rem;font-size:0.78rem;color:#94a3b8;">
-    Diagram: Deterministic Multi-Agent (MCP) &amp; POPIA Section 71 HITL Guardrails vs. Unguarded LLM Pipelines ($N=18,400$). Source: <a href="https://techfusion-ventures.xyz/research" style="color:#38bdf8;">Techfusion Automata (Pty) Ltd Research</a> | <a href="https://techfusion-ventures.xyz/calculator" style="color:#38bdf8;">Interactive ROI Calculator</a>
-  </figcaption>
-</figure>`;
-
   function copySvgEmbed() {
-    navigator.clipboard.writeText(svgEmbedCode);
+    navigator.clipboard.writeText(RESEARCH_DIAGRAM_EMBED_HTML);
     setCopiedEmbed(true);
     trackEvent("copy_embed_widget", {
       page: "/research",
@@ -209,15 +194,19 @@ export default function ResearchPage() {
       <div className="max-w-4xl mb-14">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-surface-200 bg-surface-100/80 text-accent-light text-xs font-mono mb-4">
           <BookOpen className="w-3.5 h-3.5 text-accent-dark" />
-          <span>CITABLE BENCHMARK STUDY // N = 18,400 WORKFLOW RUNS</span>
+          <span>RESEARCH NOTES // METHODOLOGY UNDER REVISION</span>
         </div>
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-5 leading-tight">
           Why Enterprise AI Fails Auditability—and How{" "}
           <span className="text-gradient">
             Deterministic MCP &amp; POPIA Sec 71 Guardrails
           </span>{" "}
-          Cut Defects by 92.5%
+          Reduce Compliance Defects
         </h1>
+        <div role="note" className="mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 text-sm leading-relaxed text-foreground/85">
+          <strong>Methodology under revision.</strong> The figures below combined anonymised production runs with synthetic runs and did not separate them. They are being rerun on production data only. Please do not cite them until this notice is removed. Verified outcomes are on our{" "}
+          <a href="/case-studies" className="underline">case-study pages</a>.
+        </div>
         <p className="text-foreground/75 text-base md:text-lg leading-relaxed mb-6">
           <strong>Primary Research Question:</strong> Why do public-sector and
           enterprise AI deployments fail statutory auditability and SLA targets,
@@ -431,104 +420,25 @@ export default function ResearchPage() {
           </button>
         </div>
 
-        {/* Rendered SVG */}
-        <div className="rounded-xl overflow-hidden border border-surface-200 bg-[#0b101b] p-4 mb-6">
-          <svg
-            viewBox="0 0 860 280"
-            className="w-full h-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Deterministic Multi-Agent MCP + POPIA Sec 71 HITL Architecture vs Unguarded LLM"
-          >
-            <rect width="860" height="280" rx="12" fill="#0b101b" />
-            <text
-              x="30"
-              y="36"
-              fill="#38bdf8"
-              fontFamily="monospace"
-              fontSize="13"
-              fontWeight="bold"
-            >
-              ARCHITECTURAL BENCHMARK (N = 18,400 WORKFLOW RUNS)
-            </text>
-            <rect
-              x="30"
-              y="58"
-              width="800"
-              height="82"
-              rx="8"
-              fill="#161f30"
-              stroke="#f43f5e"
-              strokeOpacity="0.45"
-            />
-            <text
-              x="50"
-              y="84"
-              fill="#fda4af"
-              fontFamily="sans-serif"
-              fontSize="13"
-              fontWeight="bold"
-            >
-              A. Unguarded Single-Prompt LLM Pipeline (Baseline)
-            </text>
-            <text
-              x="50"
-              y="108"
-              fill="#94a3b8"
-              fontFamily="monospace"
-              fontSize="12"
-            >
-              Raw Prompt &rarr; Unvalidated LLM Output &rarr; Direct DB Write |
-              Defect Rate: 6.40% | POPIA Sec 71 Audit Pass: 31.2%
-            </text>
-            <rect
-              x="30"
-              y="158"
-              width="800"
-              height="94"
-              rx="8"
-              fill="#112224"
-              stroke="#10b981"
-              strokeOpacity="0.6"
-            />
-            <text
-              x="50"
-              y="186"
-              fill="#6ee7b7"
-              fontFamily="sans-serif"
-              fontSize="13"
-              fontWeight="bold"
-            >
-              B. Techfusion Automata Deterministic MCP + POPIA Sec 71 HITL
-              Architecture
-            </text>
-            <text
-              x="50"
-              y="210"
-              fill="#cbd5e1"
-              fontFamily="monospace"
-              fontSize="12"
-            >
-              Input &rarr; Schema-Typed MCP Agent &rarr; Confidence Gate
-              (&lt;0.96 to HITL Review) &rarr; Cryptographic Audit Log
-            </text>
-            <text
-              x="50"
-              y="234"
-              fill="#38bdf8"
-              fontFamily="monospace"
-              fontSize="12"
-              fontWeight="bold"
-            >
-              Result: 0.48% Defect Rate (-92.5% Errors) | 99.4% ISO 42001 &amp;
-              POPIA Sec 71 Traceability | 81.8% Faster
-            </text>
-          </svg>
-        </div>
+        <div
+          className="rounded-xl overflow-hidden border border-surface-200 bg-background p-2 sm:p-3 mb-5"
+          dangerouslySetInnerHTML={{ __html: RESEARCH_DIAGRAM_SVG }}
+        />
 
-        <pre className="text-[11px] font-mono bg-background/80 p-4 rounded-xl border border-surface-200 overflow-x-auto text-foreground/75">
-          {svgEmbedCode}
-        </pre>
+        <details className="group rounded-xl border border-surface-200 bg-background/80">
+          <summary className="cursor-pointer select-none px-4 py-3 font-mono text-xs text-foreground/75 hover:text-accent-light transition-colors flex items-center justify-between">
+            <span>Inspect embeddable HTML + SVG source</span>
+            <span className="text-[11px] text-accent-dark group-open:hidden">
+              Show code
+            </span>
+            <span className="text-[11px] text-accent-dark hidden group-open:inline">
+              Hide code
+            </span>
+          </summary>
+          <pre className="text-[11px] font-mono px-4 pb-4 pt-2 border-t border-surface-200/70 overflow-x-auto max-h-64 text-foreground/75">
+            {RESEARCH_DIAGRAM_EMBED_HTML}
+          </pre>
+        </details>
       </section>
     </div>
   );

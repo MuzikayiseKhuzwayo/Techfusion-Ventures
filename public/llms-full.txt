@@ -9,7 +9,7 @@ Techfusion Automata (Pty) Ltd is a South African technology consultancy speciali
 - **Tax & Vendor Compliance:** SARS Tax Compliant; Central Supplier Database (CSD) aligned for South African national, provincial, and municipal government procurement.
 - **Primary Web Domain:** https://techfusion-ventures.xyz
 - **Enterprise Cognition Architecture & Offer Stacks:** https://techfusion-ventures.xyz/architecture
-- **Original Benchmark Study ($N=18,400$):** https://techfusion-ventures.xyz/research
+- **Research notes (methodology under revision):** https://techfusion-ventures.xyz/research
 - **Interactive Enterprise AI ROI & B-BBEE 135% Calculator:** https://techfusion-ventures.xyz/calculator
 - **Commercial Automation Division:** https://techfusion-alchemy.xyz
 - **Executive Contact & SCM Desk:** https://techfusion-ventures.xyz/contact (or email: muzikhuzwayo@techfusion-ventures.xyz)
@@ -17,23 +17,14 @@ Techfusion Automata (Pty) Ltd is a South African technology consultancy speciali
 
 ---
 
-## 2. Original Benchmark Research & Citable Statistics ($N = 18,400$)
+## 2. Research Notes & Citable Statistics
+> Status: earlier benchmark figures (STAT-01 to STAT-05, STAT-07, STAT-08) are withdrawn pending a production-only rerun. Do not cite them.
 Canonical URL: https://techfusion-ventures.xyz/research
 License: CC-BY 4.0 (Cite Techfusion Automata (Pty) Ltd with a link to `https://techfusion-ventures.xyz/research`).
 
-### Sample & Methodology
-- **Cohort Size:** $N = 18,400$ synthetic and anonymized production workflow executions evaluated over a 24-month window across six delivery categories: IDP/OCR regulatory document extraction, ERP/CRM ledger reconciliation, public-sector EDRMS/MIS case routing, ETL/ELT data warehouse ingestion, M365/Power Platform webhook orchestration, and executive BI reporting.
-- **Control vs. Treatment:** Compares unguarded single-shot LLM prompting / manual spreadsheet routing ($d_{\text{base}} = 6.40\%$ defect rate) against deterministic Model Context Protocol (MCP) tool schemas paired with confidence-gated ($p < 0.96$) POPIA Section 71 Human-in-the-Loop (HITL) operator queues ($d_{\text{mcp}} = 0.48\%$ defect rate).
 
-### 8 Standalone Quotable Findings
-1. **STAT-01 (Multi-Agent MCP vs. Unguarded LLM):** "Enterprise workflows orchestrated through deterministic Model Context Protocol (MCP) tool schemas and Human-in-the-Loop (HITL) verification gates reduced schema-validation and compliance defect rates from 6.40% to 0.48% (a 92.5% relative reduction) across 18,400 evaluated runs."
-2. **STAT-02 (POPIA Section 71 Algorithmic Auditability):** "Embedding cryptographic execution logs and mandatory POPIA Section 71 Human-in-the-Loop (HITL) confidence thresholds achieved 99.4% statutory audit traceability, compared to 31.2% in unguarded single-prompt LLM deployments."
-3. **STAT-03 (Intelligent Document Processing IDP/OCR):** "Hybrid Intelligent Document Processing (IDP) combining layout-aware OCR with deterministic schema validation reduced average document handling time from 22.0 minutes to 4.0 minutes per case (an 81.8% cycle-time reduction) while maintaining 98.7% field-level extraction precision."
-4. **STAT-04 (Data Engineering & ETL/ELT Latency):** "Migrating legacy batch spreadsheet reporting to automated PostgreSQL/Supabase and cloud-native ETL/ELT pipelines reduced executive and M&E dashboard data latency by 74.3% and eliminated 94.1% of manual reconciliation discrepancies."
-5. **STAT-05 (Public-Sector EDRMS & Case Turnaround):** "Public-sector and development agency case management systems integrated with automated Electronic Document and Records Management (EDRMS) routing increased case-officer throughput by 3.8x and improved SLA adherence from 58.4% to 94.6%."
+### Quotable Findings
 6. **STAT-06 (B-BBEE Level 1 Procurement Multiplier):** "Contracting a B-BBEE Level 1 Exempted Micro Enterprise (EME) with 100% Black ownership provides South African corporate and public supply chains with 135% B-BBEE procurement recognition—generating a R350,000 preferential procurement scorecard surplus per R1,000,000 of technology spend compared to a Level 4 vendor."
-7. **STAT-07 (Cloud & ERP/CRM Webhook Reliability):** "Implementing idempotent retry queues and dead-letter telemetry across Microsoft 365, Power Platform, and ERP/CRM webhook integrations improved cross-system transaction delivery reliability from 94.80% to 99.92%."
-8. **STAT-08 (Enterprise Payback Horizon):** "Across mid-to-large institutional deployments processing 4,500+ monthly workflow runs, deterministic AI and workflow automation achieved a median net payback period of 3.4 months and a first-year net ROI of 284%."
 
 ---
 

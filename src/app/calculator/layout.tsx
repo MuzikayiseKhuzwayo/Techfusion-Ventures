@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Enterprise AI ROI & B-BBEE 135% Procurement Calculator | Techfusion Automata",
+    "Enterprise AI ROI & B-BBEE 135% Procurement Calculator",
   description:
     "Free interactive buyer calculator to estimate annual workflow automation savings, POPIA Section 71 HITL defect reduction, payback period, and B-BBEE Level 1 (135% procurement recognition) value in ZAR.",
   alternates: {

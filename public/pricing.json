@@ -1,0 +1,38 @@
+{
+  "version": "2026-11-27",
+  "provider": "Techfusion Automata (Pty) Ltd",
+  "currency": "ZAR",
+  "canonical_url": "https://techfusion-ventures.xyz/calculator",
+  "pricing_transparency_note": "Exact project fees and managed SLA retainers are scoped per Terms of Reference (ToR) or enterprise architecture brief; fixed rate cards are unverified publicly and require scoping via /contact or /calculator.",
+  "published_commercial_terms": {
+    "managed_sovereign_crm_per_seat_tax": "R0 / seat (zero per-seat licence tax on custom managed open-source deployments; predictable managed retainer)",
+    "roi_calculator_tool": {
+      "price": 0,
+      "currency": "ZAR",
+      "url": "https://techfusion-ventures.xyz/calculator",
+      "benchmark_example_annual_contract_spend_zar": 650000,
+      "bbbee_recognized_spend_multiplier": 1.35,
+      "bbbee_example_recognized_spend_zar": 877500,
+      "bbbee_example_preferential_surplus_zar": 227500
+    },
+    "managed_sre_uptime_sla": "99.5%+ (verified on CS-02 Dubstrata 24/7 Managed SRE retainer)"
+  },
+  "engagement_models": [
+    {
+      "model": "Turnkey Institutional & Public-Sector Mandate",
+      "pricing": "unverified — scoped per ToR / RFP",
+      "scoping_url": "https://techfusion-ventures.xyz/contact"
+    },
+    {
+      "model": "Managed Application & 24/7 Cloud SRE Retainer",
+      "pricing": "unverified — predictable monthly retainer; R0/seat software licence tax",
+      "scoping_url": "https://techfusion-ventures.xyz/case-studies/managed-production-crm"
+    },
+    {
+      "model": "Executive 30-Minute Scoping & Architecture Session",
+      "pricing": 0,
+      "currency": "ZAR",
+      "booking_url": "https://calendly.com/muzikhuzwayo-techfusion-ventures/30min"
+    }
+  ]
+}

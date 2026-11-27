@@ -1,0 +1,93 @@
+{
+  "version": "2026-11-27",
+  "provider": "Techfusion Automata (Pty) Ltd",
+  "canonical_url": "https://techfusion-ventures.xyz/architecture",
+  "core_doctrine": "Enterprise Cognition Infrastructure — model-agnostic AI gateway (/chat, /embed, /rerank, /agent) behind a deterministic MCP verification shell, POPIA Section 71 HITL behavioural knowledge capture, and continuous eval/model-swap CI/CD.",
+  "flagship_spine": {
+    "id": "stack-00",
+    "name": "Stack 00: Enterprise Cognition Infrastructure",
+    "layers": [
+      "Model-Agnostic Gateway & Deterministic Shell",
+      "HITL Behavioural Capture & Organisational Memory (Data + Context + Feedback + Outcomes)",
+      "Continuous Eval CI/CD & Model-Swap Engine"
+    ],
+    "specification_url": "https://techfusion-ventures.xyz/architecture#request-dossier"
+  },
+  "service_pillars": [
+    {
+      "id": "pillar-01",
+      "name": "Digital Transformation & SOP Modernisation",
+      "summary": "End-to-end business process digitisation, workflow re-engineering, SOP automation, and phased legacy institutional system modernisation.",
+      "layers": [
+        "Operational Discovery & Process Architecture",
+        "Workflow Re-Engineering & SOP Automation",
+        "Legacy Modernisation & Institutional Adoption"
+      ],
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=digital-transformation"
+    },
+    {
+      "id": "pillar-02",
+      "name": "Automation & Intelligent AI Systems",
+      "summary": "Business/Robotic Process Automation (BPA/RPA), schema-typed multi-agent MCP orchestration, hybrid IDP/OCR extraction, conversational AI, and POPIA Section 71 HITL review consoles.",
+      "layers": [
+        "Hybrid IDP / OCR & Process Automation (BPA/RPA)",
+        "Multi-Agent MCP Orchestration & Copilots",
+        "HITL Verification & Cryptographic Auditability"
+      ],
+      "commercial_division_url": "https://techfusion-alchemy.xyz",
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=automation-ai"
+    },
+    {
+      "id": "pillar-03",
+      "name": "Data Engineering & Advanced Analytics",
+      "summary": "Enterprise data warehouse design, real-time and batch ETL/ELT pipelines, BI executive dashboards, and POPIA-compliant data governance.",
+      "layers": [
+        "Automated Ingestion & ETL / ELT Pipelines",
+        "Enterprise Warehouse & Semantic Layer",
+        "Executive BI & POPIA Data Governance"
+      ],
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=data-engineering"
+    },
+    {
+      "id": "pillar-04",
+      "name": "Custom Software Development",
+      "summary": "Cloud-native web and mobile portals (React, Next.js, React Native, FastAPI, Node.js, Laravel), high-throughput REST/GraphQL APIs, automated DevSecOps, and sovereign deployment.",
+      "layers": [
+        "Web, Mobile & Citizen / Enterprise Portals",
+        "API Core & High-Throughput Services",
+        "DevSecOps, Testing & Sovereign Hosting"
+      ],
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=custom-software"
+    },
+    {
+      "id": "pillar-05",
+      "name": "Cloud & Systems Integration",
+      "summary": "Microsoft 365 & Power Platform ecosystems, PostgreSQL and Supabase backends, ERP/CRM webhook integrations, and multi-cloud Zero-Trust IAM.",
+      "layers": [
+        "Microsoft 365 & Power Platform Ecosystems",
+        "ERP / CRM Webhooks & Event Orchestration",
+        "Multi-Cloud Infrastructure & Zero-Trust IAM"
+      ],
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=cloud-integration"
+    },
+    {
+      "id": "pillar-06",
+      "name": "Government & Public-Sector Solutions",
+      "summary": "Management Information Systems (MIS), citizen case/grant/complaint adjudication portals, PAIA/POPIA-compliant EDRMS archives, and UN/NGO Monitoring & Evaluation (M&E) platforms.",
+      "layers": [
+        "Public MIS & Case / Grant Adjudication",
+        "Electronic Document & Records Management (EDRMS)",
+        "UN / NGO Monitoring & Evaluation (M&E)"
+      ],
+      "inquiry_url": "https://techfusion-ventures.xyz/contact?service=government-solutions"
+    }
+  ],
+  "verified_production_case_studies": [
+    { "id": "CS-01", "title": "Sovereign AI-Native Production CRM & Multi-Brand Revenue Engine", "url": "https://techfusion-ventures.xyz/case-studies/managed-production-crm" },
+    { "id": "CS-02", "title": "Dubstrata: 7-Subsystem Institutional Risk Intelligence & Causal Data Platform", "url": "https://techfusion-ventures.xyz/case-studies/dubstrata-risk-intelligence-platform" },
+    { "id": "CS-03", "title": "Henry Cumines Pty Ltd: Autonomous Purchase Order & OMS Automation", "url": "https://techfusion-ventures.xyz/case-studies/henry-cumines-oms-automation" },
+    { "id": "CS-04", "title": "AI Sports Sweden / Levatus i Norden AB: Computer Vision & QuickBooks AP Automation", "url": "https://techfusion-ventures.xyz/case-studies/ai-sports-sweden-cv-analytics" },
+    { "id": "CS-05", "title": "OakFloors New York: Multi-Channel Showroom CV, Voice AI & B2B Collateral Engine", "url": "https://techfusion-ventures.xyz/case-studies/oakfloors-ny-showroom-voice-ai" },
+    { "id": "CS-06", "title": "Rollin Mopeds (Sydney): Pioneer Raspberry Pi + Twilio + Vapi In-Store AI Agent", "url": "https://techfusion-ventures.xyz/case-studies/rollin-mopeds-edge-iot-voice-ai" }
+  ]
+}

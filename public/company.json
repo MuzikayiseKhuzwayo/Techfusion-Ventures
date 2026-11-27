@@ -1,0 +1,98 @@
+{
+  "$schema": "https://techfusion-ventures.xyz/schemas/digital-embassy-company-v1.json",
+  "version": "2026-11-27",
+  "canonical_url": "https://techfusion-ventures.xyz",
+  "embassy_root": "https://techfusion-ventures.xyz/company.json",
+  "legal_name": "Techfusion Automata (Pty) Ltd",
+  "brand_names": [
+    "Techfusion Automata",
+    "TechFusion Automata",
+    "Techfusion Ventures"
+  ],
+  "registration": {
+    "jurisdiction": "Republic of South Africa",
+    "registry": "CIPC (Companies and Intellectual Property Commission)",
+    "cipc_number": "2026/399837/07",
+    "note": "Primary CIPC, SARS Tax Compliance PIN, B-BBEE affidavit, and CSD verification packs are dispatched privately to SCM officers via https://techfusion-ventures.xyz/contact?doc=bid-pack"
+  },
+  "bbbee": {
+    "status": "Level 1 Contributor",
+    "enterprise_category": "Exempted Micro Enterprise (EME)",
+    "black_ownership_percentage": 100,
+    "procurement_recognition_percentage": 135
+  },
+  "location": {
+    "city": "Cape Town",
+    "country": "South Africa",
+    "country_code": "ZA",
+    "area_served": [
+      "South Africa",
+      "Africa",
+      "Global"
+    ]
+  },
+  "founder": {
+    "name": "Muzikayise Wiston Khuzwayo",
+    "role": "Founder & Chief Executive Officer",
+    "website": "https://muzikhuzwayo.xyz",
+    "sameAs": [
+      "https://www.linkedin.com/in/muzikayise-khuzwayo-121b43171/",
+      "https://github.com/MuzikayiseKhuzwayo",
+      "https://www.youtube.com/@MuziKhuzwayoSystems",
+      "https://x.com/3mk4y_"
+    ]
+  },
+  "commercial_division": {
+    "name": "TechFusion Alchemy",
+    "url": "https://techfusion-alchemy.xyz",
+    "focus": "Custom AI & backend automation pipelines for high-growth businesses (sub-45s inbound lead triage, Vision OMS PO/invoice parsing, n8n + Supabase backends)"
+  },
+  "contact": {
+    "email": "muzikhuzwayo@techfusion-ventures.xyz",
+    "telephone": "+27 81 813 1933",
+    "contact_desk_url": "https://techfusion-ventures.xyz/contact",
+    "bid_pack_url": "https://techfusion-ventures.xyz/contact?doc=bid-pack",
+    "booking_url": "https://calendly.com/muzikhuzwayo-techfusion-ventures/30min"
+  },
+  "governance_and_compliance": [
+    "POPIA Section 71 (Automated Decision-Making Safeguards)",
+    "PAIA Section 51 Manual",
+    "ISO/IEC 42001:2023 (AIMS) aligned (not independently certified)",
+    "ISO/IEC 27001:2022 (ISMS) aligned (not independently certified)",
+    "NIST AI RMF 1.0 aligned",
+    "ISO/IEC 27701 & SOC 2 Type II Roadmap",
+    "King IV Code of Ethics & PRECCA / FICA / POCA"
+  ],
+  "accredited_oem_partners": [
+    {
+      "partner": "Microsoft",
+      "programme": "Microsoft Partner Network",
+      "status": "Verified Partner"
+    },
+    {
+      "partner": "OpenAI",
+      "programme": "OpenAI Partner Network",
+      "status": "Approved Member"
+    },
+    {
+      "partner": "Google Cloud",
+      "programme": "Google Cloud Partner Advantage",
+      "status": "Approved Member"
+    },
+    {
+      "partner": "Amazon Web Services",
+      "programme": "AWS Partner Network (APN)",
+      "status": "Registered Partner"
+    },
+    {
+      "partner": "DigiCert",
+      "programme": "PKI & Certificate Lifecycle",
+      "status": "Approved Member"
+    }
+  ],
+  "machine_readable_endpoints": {
+    "llms_txt": "https://techfusion-ventures.xyz/llms.txt",
+    "llms_full_txt": "https://techfusion-ventures.xyz/llms-full.txt",
+    "sitemap_xml": "https://techfusion-ventures.xyz/sitemap.xml"
+  }
+}

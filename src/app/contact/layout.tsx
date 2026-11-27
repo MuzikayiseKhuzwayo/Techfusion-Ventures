@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Contact & SCM Procurement Desk | Techfusion Automata (Pty) Ltd",
+    "Contact & SCM Procurement Desk",
   description:
     "Initiate a digital transformation, AI automation, data engineering, or public-sector consultation, or request private statutory verification packs (B-BBEE Level 1, SARS PIN, ISO 42001/27001, PAIA/POPIA).",
   alternates: {

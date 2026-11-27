@@ -1,0 +1,31 @@
+{
+  "version": "2026-11-27",
+  "publisher": "Techfusion Automata (Pty) Ltd",
+  "canonical_url": "https://techfusion-ventures.xyz/#faq",
+  "faqs": [
+    {
+      "question": "Is Techfusion Automata (Pty) Ltd a B-BBEE Level 1 vendor?",
+      "answer": "Yes. Techfusion Automata (Pty) Ltd is a 100% Black-Owned Exempted Micro Enterprise (EME) with B-BBEE Level 1 Contributor status, providing 135% B-BBEE procurement recognition for South African public-sector departments, state-owned entities, and corporate supply chains."
+    },
+    {
+      "question": "How do Supply Chain Management (SCM) officers request CIPC, SARS, and B-BBEE verification packs?",
+      "answer": "To safeguard statutory credentials against public scraping, CIPC registration certificates, SARS Tax Compliance PINs, B-BBEE Level 1 sworn affidavits, CSD vendor summaries, and OEM partner letters are dispatched privately upon request via our controlled SCM Verification Desk at https://techfusion-ventures.xyz/contact?doc=bid-pack."
+    },
+    {
+      "question": "How does Techfusion Automata ensure AI compliance with POPIA Section 71 and ISO/IEC 42001?",
+      "answer": "Every AI and automated workflow is engineered under our ISO/IEC 42001:2023 (AIMS) and NIST AI Risk Management Framework (AI RMF 1.0) charter. We embed Human-in-the-Loop (HITL) approval gates, deterministic execution guardrails, cryptographic audit logs, and full POPIA Section 71 protections against solely automated adverse decisions."
+    },
+    {
+      "question": "What are Techfusion Automata's Six Core Service Pillars for tenders and enterprise mandates?",
+      "answer": "Delivery is structured across six core service pillars: (1) Digital Transformation & SOP Automation, (2) Automation & Intelligent AI Systems (Multi-Agent MCP, BPA/RPA, IDP/OCR), (3) Data Engineering & Advanced Analytics (ETL/ELT, BI, POPIA Data Governance), (4) Custom Software Development, (5) Cloud & Systems Integration (Microsoft 365, Power Platform, AWS, Google Cloud), and (6) Government & Public-Sector Solutions (MIS, EDRMS, UN/NGO M&E platforms)."
+    },
+    {
+      "question": "Which global OEM technology partners is Techfusion Automata accredited with?",
+      "answer": "Techfusion Automata is an accredited member across five global OEM ecosystems: Microsoft Partner Network (Verified Partner), OpenAI Partner Network (Approved Member), Google Cloud Partner Advantage (Approved Member), Amazon Web Services APN (Registered Partner), and DigiCert PKI & Certificate Lifecycle (Approved Member)."
+    },
+    {
+      "question": "What is the relationship between Techfusion Automata (Pty) Ltd and TechFusion Alchemy?",
+      "answer": "Techfusion Automata (Pty) Ltd is the CIPC-registered contracting entity for institutional, government, development agency, and enterprise mandates. TechFusion Alchemy (https://techfusion-alchemy.xyz) operates as our specialized commercial AI and workflow automation division."
+    }
+  ]
+}
